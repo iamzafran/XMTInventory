@@ -8,8 +8,6 @@ class Computer(models.Model):
     staff = models.ForeignKey(Staff, on_delete=models.SET_NULL, null=True, default=None, blank=True)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, default=None, blank=True)
     tenant = models.ForeignKey(Tenant, on_delete=models.SET_NULL, null=True, default=None, blank=True)
-    project = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True, default=None, blank=True)
-    monitor = models.ForeignKey(Monitor, on_delete=models.SET_NULL, null=True, default=None, blank=True)
     pcTagNo = models.CharField(max_length=120)
     pcName = models.CharField(max_length=120)
     serialNo = models.CharField(max_length=120)
