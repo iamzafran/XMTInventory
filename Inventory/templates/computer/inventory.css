@@ -1,0 +1,27 @@
+body{
+  background-color: #bdc3c7;
+}
+.table-fixed{
+  width: 100%;
+  tbody{
+    height:200px;
+    overflow-y:auto;
+    width: 100%;
+    }
+  thead,tbody,tr,td,th{
+    display:block;
+  }
+  tbody{
+    td{
+      float:left;
+    }
+  }
+  thead {
+    tr{
+      th{
+        float:left;
+
+      }
+    }
+  }
+}

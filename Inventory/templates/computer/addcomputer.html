@@ -1,0 +1,302 @@
+{% extends 'computer/base.html' %}
+
+{% block body %}
+
+<div class="container">
+          <div class="form-group row">
+          <label for="model-input" class="col-2 col-form-label">Model</label>
+          <div class="col-10">
+            <select class="form-control" id="model-input">
+              <option>Desktop Computer</option>
+              <option>Tab</option>
+              <option>Laptop</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="pc-tag-input" class="col-2 col-form-label">PC Tag Number</label>
+          <div class="col-10">
+            <input class="form-control" type="text" id="pc-tag-input">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="pc-name-input" class="col-2 col-form-label">PC Name</label>
+          <div class="col-10">
+            <input class="form-control" type="text" id="pc-name-input">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="pc-model-series-input" class="col-2 col-form-label">PC Model Series</label>
+          <div class="col-10">
+            <input class="form-control" type="text" id="pc-model-series-input">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="serial-number-input" class="col-2 col-form-label">Serial Number</label>
+          <div class="col-10">
+            <input class="form-control" type="text"  id="serial-number-input">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="operating-system-input" class="col-2 col-form-label">Operating System</label>
+          <div class="col-10">
+            <input class="form-control" type="text" id="operating-system-input">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="processor-input" class="col-2 col-form-label">Processor</label>
+          <div class="col-10">
+            <input class="form-control" type="text" id="processor-input">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="system-type-input" class="col-2 col-form-label">System Type</label>
+          <div class="col-10">
+            <select class="form-control" id="system-type-input">
+              <option>32-bit</option>
+              <option>64-bit</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="ram-input" class="col-2 col-form-label">RAM</label>
+          <div class="col-10">
+            <select class="form-control" id="ram-input">
+              <option>1GB</option>
+              <option>2GB</option>
+              <option>4GB</option>
+              <option>8GB</option>
+              <option>16GB</option>
+              <option>32GB</option>
+              <option>64GB</option>
+              <option>128GB</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="hard-drive-input" class="col-2 col-form-label">Hard Drive</label>
+          <div class="col-10">
+            <select class="form-control" id="hard-drive-input">
+              <option>128GB</option>
+              <option>256GB</option>
+              <option>500GB</option>
+              <option>1TB</option>
+              <option>2TB</option>
+              <option>4TB</option>
+              <option>8TB</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row" id="monitor-input-group">
+          <label for="monitor-input" class="col-2 col-form-label">Monitor</label>
+          <div class="col-8">
+            <select class="form-control" id="monitor-input">
+                <option value="null">None</option>
+                {% for m in monitors %}
+                <option value="{{m.id}}">{{m.tagNo}}</option>
+                {% endfor %}
+            </select>
+            <div class="row" id="add-new-monitor-form-group">
+              <div class="col-12 card" style="margin-top: 10px; padding: 10px"><!-- add new monitor -->
+                <div class="form-group row">
+                  <label for="serial-number-monitor-input" class="col-2 col-form-label">Serial Number</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" id="serial-number-monitor-input">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="monitor-tag-input" class="col-2 col-form-label">Monitor Tag</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" id="monitor-tag-input">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="monitor-age-input" class="col-2 col-form-label">Age</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" id="monitor-age-input">
+                  </div>
+                </div>
+                <div>
+                </div>
+                <button class="btn btn-primary col-2" id="submit-monitor-button">Add</button>
+              </div><!--End add monitor -->
+            </div>
+          </div>
+          <div class="col-2">
+            <button class="btn btn-danger" id="add-new-monitor-button">Add New Monitor</button>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="projector-input" class="col-2 col-form-label">Projector</label>
+          <div class="col-8">
+            <select class="form-control" id="projector-input">
+              <option>None</option>
+                {% for p in projectors %}
+                <option value="{{p.id}}">{{p.projectorTag}}</option>
+                {% endfor %}
+            </select>
+            <div class="row" style="margin-top: 10px" id="add-new-projector-form-group">
+              <div class="col-12 card" style="margin-top:10px; padding:10px"><!-- add new projector -->
+                <div class="form-group row">
+                  <label for="projector-model-input" class="col-2 col-form-label">Projector Model</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" id="projector-model-input">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="projector-year-input" class="col-2 col-form-label">Year</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" id="projector-year-input">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="serial-number-projector-input" class="col-2 col-form-label">Serial Number</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" id="serial-number-projector-input">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="projector-tag-input" class="col-2 col-form-label">Projector Tag</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" id="projector-tag-input">
+                  </div>
+                </div>
+                  <button class="btn btn-primary col-2" id="submit-projector-button">Add</button>
+              </div><!--End add projector -->
+            </div>
+          </div>
+          <div class="col-2">
+            <button class="btn btn-danger" id="add-new-projector-button">Add New Projector</button>
+          </div>
+        </div>
+        <button class="btn btn-primary col-2">Save</button>
+        </div>
+
+{% endblock %}
+
+{% block script %}
+  <script>
+
+    $(document).ready(function(){
+
+      console.log("ready");
+      $("#add-new-monitor-form-group").hide();
+      $("#add-new-projector-form-group").hide();
+
+
+      $("#model-input").change(function(){
+        var str = "";
+         $( "#model-input option:selected" ).each(function() {
+           str += $( this ).text() + " ";
+           console.log(str);
+
+           //if it is not a desktop computer remove the monitor-input
+           if(str!=="Desktop Computer"){
+             console.log(typeof str);
+              $("#monitor-input-group").hide();
+           }else if(str==="Desktop Computer"){  //if it is a desktop computer show the monitor input
+             console.log("show");
+             $("#monitor-input-group").show();
+           }
+         });
+      });
+
+
+      $("#add-new-monitor-button").click(function(){
+        console.log("add new monitor");
+        if($("#add-new-monitor-form-group").is(':visible')){
+          $("#add-new-monitor-form-group").hide();
+        }else if($("#add-new-monitor-form-group").is(':hidden')){
+          $("#add-new-monitor-form-group").show();
+
+        }
+
+      });
+
+      $("#add-new-projector-button").click(function(){
+        console.log("add new monitor");
+        if($("#add-new-projector-form-group").is(':visible')){
+          $("#add-new-projector-form-group").hide();
+        }else if($("#add-new-projector-form-group").is(':hidden')){
+          $("#add-new-projector-form-group").show();
+
+        }
+
+      });
+
+       //monitor input
+      $('#submit-monitor-button').click(function(){
+            var serial_number = $('#serial-number-monitor-input').val();
+            var monitor_tag = $('#monitor-tag-input').val();
+            var monitor_age = $('#monitor-age-input').val();
+
+            var monitor = {
+                "serialNo": serial_number,
+                "tagNo": monitor_tag,
+                "age": monitor_age
+            };
+
+            var json = JSON.stringify(monitor);
+
+            console.log(json);
+
+
+            //send data to server
+            $.ajax({
+                type: "POST",
+                url: "http://127.0.0.1:8000/api/monitors/add",
+                data: json,
+                contentType: "application/json",
+                success: handleResponse
+            });
+
+            function handleResponse(data){
+                     console.log(data)
+                     var monitor = data;
+                     $('#monitor-input').prepend("<option value='"+monitor.id+"'>"+monitor.tagNo+"</option>");
+
+            }
+      });
+
+      //projector input
+      $('#submit-projector-button').click(function(){
+
+            var projector_model = $('#projector-model-input').val();
+            var projector_year = $('#projector-year-input').val();
+            var serial_number = $('#serial-number-projector-input').val();
+            var projector_tag = $('#projector-tag-input').val();
+
+            var projector = {
+                "model": projector_model,
+                "year": projector_year,
+                "serial_number": serial_number,
+                "tag": projector_tag
+            };
+
+            console.log(projector);
+
+            var json = JSON.stringify(projector);
+
+            $.ajax({
+                type: "POST",
+                url: "http://127.0.0.1:8000/api/projectors/add",
+                data: json,
+                contentType: "application/json",
+                success: handleResponse
+            });
+
+            function handleResponse(data){
+                console.log(data);
+                var projector = data;
+                $('#projector-input').prepend("<option value='"+projector.id+"'>"+projector.projectorTag+"</option>");
+            }
+
+      });
+
+    });
+
+
+
+  </script>
+
+{% endblock %}
