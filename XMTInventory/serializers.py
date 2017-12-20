@@ -3,32 +3,6 @@ from Inventory.models import *
 from Ownership.models import *
 
 
-class DepartmentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Department
-        field = ('id', 'departmentName')
-
-
-class StaffSerializer(serializers.ModelSerializer):
-    department = DepartmentSerializer()
-
-    class Meta:
-        model = Staff
-        field = ('id', 'staffID' 'staffName', 'position', 'location')
-
-
-class TenantSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tenant
-        field = ('id', 'tenantName')
-
-
-class ProjectSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Project
-        field = ('id', 'projectName')
-
-
 class ProjectorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Projector
@@ -42,16 +16,45 @@ class MonitorSerializer(serializers.ModelSerializer):
 
 
 class ComputerSerializer(serializers.ModelSerializer):
-    staff = StaffSerializer()
-    department = DepartmentSerializer()
-    tenant = TenantSerializer()
-    project = ProjectSerializer()
     projector = ProjectorSerializer()
     monitor = MonitorSerializer()
 
     class Meta:
         model = Computer
         fields = '__all__'
+
+
+class DepartmentSerializer(serializers.ModelSerializer):
+    computer = ComputerSerializer()
+
+    class Meta:
+        model = Department
+        field = ('id', 'departmentName')
+
+
+class StaffSerializer(serializers.ModelSerializer):
+    department = DepartmentSerializer()
+    computer = ComputerSerializer()
+
+    class Meta:
+        model = Staff
+        field = ('id', 'staffID' 'staffName', 'position', 'location')
+
+
+class TenantSerializer(serializers.ModelSerializer):
+    computer = ComputerSerializer()
+
+    class Meta:
+        model = Tenant
+        field = ('id', 'tenantName')
+
+
+class ProjectSerializer(serializers.ModelSerializer):
+    comuter = ComputerSerializer()
+
+    class Meta:
+        model = Project
+        field = ('id', 'projectName')
 
 
 class SystemSerializer(serializers.ModelSerializer):

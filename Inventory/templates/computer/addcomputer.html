@@ -1,5 +1,7 @@
 {% extends 'computer/base.html' %}
 
+{% load staticfiles %}
+
 {% block body %}
 
 <div class="container">
@@ -7,9 +9,9 @@
           <label for="model-input" class="col-2 col-form-label">Model</label>
           <div class="col-10">
             <select class="form-control" id="model-input">
-              <option>Desktop Computer</option>
-              <option>Tab</option>
-              <option>Laptop</option>
+              <option value="1">Desktop Computer</option>
+              <option value="2">Tab</option>
+              <option value="3">Laptop</option>
             </select>
           </div>
         </div>
@@ -53,8 +55,8 @@
           <label for="system-type-input" class="col-2 col-form-label">System Type</label>
           <div class="col-10">
             <select class="form-control" id="system-type-input">
-              <option>32-bit</option>
-              <option>64-bit</option>
+              <option value="32-bit">32-bit</option>
+              <option value="64-bit">64-bit</option>
             </select>
           </div>
         </div>
@@ -62,14 +64,14 @@
           <label for="ram-input" class="col-2 col-form-label">RAM</label>
           <div class="col-10">
             <select class="form-control" id="ram-input">
-              <option>1GB</option>
-              <option>2GB</option>
-              <option>4GB</option>
-              <option>8GB</option>
-              <option>16GB</option>
-              <option>32GB</option>
-              <option>64GB</option>
-              <option>128GB</option>
+              <option value="1GB">1GB</option>
+              <option value="2GB">2GB</option>
+              <option value="4GB">4GB</option>
+              <option value="8GB">8GB</option>
+              <option value="16GB">16GB</option>
+              <option value="32GB">32GB</option>
+              <option value="64GB">64GB</option>
+              <option value="128GB">128GB</option>
             </select>
           </div>
         </div>
@@ -77,13 +79,13 @@
           <label for="hard-drive-input" class="col-2 col-form-label">Hard Drive</label>
           <div class="col-10">
             <select class="form-control" id="hard-drive-input">
-              <option>128GB</option>
-              <option>256GB</option>
-              <option>500GB</option>
-              <option>1TB</option>
-              <option>2TB</option>
-              <option>4TB</option>
-              <option>8TB</option>
+              <option value="128GB">128GB</option>
+              <option value="256GB">256GB</option>
+              <option value="500GB">500GB</option>
+              <option value="1TB">1TB</option>
+              <option value="2TB">2TB</option>
+              <option value="4TB">4TB</option>
+              <option value="8TB">8TB</option>
             </select>
           </div>
         </div>
@@ -130,7 +132,7 @@
           <label for="projector-input" class="col-2 col-form-label">Projector</label>
           <div class="col-8">
             <select class="form-control" id="projector-input">
-              <option>None</option>
+              <option value="null">None</option>
                 {% for p in projectors %}
                 <option value="{{p.id}}">{{p.projectorTag}}</option>
                 {% endfor %}
@@ -169,134 +171,11 @@
             <button class="btn btn-danger" id="add-new-projector-button">Add New Projector</button>
           </div>
         </div>
-        <button class="btn btn-primary col-2">Save</button>
+        <button class="btn btn-primary col-2" id="save-button">Save</button>
         </div>
 
 {% endblock %}
 
 {% block script %}
-  <script>
-
-    $(document).ready(function(){
-
-      console.log("ready");
-      $("#add-new-monitor-form-group").hide();
-      $("#add-new-projector-form-group").hide();
-
-
-      $("#model-input").change(function(){
-        var str = "";
-         $( "#model-input option:selected" ).each(function() {
-           str += $( this ).text() + " ";
-           console.log(str);
-
-           //if it is not a desktop computer remove the monitor-input
-           if(str!=="Desktop Computer"){
-             console.log(typeof str);
-              $("#monitor-input-group").hide();
-           }else if(str==="Desktop Computer"){  //if it is a desktop computer show the monitor input
-             console.log("show");
-             $("#monitor-input-group").show();
-           }
-         });
-      });
-
-
-      $("#add-new-monitor-button").click(function(){
-        console.log("add new monitor");
-        if($("#add-new-monitor-form-group").is(':visible')){
-          $("#add-new-monitor-form-group").hide();
-        }else if($("#add-new-monitor-form-group").is(':hidden')){
-          $("#add-new-monitor-form-group").show();
-
-        }
-
-      });
-
-      $("#add-new-projector-button").click(function(){
-        console.log("add new monitor");
-        if($("#add-new-projector-form-group").is(':visible')){
-          $("#add-new-projector-form-group").hide();
-        }else if($("#add-new-projector-form-group").is(':hidden')){
-          $("#add-new-projector-form-group").show();
-
-        }
-
-      });
-
-       //monitor input
-      $('#submit-monitor-button').click(function(){
-            var serial_number = $('#serial-number-monitor-input').val();
-            var monitor_tag = $('#monitor-tag-input').val();
-            var monitor_age = $('#monitor-age-input').val();
-
-            var monitor = {
-                "serialNo": serial_number,
-                "tagNo": monitor_tag,
-                "age": monitor_age
-            };
-
-            var json = JSON.stringify(monitor);
-
-            console.log(json);
-
-
-            //send data to server
-            $.ajax({
-                type: "POST",
-                url: "http://127.0.0.1:8000/api/monitors/add",
-                data: json,
-                contentType: "application/json",
-                success: handleResponse
-            });
-
-            function handleResponse(data){
-                     console.log(data)
-                     var monitor = data;
-                     $('#monitor-input').prepend("<option value='"+monitor.id+"'>"+monitor.tagNo+"</option>");
-
-            }
-      });
-
-      //projector input
-      $('#submit-projector-button').click(function(){
-
-            var projector_model = $('#projector-model-input').val();
-            var projector_year = $('#projector-year-input').val();
-            var serial_number = $('#serial-number-projector-input').val();
-            var projector_tag = $('#projector-tag-input').val();
-
-            var projector = {
-                "model": projector_model,
-                "year": projector_year,
-                "serial_number": serial_number,
-                "tag": projector_tag
-            };
-
-            console.log(projector);
-
-            var json = JSON.stringify(projector);
-
-            $.ajax({
-                type: "POST",
-                url: "http://127.0.0.1:8000/api/projectors/add",
-                data: json,
-                contentType: "application/json",
-                success: handleResponse
-            });
-
-            function handleResponse(data){
-                console.log(data);
-                var projector = data;
-                $('#projector-input').prepend("<option value='"+projector.id+"'>"+projector.projectorTag+"</option>");
-            }
-
-      });
-
-    });
-
-
-
-  </script>
-
+<script src="{% static 'js/addcomputerform.js' %}"></script>
 {% endblock %}

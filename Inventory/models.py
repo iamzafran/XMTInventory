@@ -17,7 +17,9 @@ class Projector(models.Model):
 
 
 class Computer(models.Model):
+    pcModel = models.CharField(max_length=25, null=True, default=None, blank=True)
     pcTagNo = models.CharField(max_length=120)
+    pcModelSeries = models.CharField(max_length=25, null=True, default=None, blank=True)
     pcName = models.CharField(max_length=120)
     serialNo = models.CharField(max_length=120)
     operatingSystem = models.CharField(max_length=120)

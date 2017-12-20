@@ -21,9 +21,9 @@ from Inventory import views
 urlpatterns = [
     url(r'^', include('Inventory.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^api/computers', views.ComputerList.as_view()),
     url(r'^api/monitors/add', views.MonitorList.as_view()),
     url(r'^api/projectors/add', views.ProjectorList.as_view()),
+    url(r'^api/computers/add', views.ComputerList.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

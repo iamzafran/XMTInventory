@@ -35,7 +35,41 @@ class ComputerList(APIView):
         return Response(serializer.data)
 
     def post(self, request):
-        pass
+        computer = request.data
+        pcModel = computer["model"]
+        pcTagNo = computer["tag"]
+        pcModelSeries = computer["model_series"]
+        pcName = computer["name"]
+        serialNo = computer["serial_number"]
+        operatingSystem = computer["os"]
+        processor = computer["processor"]
+        systemType = computer["systemType"]
+        ram = computer["systemType"]
+        hardDrive = computer["hdd"]
+
+        c = Computer(pcModel=pcModel, pcTagNo=pcTagNo, pcModelSeries=pcModelSeries, pcName=pcName, serialNo=serialNo,
+                     operatingSystem=operatingSystem, processor=processor,
+                     systemType=systemType, ram=ram, hardDrive=hardDrive)
+
+        if pcModel == 1:
+
+            if computer["projector"] is not None:
+                projector = Projector.objects.get(pk=computer["projector"])
+                c.projector = projector
+
+            if computer["monitor"] is not None:
+                monitor = Monitor.objects.get(pk=computer["monitor"])
+                c.monitor = monitor
+
+        else:
+            if computer["projector"] is not None:
+                projector = Projector.objects.get(pk=computer["projector"])
+                c.projector = projector
+
+        c.save()
+        serializer = ComputerSerializer(c, many=False)
+        print(c.id)
+        return Response(serializer.data)
 
 
 class MonitorList(APIView):
