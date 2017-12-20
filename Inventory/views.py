@@ -16,8 +16,8 @@ def index(request):
 
 def addNewComputer(request):
     template = loader.get_template('computer/addcomputer.html')
-    monitors = Monitor.objects.raw('SELECT * FROM Inventory_monitor WHERE computer_id IS NULL')
-    projectors = Projector.objects.raw('SELECT * FROM Inventory_projector WHERE computer_id IS NULL')
+    monitors = Monitor.objects.raw('SELECT * FROM Inventory_monitor')
+    projectors = Projector.objects.raw('SELECT * FROM Inventory_projector')
     for p in projectors:
         print(p.projectorTag)
     context = {
