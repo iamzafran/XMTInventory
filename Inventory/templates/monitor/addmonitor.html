@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block body %}
+
+<div class="container">
+                <div class="form-group row">
+                  <label for="serial-number-monitor-input" class="col-2 col-form-label">Serial Number</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" id="serial-number-monitor-input">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="monitor-tag-input" class="col-2 col-form-label">Monitor Tag</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" id="monitor-tag-input">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="monitor-age-input" class="col-2 col-form-label">Age</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" id="monitor-age-input">
+                  </div>
+                </div>
+                <div>
+                </div>
+                <button class="btn btn-primary col-2" id="submit-monitor-button">Add</button>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/addcomputerform.js' %}"></script>
+{% endblock %}

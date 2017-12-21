@@ -19,11 +19,14 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from Inventory import views
 
 urlpatterns = [
-    url(r'^', include('Inventory.urls')),
+    url(r'^$', views.index, name='index'),
+    url(r'^inventory/', include('Inventory.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^api/monitors/add', views.MonitorList.as_view()),
     url(r'^api/projectors/add', views.ProjectorList.as_view()),
     url(r'^api/computers/add', views.ComputerList.as_view()),
+    url(r'^api/systems/add', views.SystemList.as_view()),
+
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

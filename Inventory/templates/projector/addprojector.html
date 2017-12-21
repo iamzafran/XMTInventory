@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block body %}
+
+<div class="container">
+        <div class="form-group row">
+                  <label for="projector-model-input" class="col-2 col-form-label">Projector Model</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" id="projector-model-input">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="projector-year-input" class="col-2 col-form-label">Year</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" id="projector-year-input">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="serial-number-projector-input" class="col-2 col-form-label">Serial Number</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" id="serial-number-projector-input">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="projector-tag-input" class="col-2 col-form-label">Projector Tag</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" id="projector-tag-input">
+                  </div>
+                </div>
+                  <button class="btn btn-primary col-2" id="submit-projector-button">Add</button>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/addcomputerform.js' %}"></script>
+{% endblock %}

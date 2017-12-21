@@ -3,13 +3,37 @@ from django.http import HttpResponse
 from django.template import loader
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Computer, Monitor, Projector
-from XMTInventory.serializers import ComputerSerializer, MonitorSerializer, ProjectorSerializer
+from .models import Computer, Monitor, Projector, System
+from XMTInventory.serializers import ComputerSerializer, MonitorSerializer, ProjectorSerializer, SystemSerializer
 # Create your views here.
 
 
 def index(request):
     template = loader.get_template('computer/computer.html')
+    context = {}
+    return HttpResponse(template.render(context, request))
+
+
+def projector(request):
+    template = loader.get_template('projector/projector.html')
+    context = {}
+    return HttpResponse(template.render(context, request))
+
+
+def monitor(request):
+    template = loader.get_template('monitor/monitor.html')
+    context = {}
+    return HttpResponse(template.render(context, request))
+
+
+def system(request):
+    template = loader.get_template('system/system.html')
+    context = {}
+    return HttpResponse(template.render(context, request))
+
+
+def email(request):
+    template = loader.get_template('email/email.html')
     context = {}
     return HttpResponse(template.render(context, request))
 
@@ -23,6 +47,42 @@ def addNewComputer(request):
     context = {
         'monitors': monitors,
         'projectors': projectors,
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def addNewProjector(request):
+    template = loader.get_template('projector/addprojector.html')
+
+    context = {
+
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def addNewMonitor(request):
+    template = loader.get_template('monitor/addmonitor.html')
+
+    context = {
+
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def addNewSystem(request):
+    template = loader.get_template('system/addsystem.html')
+
+    context = {
+
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def addNewEmail(request):
+    template = loader.get_template('email/addemail.html')
+
+    context = {
+
     }
     return HttpResponse(template.render(context, request))
 
@@ -101,10 +161,10 @@ class ProjectorList(APIView):
         return Response(serializer.data)
 
     def post(self, request):
-        projector = request.data
-        model = projector["model"]
-        year = projector["year"]
-        serial_number = projector["serial_number"]
+        data = request.data
+        model = data["model"]
+        year = data["year"]
+        serial_number = data["serial_number"]
         tag = projector["tag"]
         p = Projector(projectorModel=model, projectorYear=year, projectorSerialNumber=serial_number, projectorTag=tag)
         p.save()
@@ -113,3 +173,21 @@ class ProjectorList(APIView):
         return Response(serializer.data)
 
 
+class SystemList(APIView):
+
+    def get(self, request):
+        s = System.objects.all()
+        serializer = SystemSerializer(s, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        data = request.data
+        system_name = data["system_name"]
+        location = data["location"]
+
+        s = System(systemName=system_name, location=location)
+        s.save()
+
+        serializer = SystemSerializer(s, many=False)
+        print(s.id)
+        return Response(serializer.data)

@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
-
 {% block inventory %}
-<div class="row">
+    <div class="row">
         <div class="col-10 offset-md-1">
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display: inline">
@@ -14,21 +13,18 @@
               <a class="dropdown-item" href="/inventory/monitor">Monitor</a>
               <a class="dropdown-item" href="/inventory/system">System</a>
               <a class="dropdown-item" href="#">Server</a>
-              <a class="dropdown-item" href="/inventory/email">Email Listings</a>
+              <a class="dropdown-item" href="#">Email Listings</a>
               <a class="dropdown-item" href="#">DC Asset</a>
             </div>
-            <a href="/inventory/computer/add"><button class="btn btn-primary">Add New</button></a>
+            <a href="/inventory/monitor/add"><button class="btn btn-primary">Add New</button></a>
           </div>
 
 
         </div>
 
 
-</div>
+    </div>
 {% endblock %}
-
-
-
 {% block body %}
   <div class="container" style="margin-top: 50px">
           <div class="row">
@@ -38,9 +34,9 @@
                   <tr>
                     <th>No</th>
                     <th>Model</th>
-                    <th>PC Name</th>
-                    <th>PC Tag Number</th>
-                    <th>Owned by</th>
+                    <th>Monitor Name</th>
+                    <th>Monitor Tag Number</th>
+                    <th>Owner</th>
                   </tr>
                 </thead>
                 <tbody>

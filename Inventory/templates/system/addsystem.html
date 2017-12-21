@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block body %}
+
+<div class="container">
+                <div class="form-group row">
+                  <label for="system-name-input" class="col-2 col-form-label">System Name </label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" id="system-name-input">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="system-location-input" class="col-2 col-form-label">Location</label>
+                  <div class="col-10">
+                    <input class="form-control" type="text" id="system-location-input">
+                  </div>
+                </div>
+                <div>
+                </div>
+                <button class="btn btn-primary col-2" id="submit-system-button">Add</button>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/addcomputerform.js' %}"></script>
+{% endblock %}

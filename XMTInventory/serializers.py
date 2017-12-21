@@ -60,8 +60,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 class SystemSerializer(serializers.ModelSerializer):
     class Meta:
         model = System
-        field = ('id', 'systemName', 'location')
-
+        fields = '__all__'
 
 class EmailSerializer(serializers.ModelSerializer):
     class Meta:

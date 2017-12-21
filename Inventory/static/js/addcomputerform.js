@@ -176,5 +176,39 @@ $(document).ready(function(){
 
       });
 
+
+      //add system to database
+      $('#submit-system-button').click(function(){
+
+            var system_name = $('#system-name-input').val();
+            var location = $('#system-location-input').val();
+
+
+            var system = {
+                "system_name": system_name,
+                "location": location,
+
+            };
+
+            console.log(system);
+
+            var json = JSON.stringify(system);
+
+            $.ajax({
+                type: "POST",
+                url: "http://127.0.0.1:8000/api/systems/add",
+                data: json,
+                contentType: "application/json",
+                success: handleResponse
+            });
+
+            function handleResponse(data){
+                console.log(data);
+
+            }
+
+      });
+
+
     });
 
