@@ -16,5 +16,7 @@ urlpatterns = [
     url(r'^dcasset/add$', views.addNewDCasset, name='adddcasset'),
     url(r'^server/$', views.server, name='server'),
     url(r'^server/add$', views.addServer, name='addserver'),
+    url(r'^software/$', views.software, name='software'),
+    url(r'^software/add$', views.addsoftware, name='addsoftware'),
 
 ]

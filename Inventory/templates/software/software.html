@@ -15,10 +15,10 @@
               <a class="dropdown-item" href="/inventory/server">Server</a>
               <a class="dropdown-item" href="/inventory/email">Email Listings</a>
               <a class="dropdown-item" href="/inventory/dcasset">DC Asset</a>
-                              <a class="dropdown-item" href="/inventory/software">Software</a>
+                <a class="dropdown-item" href="/inventory/software">Software</a>
 
             </div>
-            <a href="/inventory/email/add"><button class="btn btn-primary">Add New</button></a>
+            <a href="/inventory/software/add"><button class="btn btn-primary">Add New</button></a>
           </div>
 
 
@@ -36,24 +36,12 @@
                   <tr>
                     <th>No</th>
 
-                    <th>Licenses</th>
-                    <th>Principal Name</th>
-                      <th>Date Created</th>
+                    <th>Software Name</th>
 
                   </tr>
                 </thead>
                 <tbody>
 
-                {% for e in emails%}
-                  <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-
-                    <td>{{ e.licenses }}</td>
-                    <td>{{ e.principalName }}</td>
-                    <td>{{ e.dateCreated }}</td>
-
-                  </tr>
-                {% endfor %}
                 </tbody>
               </table>
             </div>

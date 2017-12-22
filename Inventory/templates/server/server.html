@@ -16,6 +16,8 @@
               <a class="dropdown-item" href="#">Server</a>
               <a class="dropdown-item" href="/inventory/email">Email Listings</a>
               <a class="dropdown-item" href="/inventory/dcasset">DC Asset</a>
+                              <a class="dropdown-item" href="/inventory/software">Software</a>
+
             </div>
             <a href="/inventory/server/add"><button class="btn btn-primary">Add New</button></a>
           </div>
@@ -44,83 +46,15 @@
                   </tr>
                 </thead>
                 <tbody>
+                {% for s in servers%}
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ s.hostname }}</td>
+                    <td>{{ s.serverModel }}</td>
+                    <td>{{ s.domain }}</td>
+                    <td>{{ s.application }}</td>
                   </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr><tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr><tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr><tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr><tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-
-
-
-
+                {% endfor %}
                 </tbody>
               </table>
             </div>

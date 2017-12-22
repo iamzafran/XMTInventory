@@ -322,6 +322,32 @@ $(document).ready(function(){
 
       });
 
+      $('#submit-software-button').click(function(){
+        var software_name = $('#software-name-input').val();
+
+        var software = {
+            'software_name': software_name
+        };
+
+        console.log(software);
+
+        var json = JSON.stringify(software);
+
+            $.ajax({
+                type: "POST",
+                url: "http://127.0.0.1:8000/api/software/add",
+                data: json,
+                contentType: "application/json",
+                success: handleResponse
+            });
+
+            function handleResponse(data){
+                console.log(data);
+            }
+
+
+      });
+
 
     });
 

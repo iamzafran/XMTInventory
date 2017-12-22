@@ -3,9 +3,9 @@ from django.http import HttpResponse
 from django.template import loader
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Computer, Monitor, Projector, System, Email, DCAsset, Server
+from .models import Computer, Monitor, Projector, System, Email, DCAsset, Server, Software
 from XMTInventory.serializers import ComputerSerializer, MonitorSerializer, ProjectorSerializer, \
-    SystemSerializer, EmailSerializer, DCAssetSerializer, ServerSerializer
+    SystemSerializer, EmailSerializer, DCAssetSerializer, ServerSerializer, SoftwareSerializer
 # Create your views here.
 
 
@@ -141,6 +141,24 @@ def addServer(request):
     return HttpResponse(template.render(context, request))
 
 
+def software(request):
+    template = loader.get_template('software/software.html')
+    softwares = Software.objects.all()
+
+    context = {
+        'softwares': softwares
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def addsoftware(request):
+    template = loader.get_template('software/addsoftware.html')
+
+    context = {
+    }
+    return HttpResponse(template.render(context, request))
+
+
 class ComputerList(APIView):
 
     def get(self, request):
@@ -257,7 +275,7 @@ class EmailList(APIView):
     def post(self, request):
         data = request.data
         licenses = data["licenses"]
-        principal_name = data["licenses"]
+        principal_name = data["principal_name"]
         date_created = data["date_created"]
 
         e = Email(licenses=licenses, principalName=principal_name, dateCreated=date_created)
@@ -320,5 +338,24 @@ class ServerList(APIView):
         s.save()
 
         serializer = ServerSerializer(s, many=False)
+
+        return Response(serializer.data)
+
+
+class SoftwareList(APIView):
+
+    def get(self, request):
+        s = Software.objects.all()
+        serializer = SoftwareSerializer(s, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        data = request.data
+        software_name = data["software_name"]
+
+        s = Software(softwareName=software_name)
+        s.save()
+
+        serializer = SoftwareSerializer(s, many=False)
 
         return Response(serializer.data)

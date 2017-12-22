@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^api/email/add', views.EmailList.as_view()),
     url(r'^api/dcasset/add', views.DCAssetList.as_view()),
     url(r'^api/server/add', views.ServerList.as_view()),
+    url(r'^api/software/add', views.SoftwareList.as_view()),
 
 ]
 

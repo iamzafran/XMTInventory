@@ -84,7 +84,7 @@ class DCAssetSerializer(serializers.ModelSerializer):
 class SoftwareSerializer(serializers.ModelSerializer):
     class Meta:
         model = Software
-        field = ('id', 'softwareName')
+        fields = '__all__'
 
 
 class SoftwareOwnershipSerializer(serializers.ModelSerializer):
