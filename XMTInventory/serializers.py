@@ -62,23 +62,23 @@ class SystemSerializer(serializers.ModelSerializer):
         model = System
         fields = '__all__'
 
+
 class EmailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Email
-        field = ('id', 'licenses', 'principalName', 'dateCreated')
+        fields = '__all__'
 
 
 class ServerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Server
-        field = ('id', 'hostname', 'serverModel', 'ipv4', 'domain', 'username', 'password', 'operatingSystem',
-                 'serialNumber', 'productKey', 'processor', 'hardDrive', 'application', 'location')
+        fields = '__all__'
 
 
 class DCAssetSerializer(serializers.ModelSerializer):
     class Meta:
         model = DCAsset
-        field = ('id', 'equipment', 'description', 'serialNumber')
+        fields = '__all__'
 
 
 class SoftwareSerializer(serializers.ModelSerializer):

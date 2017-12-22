@@ -12,5 +12,9 @@ urlpatterns = [
     url(r'^system/add$', views.addNewSystem, name='monitor'),
     url(r'^email/$', views.email, name='monitor'),
     url(r'^email/add$', views.addNewEmail, name='monitor'),
+    url(r'^dcasset/$', views.dcasset, name='dcasset'),
+    url(r'^dcasset/add$', views.addNewDCasset, name='adddcasset'),
+    url(r'^server/$', views.server, name='server'),
+    url(r'^server/add$', views.addServer, name='addserver'),
 
 ]

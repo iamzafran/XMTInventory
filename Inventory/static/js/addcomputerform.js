@@ -210,5 +210,118 @@ $(document).ready(function(){
       });
 
 
+      //add email to database
+      $('#submit-email-button').click(function(){
+
+        var licenses = $('#licenses-input').val();
+        var principal_name = $('#principal-name-input').val();
+        var date = $('#date-created-input').val();
+
+        var email = {
+            "licenses": licenses,
+            "principal_name": principal_name,
+            "date_created": date
+        };
+
+        console.log(email);
+
+        var json = JSON.stringify(email);
+
+            $.ajax({
+                type: "POST",
+                url: "http://127.0.0.1:8000/api/email/add",
+                data: json,
+                contentType: "application/json",
+                success: handleResponse
+            });
+
+            function handleResponse(data){
+                console.log(data);
+            }
+
+      });
+
+
+      //add dc asset
+      $('#submit-asset-button').click(function() {
+        var equipment = $('#equipment-input').val();
+        var description = $('#description-input').val();
+        var serial_number = $('#serial-number-input').val();
+
+        var dcasset = {
+            "equipment": equipment,
+            "description": description,
+            "serial_number": serial_number
+        };
+
+        console.log(dcasset);
+
+        var json = JSON.stringify(dcasset);
+
+            $.ajax({
+                type: "POST",
+                url: "http://127.0.0.1:8000/api/dcasset/add",
+                data: json,
+                contentType: "application/json",
+                success: handleResponse
+            });
+
+            function handleResponse(data){
+                console.log(data);
+            }
+
+      });
+
+
+      $('#add-server-button').click(function(){
+        var hostname = $('#hostname-input').val();
+        var server_model = $('#server-model-input').val();
+        var ipv4 = $('#ip-input').val();
+        var domain = $('#domain-input').val();
+        var username = $('#username-input').val();
+        var password = $('#password-input').val();
+        var os = $('#operating-system-input').val();
+        var serial_number = $('#serial-number-input').val();
+        var product_key = $('#product-key-input').val();
+        var processor = $('#processor-input').val();
+        var hdd = $('#hard-drive-input').val();
+        var application = $('#application-input').val();
+        var location = $('#location-input').val();
+
+
+        server = {
+            "hostname": hostname,
+            "server_model": server_model,
+            "ip": ipv4,
+            "domain": domain,
+            "username": username,
+            "password": password,
+            "os": os,
+            "serial_number": serial_number,
+            "product_key": product_key,
+            "processor": processor,
+            "hdd": hdd,
+            "application": application,
+            "location": location
+        }
+
+        console.log(server);
+        var json = JSON.stringify(server);
+
+            $.ajax({
+                type: "POST",
+                url: "http://127.0.0.1:8000/api/server/add",
+                data: json,
+                contentType: "application/json",
+                success: handleResponse
+            });
+
+            function handleResponse(data){
+                console.log(data);
+            }
+
+      });
+
+
     });
 

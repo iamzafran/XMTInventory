@@ -26,6 +26,9 @@ urlpatterns = [
     url(r'^api/projectors/add', views.ProjectorList.as_view()),
     url(r'^api/computers/add', views.ComputerList.as_view()),
     url(r'^api/systems/add', views.SystemList.as_view()),
+    url(r'^api/email/add', views.EmailList.as_view()),
+    url(r'^api/dcasset/add', views.DCAssetList.as_view()),
+    url(r'^api/server/add', views.ServerList.as_view()),
 
 ]
 
