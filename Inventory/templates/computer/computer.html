@@ -40,87 +40,20 @@
                     <th>Model</th>
                     <th>PC Name</th>
                     <th>PC Tag Number</th>
-                    <th>Owned by</th>
+                    <th>Remarks</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr><tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr><tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr><tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr><tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
+                    {% for c in computers %}
 
-
-
-
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td>{{c.pcModelSeries}}</td>
+                            <td>{{c.pcName}}</td>
+                            <td>{{c.pcTagNo}}</td>
+                            <td>{{Remarks}}</td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
               </table>
             </div>

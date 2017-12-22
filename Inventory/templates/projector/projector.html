@@ -34,87 +34,19 @@
                   <tr>
                     <th>No</th>
                     <th>Model</th>
-                    <th>Projector Name</th>
-                    <th>Projector Tag Number</th>
-                    <th>Owner</th>
+                    <th>Projector Tag</th>
+                    <th>Projector Serial Number</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr><tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr><tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr><tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr><tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-
-
+                    {% for p in projectors %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ p.projectorModel }}</td>
+                            <td>{{ p.projectorTag}}</td>
+                            <td>{{ p.projectorSerialNumber }}</td>
+                        </tr>
+                    {% endfor %}
 
 
                 </tbody>

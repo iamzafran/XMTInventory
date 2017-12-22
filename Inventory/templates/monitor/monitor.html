@@ -33,88 +33,21 @@
                 <thead class="thead-inverse">
                   <tr>
                     <th>No</th>
-                    <th>Model</th>
-                    <th>Monitor Name</th>
-                    <th>Monitor Tag Number</th>
-                    <th>Owner</th>
+                    <th>Monitor Serial Number</th>
+                    <th>Monitor Tag No</th>
+                    <th>Age</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr><tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr><tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr><tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr><tr>
-                    <th scope="row">1</th>
-                    <td>Laptop</td>
-                    <td>XMT\Zafran</td>
-                    <td>XMT\PC\001</td>
-                    <td>Muhammad Zafran</td>
-                  </tr>
 
-
+                    {% for m in monitors %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ m.serialNo }}</td>
+                            <td>{{ m.tagNo }}</td>
+                            <td>{{ m.age }}</td>
+                        </tr>
+                    {% endfor %}
 
 
                 </tbody>

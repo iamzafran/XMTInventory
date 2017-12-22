@@ -11,31 +11,46 @@ from XMTInventory.serializers import ComputerSerializer, MonitorSerializer, Proj
 
 def index(request):
     template = loader.get_template('computer/computer.html')
-    context = {}
+    computers = Computer.objects.all()
+    context = {
+        'computers': computers,
+    }
     return HttpResponse(template.render(context, request))
 
 
 def projector(request):
     template = loader.get_template('projector/projector.html')
-    context = {}
+    projectors = Projector.objects.all()
+    context = {
+        'projectors': projectors,
+    }
     return HttpResponse(template.render(context, request))
 
 
 def monitor(request):
     template = loader.get_template('monitor/monitor.html')
-    context = {}
+    monitors = Monitor.objects.all()
+    context = {
+        'monitors': monitors,
+    }
     return HttpResponse(template.render(context, request))
 
 
 def system(request):
     template = loader.get_template('system/system.html')
-    context = {}
+    systems = System.objects.all()
+    context = {
+        'systems': systems
+    }
     return HttpResponse(template.render(context, request))
 
 
 def email(request):
     template = loader.get_template('email/email.html')
-    context = {}
+    emails = Email.objects.all()
+    context = {
+       'emails': emails
+    }
     return HttpResponse(template.render(context, request))
 
 
@@ -90,9 +105,10 @@ def addNewEmail(request):
 
 def dcasset(request):
     template = loader.get_template('dcasset/dcasset.html')
+    dcassets = DCAsset.objects.all()
 
     context = {
-
+        'dcassets': dcassets,
     }
     return HttpResponse(template.render(context, request))
 
@@ -108,9 +124,10 @@ def addNewDCasset(request):
 
 def server(request):
     template = loader.get_template('server/server.html')
+    servers = Server.objects.all()
 
     context = {
-
+        'servers': servers
     }
     return HttpResponse(template.render(context, request))
 
