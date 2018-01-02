@@ -1,5 +1,6 @@
 from django.db import models
 from Inventory.models import Computer, Server, System, Email, Software
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -7,11 +8,12 @@ from Inventory.models import Computer, Server, System, Email, Software
 
 class Department(models.Model):
     departmentName = models.CharField(max_length=250)
-    computer = models.ForeignKey(Computer, on_delete=models.SET_NULL, null=True, default=None, blank=True)
-    server = models.ForeignKey(Server, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+    computer = models.ForeignKey(Computer, max_length=20, null=True, default=None, blank=True, on_delete=models.SET_NULL)
+    server = models.ForeignKey(Server, max_length=20, null=True, default=None, blank=True, on_delete=models.SET_NULL)
 
 
 class Staff(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     staffID = models.CharField(max_length=20, null=True, default=None, blank=True)
     staffName = models.CharField(max_length=250)
     position = models.CharField(max_length=250)
@@ -23,11 +25,13 @@ class Staff(models.Model):
 
 
 class Tenant(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     tenantName = models.CharField(max_length=250)
     computer = models.ForeignKey(Computer, on_delete=models.SET_NULL, null=True, default=None, blank=True)
 
 
 class Project(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     projectName = models.CharField(max_length=250)
     computer = models.ForeignKey(Computer, on_delete=models.SET_NULL, null=True, default=None, blank=True)
 
