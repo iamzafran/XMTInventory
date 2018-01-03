@@ -37,7 +37,7 @@ class StaffSerializer(serializers.ModelSerializer):
     computer = ComputerSerializer()
 
     class Meta:
-        model = Staff
+        model = XMTStaff
         field = ('id', 'staffID' 'staffName', 'position', 'location')
 
 

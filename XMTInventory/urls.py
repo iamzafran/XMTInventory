@@ -16,20 +16,23 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import include, url
 from rest_framework.urlpatterns import format_suffix_patterns
-from Inventory import views
-
+from Inventory import views as iviews
+from Ownership import views as oviews
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', iviews.index, name='index'),
     url(r'^inventory/', include('Inventory.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^api/monitors/add', views.MonitorList.as_view()),
-    url(r'^api/projectors/add', views.ProjectorList.as_view()),
-    url(r'^api/computers/add', views.ComputerList.as_view()),
-    url(r'^api/systems/add', views.SystemList.as_view()),
-    url(r'^api/email/add', views.EmailList.as_view()),
-    url(r'^api/dcasset/add', views.DCAssetList.as_view()),
-    url(r'^api/server/add', views.ServerList.as_view()),
-    url(r'^api/software/add', views.SoftwareList.as_view()),
+    url(r'^api/monitors/add', iviews.MonitorList.as_view()),
+    url(r'^api/projectors/add', iviews.ProjectorList.as_view()),
+    url(r'^api/computers/add', iviews.ComputerList.as_view()),
+    url(r'^api/systems/add', iviews.SystemList.as_view()),
+    url(r'^api/email/add', iviews.EmailList.as_view()),
+    url(r'^api/dcasset/add', iviews.DCAssetList.as_view()),
+    url(r'^api/server/add', iviews.ServerList.as_view()),
+    url(r'^api/software/add', iviews.SoftwareList.as_view()),
+    url(r'^ownership/', include('Ownership.urls')),
+    url(r'^api/computer/autocomplete', iviews.ComputerAutoComplete.as_view()),
+
 
 ]
 

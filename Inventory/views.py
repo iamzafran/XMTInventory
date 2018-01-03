@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.template import loader
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -159,6 +160,24 @@ def addsoftware(request):
     return HttpResponse(template.render(context, request))
 
 
+class ComputerAutoComplete(APIView):
+
+    def post(self, request):
+        data = request.data
+        print(request)
+        search = data["search"]
+        computers = Computer.objects.raw("SELECT * FROM Inventory_computer WHERE pcTagNo LIKE '" + search + "%'")
+        response = []
+
+        for c in computers:
+            computer = {
+                'label': c.pcTagNo,
+                'value': c.id
+            }
+            response.append(computer)
+        return JsonResponse(response, safe=False)
+
+
 class ComputerList(APIView):
 
     def get(self, request):
@@ -183,17 +202,22 @@ class ComputerList(APIView):
                      operatingSystem=operatingSystem, processor=processor,
                      systemType=systemType, ram=ram, hardDrive=hardDrive)
 
-        if pcModel == 1:
+        print("PC model = "+pcModel)
 
+        if pcModel == "1":
+            print("Desktop computer")
             if computer["projector"] is not None:
                 projector = Projector.objects.get(pk=computer["projector"])
                 c.projector = projector
 
             if computer["monitor"] is not None:
+                print(computer["monitor"])
                 monitor = Monitor.objects.get(pk=computer["monitor"])
                 c.monitor = monitor
 
         else:
+            print("Not Desktop computer")
+
             if computer["projector"] is not None:
                 projector = Projector.objects.get(pk=computer["projector"])
                 c.projector = projector
@@ -237,7 +261,7 @@ class ProjectorList(APIView):
         model = data["model"]
         year = data["year"]
         serial_number = data["serial_number"]
-        tag = projector["tag"]
+        tag = data["tag"]
         p = Projector(projectorModel=model, projectorYear=year, projectorSerialNumber=serial_number, projectorTag=tag)
         p.save()
         serializer = ProjectorSerializer(p, many=False)

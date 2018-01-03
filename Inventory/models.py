@@ -1,4 +1,5 @@
 from django.db import models
+from Ownership.models import XMTStaff, Project, Tenant, Department
 
 # Create your models here.
 
@@ -30,17 +31,23 @@ class Computer(models.Model):
     remarks = models.CharField(max_length=250)
     projector = models.ForeignKey(Projector, on_delete=models.SET_NULL, null=True, default=None, blank=True)
     monitor = models.ForeignKey(Monitor, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+    xmtstaff = models.ForeignKey(XMTStaff, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+    tenant = models.ForeignKey(Tenant, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+    project = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True, default=None, blank=True)
 
 
 class System(models.Model):
     systemName = models.CharField(max_length=120)
     location = models.CharField(max_length=120)
+    xmtstaff = models.ForeignKey(XMTStaff, on_delete=models.SET_NULL, null=True, default=None, blank=True)
 
 
 class Email(models.Model):
     licenses = models.CharField(max_length=120)
     principalName = models.CharField(max_length=120)
     dateCreated = models.CharField(max_length=120)
+    xmtstaff = models.ForeignKey(XMTStaff, on_delete=models.SET_NULL,
+                                 null=True, default=None, blank=True, related_name="+")
 
 
 class Server(models.Model):
@@ -57,6 +64,7 @@ class Server(models.Model):
     hardDrive = models.CharField(max_length=8)
     application = models.CharField(max_length=120)
     location = models.CharField(max_length=120)
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, default=None, blank=True)
 
 
 class DCAsset(models.Model):
@@ -69,3 +77,6 @@ class Software(models.Model):
     softwareName = models.CharField(max_length=120)
 
 
+class SoftwareOwnership(models.Model):
+    staff = models.ForeignKey(XMTStaff, on_delete=models.CASCADE, null=True, default=None, blank=True)
+    software = models.ForeignKey(Software, on_delete=models.CASCADE, null=True, default=None, blank=True)

@@ -1,0 +1,116 @@
+{% extends 'base_ownership.html' %}
+
+
+{% block body %}
+<div class="container">
+          <p class="h3">{{ staff.staffName }}</p>
+          <div class="row align-items-start" style="margin-top:30px;">
+            <div class="col-3"><p class="h5">Position</p></div>
+            <div class="col-9"><p class="text-muted">{{ staff.position}}</p></div>
+          </div>
+          <div class="row align-items-start">
+            <div class="col-3"><p class="h5">Location</p></div>
+            <div class="col-9"><p class="text-muted">{{ staff.location }}</p></div>
+          </div>
+          <div class="row align-items-start">
+            <div class="col-3"><p class="h5">Department</p></div>
+            <div class="col-9"><p class="text-muted">{{ staff.department }}</p></div>
+          </div>
+          <div class="card">
+              <div class="card-header">
+                <span class="h4">Assets</span>
+                <button class="btn btn-outline-primary float-right col-1" id="edit_button">Edit</button>
+                <div class="btn-toolbar d-inline" role="toolbar" >
+                <button class="btn btn-outline-danger float-right toggle" id="cancel_button" hidden>Cancel</button>
+                <button class="btn btn-outline-success float-right toggle" style="margin-right:10px" id="update_button" hidden>Update</button>
+
+              </div>
+              </div>
+              <div class="card-body" style="padding: 20px">
+                <div>
+                  <div class="form-group">
+                    <label for="computer-detail-input" class="h5">Computer</label>
+
+                      {% if computer is not None %}
+                              <input type="text" class="form-control input" id="computer-detail-input"  value="{{ computer.pcTagNo }}" disabled>
+                      {% else %}
+                                <input type="text" class="form-control input" id="computer-detail-input"  value="No Computer" disabled>
+                      {% endif %}
+                  </div>
+                  <div class="form-group">
+                    <label for="system-detail-input" class="h5">System</label>
+
+                        {% if system is not None %}
+                            <input type="text" class="form-control input" id="system-detail-input" value="CCMS" disabled>
+                        {% else %}
+                            <input type="text" class="form-control input" id="system-detail-input" value="No System" disabled>
+                      {% endif %}
+
+
+                  </div>
+                  <div class="form-group">
+                    <label for="email-detail-input" class="h5">Email</label>
+                          {% if email is not None %}
+                            <input type="text" class="form-control input" id="email-detail-input" value="muhammad.zafran@outlook.com" disabled>
+                          {% else %}
+                             <input type="text" class="form-control input" id="system-detail-input" value="No Email" disabled>
+                            {% endif %}
+
+
+
+                  </div>
+                </div>
+
+              </div>
+          </div>
+
+</div>>
+{% endblock %}
+
+{% block script %}
+
+<script>
+
+    $(document).ready(function(){
+
+        $('#edit_button').click(function(){
+
+          $('.toggle').removeAttr('hidden');
+          $(this).attr('hidden', 'true');
+          $('.input').removeAttr('disabled');
+        });
+
+        $('#cancel_button').click(function(){
+            $('.toggle').attr('hidden', 'true');
+            $('#edit_button').removeAttr('hidden');
+            $('.input').attr('disabled', 'true');
+        });
+
+        $('#computer-detail-input').autocomplete({
+         source : function(request, response){
+            $.ajax({
+                url: 'http://127.0.0.1:8000/api/computer/autocomplete',
+                type: 'post',
+                dataType : "json",
+                data : {
+                    search : request.term
+                },
+                success : function(data){
+                    response(data);
+                }
+            });
+         },
+         delay : 500,
+         minLength : 2
+        });
+
+
+    });
+
+
+
+
+
+
+  </script>
+{% endblock %}
