@@ -171,8 +171,7 @@ class ComputerAutoComplete(APIView):
 
         for c in computers:
             computer = {
-                'label': c.pcTagNo,
-                'value': c.id
+                'label': c.pcTagNo
             }
             response.append(computer)
         return JsonResponse(response, safe=False)
@@ -289,6 +288,23 @@ class SystemList(APIView):
         return Response(serializer.data)
 
 
+class SystemAutoComplete(APIView):
+
+    def post(self, request):
+        data = request.data
+        print(request)
+        search = data["search"]
+        system_query = System.objects.raw("SELECT * FROM Inventory_system WHERE systemName LIKE '" + search + "%'")
+        response = []
+
+        for s in system_query:
+            row = {
+                'label': s.systemName
+            }
+            response.append(row)
+        return JsonResponse(response, safe=False)
+
+
 class EmailList(APIView):
 
     def get(self, request):
@@ -308,6 +324,23 @@ class EmailList(APIView):
         serializer = EmailSerializer(e, many=False)
 
         return Response(serializer.data)
+
+
+class EmailListAutoComplete(APIView):
+
+    def post(self, request):
+        data = request.data
+        print(request)
+        search = data["search"]
+        email_query = Email.objects.raw("SELECT * FROM Inventory_email WHERE principalName LIKE '" + search + "%'")
+        response = []
+
+        for e in email_query:
+            row = {
+                'label': e.principalName
+            }
+            response.append(row)
+        return JsonResponse(response, safe=False)
 
 
 class DCAssetList(APIView):

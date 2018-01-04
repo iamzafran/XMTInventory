@@ -35,11 +35,17 @@ class Computer(models.Model):
     tenant = models.ForeignKey(Tenant, on_delete=models.SET_NULL, null=True, default=None, blank=True)
     project = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True, default=None, blank=True)
 
+    def __str__(self):
+        return self.pcTagNo
+
 
 class System(models.Model):
     systemName = models.CharField(max_length=120)
     location = models.CharField(max_length=120)
     xmtstaff = models.ForeignKey(XMTStaff, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+
+    def __str__(self):
+        return self.systemName
 
 
 class Email(models.Model):
@@ -48,6 +54,9 @@ class Email(models.Model):
     dateCreated = models.CharField(max_length=120)
     xmtstaff = models.ForeignKey(XMTStaff, on_delete=models.SET_NULL,
                                  null=True, default=None, blank=True, related_name="+")
+
+    def __str__(self):
+        return self.principalName
 
 
 class Server(models.Model):
@@ -65,6 +74,9 @@ class Server(models.Model):
     application = models.CharField(max_length=120)
     location = models.CharField(max_length=120)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+
+    def __str__(self):
+        return self.hostname
 
 
 class DCAsset(models.Model):

@@ -1,5 +1,6 @@
 {% extends 'base_ownership.html' %}
 
+{% load staticfiles %}
 
 {% block body %}
 <div class="container">
@@ -41,7 +42,7 @@
                     <label for="system-detail-input" class="h5">System</label>
 
                         {% if system is not None %}
-                            <input type="text" class="form-control input" id="system-detail-input" value="CCMS" disabled>
+                            <input type="text" class="form-control input" id="system-detail-input" value="{{ system.systemName }}" disabled>
                         {% else %}
                             <input type="text" class="form-control input" id="system-detail-input" value="No System" disabled>
                       {% endif %}
@@ -51,9 +52,9 @@
                   <div class="form-group">
                     <label for="email-detail-input" class="h5">Email</label>
                           {% if email is not None %}
-                            <input type="text" class="form-control input" id="email-detail-input" value="muhammad.zafran@outlook.com" disabled>
+                            <input type="text" class="form-control input" id="email-detail-input" value="{{ email.principalName }}" disabled>
                           {% else %}
-                             <input type="text" class="form-control input" id="system-detail-input" value="No Email" disabled>
+                             <input type="text" class="form-control input" id="email-detail-input" value="No Email" disabled>
                             {% endif %}
 
 
@@ -68,49 +69,10 @@
 {% endblock %}
 
 {% block script %}
-
 <script>
+         var staffID = {{ staff.id }};
 
-    $(document).ready(function(){
+</script>>
 
-        $('#edit_button').click(function(){
-
-          $('.toggle').removeAttr('hidden');
-          $(this).attr('hidden', 'true');
-          $('.input').removeAttr('disabled');
-        });
-
-        $('#cancel_button').click(function(){
-            $('.toggle').attr('hidden', 'true');
-            $('#edit_button').removeAttr('hidden');
-            $('.input').attr('disabled', 'true');
-        });
-
-        $('#computer-detail-input').autocomplete({
-         source : function(request, response){
-            $.ajax({
-                url: 'http://127.0.0.1:8000/api/computer/autocomplete',
-                type: 'post',
-                dataType : "json",
-                data : {
-                    search : request.term
-                },
-                success : function(data){
-                    response(data);
-                }
-            });
-         },
-         delay : 500,
-         minLength : 2
-        });
-
-
-    });
-
-
-
-
-
-
-  </script>
+<script src="{% static 'js/staff_detail.js' %}"></script>
 {% endblock %}

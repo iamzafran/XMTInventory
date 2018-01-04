@@ -32,7 +32,9 @@ urlpatterns = [
     url(r'^api/software/add', iviews.SoftwareList.as_view()),
     url(r'^ownership/', include('Ownership.urls')),
     url(r'^api/computer/autocomplete', iviews.ComputerAutoComplete.as_view()),
-
+    url(r'^api/system/autocomplete', iviews.SystemAutoComplete.as_view()),
+    url(r'^api/email/autocomplete', iviews.EmailListAutoComplete.as_view()),
+    url(r'^api/update/inventory/staff', oviews.UpdateStaffInventory.as_view()),
 
 ]
 
