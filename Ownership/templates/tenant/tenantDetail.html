@@ -1,0 +1,51 @@
+{% extends 'base_ownership.html' %}
+
+{% load staticfiles %}
+
+{% block body %}
+      <div class="container">
+          <p class="h3" style="margin-bottom: 50px;">Tenant: {{ tenant.tenantName }}</p>
+
+          <div class="card">
+              <div class="card-header">
+                <span class="h4">Assets</span>
+                <button class="btn btn-outline-primary float-right col-1" id="edit_button">Edit</button>
+                <div class="btn-toolbar d-inline" role="toolbar" >
+                <button class="btn btn-outline-danger float-right toggle" id="cancel_button" hidden>Cancel</button>
+                <button class="btn btn-outline-success float-right toggle" style="margin-right:10px" id="update_button" hidden>Update</button>
+
+              </div>
+              </div>
+              <div class="card-body" style="padding: 20px">
+                <div class="container">
+                  <div class="form-group">
+                    <label for="computer-detail-input" class="h5">Computer</label>
+                      {% for c in computers %}
+                        <div class="row form-row">
+                          <input type="text" class="form-control input col-8 computer-tag-no" id="computer-detail-input"   value="{{ c.pcTagNo }}" disabled>
+                          <button class="btn btn-danger button input remove" onclick="remove(this)" disabled>Remove</button>
+                        </div>
+                      {% endfor %}
+
+
+
+                  </div>
+                  <div class="row button-row">
+                    <button class="btn btn-primary button input add col-1" onclick="add()" disabled>Add</button>
+                  </div>
+                </div>
+
+              </div>
+          </div>
+
+        </div>
+{% endblock %}
+
+{% block script %}
+<script>
+         var tenantID = {{ tenant.id }};
+         var computersToAdd = [];
+</script>
+
+<script src="{% static 'js/tenant_detail.js' %}"></script>
+{% endblock %}

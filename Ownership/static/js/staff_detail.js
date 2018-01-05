@@ -51,7 +51,7 @@
 
 
         //autocomplete for system
-        $('#system-detail-input').autocomplete({
+        $('#search').autocomplete({
          source : function(request, response){
             $.ajax({
                 url: 'http://127.0.0.1:8000/api/system/autocomplete',

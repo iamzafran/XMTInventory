@@ -166,7 +166,7 @@ class ComputerAutoComplete(APIView):
         data = request.data
         print(request)
         search = data["search"]
-        computers = Computer.objects.raw("SELECT * FROM Inventory_computer WHERE pcTagNo LIKE '" + search + "%'")
+        computers = Computer.objects.filter(pcTagNo__icontains=search, tenant=None, xmtstaff=None, project=None)
         response = []
 
         for c in computers:
@@ -397,6 +397,23 @@ class ServerList(APIView):
         serializer = ServerSerializer(s, many=False)
 
         return Response(serializer.data)
+
+
+class ServerAutoComplete(APIView):
+
+    def post(self, request):
+        data = request.data
+        print(request)
+        search = data["search"]
+        servers = Server.objects.filter(hostname__icontains=search, department=None)
+        response = []
+
+        for s in servers:
+            computer = {
+                'label': s.hostname
+            }
+            response.append(computer)
+        return JsonResponse(response, safe=False)
 
 
 class SoftwareList(APIView):

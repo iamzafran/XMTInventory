@@ -11,7 +11,7 @@
               <a class="dropdown-item" href="/ownership/">Staff</a>
               <a class="dropdown-item" href="/ownership/tenant">Tenant</a>
               <a class="dropdown-item" href="/ownership/project">Project</a>
-              <a class="dropdown-item" href="/inventory/system">Department</a>
+              <a class="dropdown-item" href="/ownership/department">Department</a>
             </div>
 
           </div>
@@ -33,17 +33,14 @@
                   <tr>
                     <th>No</th>
 
-                    <th>Staff ID</th>
-                    <th>Staff Name</th>
-                      <th>Position</th>
-                      <th>Department</th>
+                    <th>Project</th>
 
 
                   </tr>
                 </thead>
                 <tbody>
 
-                {% for s in staffs %}
+                {% for d in departments %}
                   <tr>
 
 
@@ -51,10 +48,7 @@
 
                     <th scope="row">{{ forloop.counter }}</th>
 
-                    <td> <a href="/ownership/staff/{{s.id}}">{{ s.staffID }} </a></td>
-                    <td><a href="/ownership/staff/{{s.id}}">{{ s.staffName }}</a></td>
-                      <td><a href="/ownership/staff/{{s.id}}">{{ s.position }}</a></td>
-                      <td><a href="/ownership/staff/{{s.id}}">{{ s.department }}</a></td>
+                    <td> <a href="/ownership/department/{{d.id}}">{{ d.departmentName }} </a></td>
 
 
                   </tr>

@@ -33,17 +33,14 @@
                   <tr>
                     <th>No</th>
 
-                    <th>Staff ID</th>
-                    <th>Staff Name</th>
-                      <th>Position</th>
-                      <th>Department</th>
+                    <th>Tenant</th>
 
 
                   </tr>
                 </thead>
                 <tbody>
 
-                {% for s in staffs %}
+                {% for t in tenants %}
                   <tr>
 
 
@@ -51,10 +48,7 @@
 
                     <th scope="row">{{ forloop.counter }}</th>
 
-                    <td> <a href="/ownership/staff/{{s.id}}">{{ s.staffID }} </a></td>
-                    <td><a href="/ownership/staff/{{s.id}}">{{ s.staffName }}</a></td>
-                      <td><a href="/ownership/staff/{{s.id}}">{{ s.position }}</a></td>
-                      <td><a href="/ownership/staff/{{s.id}}">{{ s.department }}</a></td>
+                    <td> <a href="/ownership/tenant/{{t.id}}">{{ t.tenantName }} </a></td>
 
 
                   </tr>

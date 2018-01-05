@@ -34,7 +34,14 @@ urlpatterns = [
     url(r'^api/computer/autocomplete', iviews.ComputerAutoComplete.as_view()),
     url(r'^api/system/autocomplete', iviews.SystemAutoComplete.as_view()),
     url(r'^api/email/autocomplete', iviews.EmailListAutoComplete.as_view()),
+    url(r'^api/server/autocomplete', iviews.ServerAutoComplete.as_view()),
     url(r'^api/update/inventory/staff', oviews.UpdateStaffInventory.as_view()),
+    url(r'^api/update/inventory/tenant', oviews.UpdateTenantInventory.as_view()),
+    url(r'^api/delete/inventory/tenant', oviews.DeleteTenantInventory.as_view()),
+    url(r'^api/update/inventory/project', oviews.UpdateProjectInventory.as_view()),
+    url(r'^api/delete/inventory/project', oviews.DeleteProjectInventory.as_view()),
+    url(r'^api/update/inventory/department', oviews.UpdateDepartmentInventory.as_view()),
+    url(r'^api/delete/inventory/department', oviews.DeleteDepartmentInventory.as_view()),
 
 ]
 
