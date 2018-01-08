@@ -5,6 +5,7 @@ from django.template import loader
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Computer, Monitor, Projector, System, Email, DCAsset, Server, Software
+from Ownership.models import XMTStaff, Tenant, Project
 from XMTInventory.serializers import ComputerSerializer, MonitorSerializer, ProjectorSerializer, \
     SystemSerializer, EmailSerializer, DCAssetSerializer, ServerSerializer, SoftwareSerializer
 # Create your views here.
@@ -64,6 +65,7 @@ def addNewComputer(request):
     context = {
         'monitors': monitors,
         'projectors': projectors,
+
     }
     return HttpResponse(template.render(context, request))
 
@@ -160,6 +162,20 @@ def addsoftware(request):
     return HttpResponse(template.render(context, request))
 
 
+def computer_detail(request, computer_id):
+    template = loader.get_template('computer/computerDetail.html')
+    computer = Computer.objects.get(pk=computer_id)
+    context = {
+        "computer": computer,
+        "staff": computer.xmtstaff,
+        "project": computer.project,
+        "tenant": computer.tenant,
+        "projector": computer.projector,
+        "monitor": computer.monitor
+    }
+    return HttpResponse(template.render(context, request))
+
+
 class ComputerAutoComplete(APIView):
 
     def post(self, request):
@@ -194,7 +210,7 @@ class ComputerList(APIView):
         operatingSystem = computer["os"]
         processor = computer["processor"]
         systemType = computer["systemType"]
-        ram = computer["systemType"]
+        ram = computer["ram"]
         hardDrive = computer["hdd"]
 
         c = Computer(pcModel=pcModel, pcTagNo=pcTagNo, pcModelSeries=pcModelSeries, pcName=pcName, serialNo=serialNo,
@@ -227,6 +243,35 @@ class ComputerList(APIView):
         return Response(serializer.data)
 
 
+class ComputerUpdate(APIView):
+
+    def post(self, request):
+        data = request.data
+        id = data["id"]
+        new_monitor = data["monitor"]
+        os = data["os"]
+        pcName = data["pcName"]
+        new_projector = data["projector"]
+        remarks = data["remarks"]
+
+        computer = Computer.objects.get(pk=id)
+
+        if new_monitor:
+            m = Monitor.objects.get(tagNo=new_monitor)
+            computer.monitor = m
+
+        if new_projector:
+            p = Projector.objects.get(projectorTag=new_projector)
+            computer.projector = p
+
+        computer.operatingSystem = os
+        computer.pcName = pcName
+        computer.remarks = remarks
+
+        computer.save()
+        return HttpResponse("Updated")
+
+
 class MonitorList(APIView):
 
     def get(self, request):
@@ -248,6 +293,23 @@ class MonitorList(APIView):
         return Response(serialzer.data)
 
 
+class MonitorAutoComplete(APIView):
+
+    def post(self, request):
+        data = request.data
+        print(request)
+        search = data["search"]
+        monitors = Monitor.objects.filter(tagNo__icontains=search)
+        response = []
+
+        for m in monitors:
+            i = {
+                'label': m.tagNo
+            }
+            response.append(i)
+        return JsonResponse(response, safe=False)
+
+
 class ProjectorList(APIView):
 
     def get(self, request):
@@ -266,6 +328,23 @@ class ProjectorList(APIView):
         serializer = ProjectorSerializer(p, many=False)
         print(p.id)
         return Response(serializer.data)
+
+
+class ProjectorAutoComplete(APIView):
+
+    def post(self, request):
+        data = request.data
+        print(request)
+        search = data["search"]
+        projectors = Projector.objects.filter(projectorTag__icontains=search)
+        response = []
+
+        for p in projectors:
+            i = {
+                'label': p.projectorTag
+            }
+            response.append(i)
+        return JsonResponse(response, safe=False)
 
 
 class SystemList(APIView):

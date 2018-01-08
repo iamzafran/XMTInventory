@@ -42,6 +42,9 @@ urlpatterns = [
     url(r'^api/delete/inventory/project', oviews.DeleteProjectInventory.as_view()),
     url(r'^api/update/inventory/department', oviews.UpdateDepartmentInventory.as_view()),
     url(r'^api/delete/inventory/department', oviews.DeleteDepartmentInventory.as_view()),
+    url(r'^api/monitor/autocomplete', iviews.MonitorAutoComplete.as_view()),
+    url(r'^api/projector/autocomplete', iviews.ProjectorAutoComplete.as_view()),
+    url(r'^api/update/inventory/computer', iviews.ComputerUpdate.as_view()),
 
 ]
 

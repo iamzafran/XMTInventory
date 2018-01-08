@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block body %}
+
+<div class="container"  style="margin-top: 50px">
+          <p class="h3" style="margin-bottom: 50px;">{{ computer.pcModelSeries }}</p>
+
+          <div class="card">
+              <div class="card-header">
+                <span class="h4">Technical Specification</span>
+                <button class="btn btn-outline-primary float-right col-1" id="edit_button">Edit</button>
+                <div class="btn-toolbar d-inline" role="toolbar" >
+                <button class="btn btn-outline-danger float-right toggle" id="cancel_button" hidden>Cancel</button>
+                <button class="btn btn-outline-success float-right toggle" style="margin-right:10px" id="save_button" hidden>Save</button>
+
+              </div>
+              </div>
+              <div class="card-body" style="padding: 20px">
+                <div class="container">
+                  <div class="form-group">
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">PC Model</p></div>
+
+                        {% if computer.pcModel == 1 %}
+                            <p class="col-6 ">Desktop Computer</p>
+                        {% elif computer.pcModel == 2 %}
+                            <p class="col-6 ">Tab</p>
+                        {% elif computer.pcModel == 3 %}
+                            <p class="col-6 ">Laptop</p>
+                        {% endif %}
+
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">PC Tag No</p></div>
+                      <p class="col-6 ">{{ computer.pcTagNo }}</p>
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">Serial Number</p></div>
+                      <p class="col-6 ">{{ computer.serialNo }}</p>
+
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">PC Name</p></div>
+                      <input type="text" class="form-control input col-6"  id="pc-name-input" value="{{ computer.pcName }}" disabled>
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">Operating System</p></div>
+                      <input type="text" class="form-control input col-6"  id="operating-system-input" value="{{ computer.operatingSystem }}" disabled>
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">Processor</p></div>
+                      <p class="col-6">{{ computer.processor }}</p>
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">System Type</p></div>
+                      <p class="col-6 ">{{ computer.systemType }}</p>
+
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">RAM</p></div>
+                        <p class="col-6 ">{{ computer.ram }}</p>
+
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">Hard Drive</p></div>
+                        <p class="col-6 ">{{ computer.hardDrive }}</p>
+
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">Remarks</p></div>
+                      <textarea type="text" class="form-control input col-6"  id="remarks-input"   disabled>{{ computer.remarks }}</textarea>
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">Projector</p></div>
+                      <input type="text" class="form-control input col-6"  id="projector-input" value="{{ projector.projectorTag }}" placeholder="Projector Tag" disabled>
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">Monitor</p></div>
+                      <input type="text" class="form-control input col-6"  id="monitor-input" value="{{ monitor.tagNo }}" placeholder="Monitor Tag No" disabled>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+          </div>
+          <div class="card" style="margin-top:50px; margin-bottom:100px;">
+            <div class="card-header"><span class="h4">Ownership</span>
+            <button class="btn btn-outline-primary float-right col-1" id="edit_ownership_button">Edit</button>
+            <div class="btn-toolbar d-inline" role="toolbar" >
+            <button class="btn btn-outline-danger float-right ownership-toggle" id="cancel_ownership_edit_button" hidden>Cancel</button>
+            <button class="btn btn-outline-success float-right ownership-toggle" style="margin-right:10px" id="update_ownership_button" hidden>Update</button>
+
+          </div></div>
+            <div class="card-body" style="padding: 20px"><div class="row form-row">
+              <div class="col-2"><p class="h6">Staff</p></div>
+              <input type="text" class="form-control ownership-input col-6"  id="" value="{{ staff.staffName }}" disabled>
+            </div>
+            <div class="row form-row">
+              <div class="col-2"><p class="h6">Tenant</p></div>
+              <input type="text" class="form-control ownership-input col-6"  id="" value="{{ tenant.tenantName }}" disabled>
+            </div>
+            <div class="row form-row">
+              <div class="col-2"><p class="h6">Project</p></div>
+              <input type="text" class="form-control ownership-input col-6"  id="" value="{{ project.projectName }}" disabled>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+      var computerID = {{ computer.id }};
+    </script>
+    <script src="{% static 'js/computer_detail.js' %}"></script>
+{% endblock %}

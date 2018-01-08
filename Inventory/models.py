@@ -21,14 +21,14 @@ class Computer(models.Model):
     pcModel = models.CharField(max_length=25, null=True, default=None, blank=True)
     pcTagNo = models.CharField(max_length=120)
     pcModelSeries = models.CharField(max_length=25, null=True, default=None, blank=True)
-    pcName = models.CharField(max_length=120)
+    pcName = models.CharField(max_length=120)  #edit
     serialNo = models.CharField(max_length=120)
-    operatingSystem = models.CharField(max_length=120)
+    operatingSystem = models.CharField(max_length=120) #edit
     processor = models.CharField(max_length=120)
     systemType = models.CharField(max_length=10)
-    ram = models.CharField(max_length=8)
-    hardDrive = models.CharField(max_length=10)
-    remarks = models.CharField(max_length=250)
+    ram = models.CharField(max_length=8)  #edit
+    hardDrive = models.CharField(max_length=10) #edit
+    remarks = models.CharField(max_length=250) #edit
     projector = models.ForeignKey(Projector, on_delete=models.SET_NULL, null=True, default=None, blank=True)
     monitor = models.ForeignKey(Monitor, on_delete=models.SET_NULL, null=True, default=None, blank=True)
     xmtstaff = models.ForeignKey(XMTStaff, on_delete=models.SET_NULL, null=True, default=None, blank=True)

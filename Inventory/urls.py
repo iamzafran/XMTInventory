@@ -18,5 +18,6 @@ urlpatterns = [
     url(r'^server/add$', views.addServer, name='addserver'),
     url(r'^software/$', views.software, name='software'),
     url(r'^software/add$', views.addsoftware, name='addsoftware'),
+    url(r'^computer/(?P<computer_id>[0-9]+)$', views.computer_detail, name='computer_detail'),
 
 ]
