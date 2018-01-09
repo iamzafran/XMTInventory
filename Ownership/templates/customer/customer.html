@@ -10,7 +10,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" href="/ownership/">Staff</a>
               <a class="dropdown-item" href="/ownership/tenant">Tenant</a>
-              <a class="dropdown-item" href="/ownership/project">Project</a>
+              <a class="dropdown-item" href="/ownership/customer">Customer</a>
               <a class="dropdown-item" href="/ownership/department">Department</a>
             </div>
 
@@ -40,7 +40,7 @@
                 </thead>
                 <tbody>
 
-                {% for p in projects %}
+                {% for c in customers %}
                   <tr>
 
 
@@ -48,7 +48,7 @@
 
                     <th scope="row">{{ forloop.counter }}</th>
 
-                    <td> <a href="/ownership/project/{{p.id}}">{{ p.projectName }} </a></td>
+                    <td> <a href="/ownership/customer/{{c.id}}">{{ c.customerName }} </a></td>
 
 
                   </tr>

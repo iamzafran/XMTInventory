@@ -5,7 +5,7 @@ from django.template import loader
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Computer, Monitor, Projector, System, Email, DCAsset, Server, Software
-from Ownership.models import XMTStaff, Tenant, Project
+from Inventory.models import TenantLocation, XMTStaff, Customer
 from XMTInventory.serializers import ComputerSerializer, MonitorSerializer, ProjectorSerializer, \
     SystemSerializer, EmailSerializer, DCAssetSerializer, ServerSerializer, SoftwareSerializer
 # Create your views here.
@@ -168,8 +168,8 @@ def computer_detail(request, computer_id):
     context = {
         "computer": computer,
         "staff": computer.xmtstaff,
-        "project": computer.project,
-        "tenant": computer.tenant,
+        "customer": computer.customer,
+        "tenant": computer.tenantlocation,
         "projector": computer.projector,
         "monitor": computer.monitor
     }
@@ -182,7 +182,7 @@ class ComputerAutoComplete(APIView):
         data = request.data
         print(request)
         search = data["search"]
-        computers = Computer.objects.filter(pcTagNo__icontains=search, tenant=None, xmtstaff=None, project=None)
+        computers = Computer.objects.filter(pcTagNo__icontains=search, tenantlocation=None, xmtstaff=None, customer=None)
         response = []
 
         for c in computers:
@@ -269,6 +269,36 @@ class ComputerUpdate(APIView):
         computer.remarks = remarks
 
         computer.save()
+        return HttpResponse("Updated")
+
+
+class UpdateComputerOwnership(APIView):
+
+    def post(self, request):
+        data = request.data
+        ownership_type = data["type"]
+        computer_id = data["computer_id"]
+        project = data["project_name"]
+        tenant = data["tenant_name"]
+        staff = data["staff_name"]
+
+        computer = Computer.objects.get(pk=computer_id)
+        computer.tenant = None
+        computer.xmtstaff = None
+        computer.project = None
+
+        if ownership_type == "staff":
+            staff = XMTStaff.objects.get(staffName=staff)
+            computer.xmtstaff = staff
+        elif ownership_type == "customer":
+            project = Customer.objects.get(projectName=project)
+            computer.project = project
+        elif ownership_type == "tenant":
+            tenant = Tenant.objects.get(tenantName=tenant)
+            computer.tenant = tenant
+
+        computer.save()
+
         return HttpResponse("Updated")
 
 

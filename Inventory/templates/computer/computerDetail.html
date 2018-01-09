@@ -95,19 +95,46 @@
             <button class="btn btn-outline-success float-right ownership-toggle" style="margin-right:10px" id="update_ownership_button" hidden>Update</button>
 
           </div></div>
-            <div class="card-body" style="padding: 20px"><div class="row form-row">
-              <div class="col-2"><p class="h6">Staff</p></div>
-              <input type="text" class="form-control ownership-input col-6"  id="" value="{{ staff.staffName }}" disabled>
-            </div>
-            <div class="row form-row">
-              <div class="col-2"><p class="h6">Tenant</p></div>
-              <input type="text" class="form-control ownership-input col-6"  id="" value="{{ tenant.tenantName }}" disabled>
-            </div>
-            <div class="row form-row">
-              <div class="col-2"><p class="h6">Project</p></div>
-              <input type="text" class="form-control ownership-input col-6"  id="" value="{{ project.projectName }}" disabled>
+            <div class="card-body" style="padding: 20px">
+              <div class="row form-row">
+              <div class="col-2"><p class="h6">Type</p></div>
+              <div class="col-6">
+                <select class="form-control ownership-input" id="ownership-type-input" disabled>
+
+                 {% if staff %}
+                  <option value="staff" selected>Staff</option>
+                  <option value="tenant">Tenant</option>
+                  <option value="project">Project</option>
+                  {% elif tenant %}
+                    <option value="staff">Staff</option>
+                    <option value="tenant" selected>Tenant</option>
+                    <option value="project">Project</option>
+                  {% elif project %}
+                    <option value="staff">Staff</option>
+                    <option value="tenant">Tenant</option>
+                    <option value="project" selected>Project</option>
+                  {% endif %}
+                </select>
               </div>
             </div>
+            <div class="row form-row staff"  {% if not staff %}hidden{% endif %}>
+              <div class="col-2"><p class="h6">Staff</p></div>
+              <input type="text" class="form-control ownership-input col-6"  id="staff-input" value="{{ staff.staffName }}" disabled>
+            </div>
+            <div class="row form-row tenant" {% if not tenant %}hidden{% endif %}>
+              <div class="col-2"><p class="h6">Tenant</p></div>
+              <input type="text" class="form-control ownership-input col-6"  id="tenant-input" value="{{ tenant.tenantName }}" disabled>
+            </div>
+            <div class="row form-row project" {% if not project %}hidden{% endif %}>
+              <div class="col-2"><p class="h6">Project</p></div>
+              <input type="text" class="form-control ownership-input col-6"  id="project-input" value="{{ project.projectName }}" disabled>
+              </div>
+               <div class="row form-row" style="margin-left:10px">
+              <button class="btn btn-danger ownership-input" disabled>Revoke All Ownership</button>
+            </div>
+            </div>
+
+
           </div>
 
         </div>
@@ -117,6 +144,11 @@
 {% block script %}
     <script>
       var computerID = {{ computer.id }};
+      var pcName = "{{ computer.pcName }}";
+      var os = "{{ computer.operatingSystem }}";
+      var remarks = "{{ computer.remarks }}";
+      var projector = "{{ projector.projectorTag }}";
+      var monitor = "{{ monitor.tagNo }}";
     </script>
     <script src="{% static 'js/computer_detail.js' %}"></script>
 {% endblock %}

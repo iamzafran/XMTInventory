@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.template import loader
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.core.exceptions import ObjectDoesNotExist
 
-from .models import XMTStaff, Tenant, Project, Department
+from .models import XMTStaff, Tenant, Customer, Department, TenantLocation, TenantPersonIncharge
 from Inventory.models import Computer, System, Email, Server
 # Create your views here.
 
@@ -30,10 +31,10 @@ def tenant_view(request):
 
 
 def project_view(request):
-    template = loader.get_template('project/project.html')
-    projects = Project.objects.all()
+    template = loader.get_template('customer/customer.html')
+    customers = Customer.objects.all()
     context = {
-        "projects": projects
+        "customers": customers
     }
     return HttpResponse(template.render(context, request))
 
@@ -82,20 +83,25 @@ def tenant_detail(request, tenant_id):
     tenant = Tenant.objects.get(pk=tenant_id)
 
     try:
-        computer = Computer.objects.filter(tenant=tenant)
+        tenantloc = TenantLocation.objects.filter(tenant=tenant)
     except ObjectDoesNotExist:
-        computer = None
+        tenantloc = None
+
+    # try:
+    #     computer = Computer.objects.filter(tenantlocation=tenantloc)
+    # except ObjectDoesNotExist:
+    #     computer = None
 
     context = {
         "tenant": tenant,
-        "computers": computer
+        "locations": tenantloc
     }
     return HttpResponse(template.render(context, request))
 
 
 def project_detail(request, project_id):
-    template = loader.get_template('project/projectDetail.html')
-    project = Project.objects.get(pk=project_id)
+    template = loader.get_template('customer/customerDetail.html')
+    project = Customer.objects.get(pk=project_id)
 
     try:
         computer = Computer.objects.filter(project=project)
@@ -103,7 +109,7 @@ def project_detail(request, project_id):
         computer = None
 
     context = {
-        "project": project,
+        "customer": project,
         "computers": computer
     }
     return HttpResponse(template.render(context, request))
@@ -123,6 +129,75 @@ def department_detail(request, department_id):
         "servers": servers
     }
     return HttpResponse(template.render(context, request))
+
+
+def department_location_detail(request, location_id):
+    template = loader.get_template('tenantlocation/tenantLocationDetail.html')
+    location = TenantLocation.objects.get(pk=location_id)
+    pic = TenantPersonIncharge.objects.get(location=location)
+
+    try:
+        computers = Computer.objects.filter(tenantlocation=location)
+    except ObjectDoesNotExist:
+        computers = None
+
+    context = {
+        "location": location,
+        "computers": computers,
+        "pic": pic
+    }
+    return HttpResponse(template.render(context, request))
+
+
+class StaffAutoComplete(APIView):
+
+    def post(self, request):
+        data = request.data
+        print(request)
+        search = data["search"]
+        staffs = XMTStaff.objects.filter(staffName__icontains=search)
+        response = []
+
+        for s in staffs:
+            i = {
+                'label': s.staffName
+            }
+            response.append(i)
+        return JsonResponse(response, safe=False)
+
+
+class ProjectAutoComplete(APIView):
+
+    def post(self, request):
+        data = request.data
+        print(request)
+        search = data["search"]
+        projects = Customer.objects.filter(projectName__icontains=search)
+        response = []
+
+        for p in projects:
+            i = {
+                'label': p.projectName
+            }
+            response.append(i)
+        return JsonResponse(response, safe=False)
+
+
+class TenantAutoComplete(APIView):
+
+    def post(self, request):
+        data = request.data
+        print(request)
+        search = data["search"]
+        tenants = Tenant.objects.filter(tenantName__icontains=search)
+        response = []
+
+        for t in tenants:
+            i = {
+                'label': t.tenantName
+            }
+            response.append(i)
+        return JsonResponse(response, safe=False)
 
 
 class UpdateStaffInventory(APIView):
@@ -200,9 +275,9 @@ class UpdateProjectInventory(APIView):
 
     def post(self, request):
         data = request.data
-        project_id = data["project"]
+        project_id = data["customer"]
         computers = data["computers"]
-        project = Project.objects.get(id=project_id)
+        project = Customer.objects.get(id=project_id)
         for c in computers:
             computer = Computer.objects.get(pcTagNo=c)
             computer.project = project
@@ -246,3 +321,10 @@ class DeleteDepartmentInventory(APIView):
         server.department = None
         server.save()
         return HttpResponse("deleted")
+
+
+
+
+
+
+

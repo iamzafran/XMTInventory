@@ -38,13 +38,17 @@ urlpatterns = [
     url(r'^api/update/inventory/staff', oviews.UpdateStaffInventory.as_view()),
     url(r'^api/update/inventory/tenant', oviews.UpdateTenantInventory.as_view()),
     url(r'^api/delete/inventory/tenant', oviews.DeleteTenantInventory.as_view()),
-    url(r'^api/update/inventory/project', oviews.UpdateProjectInventory.as_view()),
-    url(r'^api/delete/inventory/project', oviews.DeleteProjectInventory.as_view()),
+    url(r'^api/update/inventory/customer', oviews.UpdateProjectInventory.as_view()),
+    url(r'^api/delete/inventory/customer', oviews.DeleteProjectInventory.as_view()),
     url(r'^api/update/inventory/department', oviews.UpdateDepartmentInventory.as_view()),
     url(r'^api/delete/inventory/department', oviews.DeleteDepartmentInventory.as_view()),
     url(r'^api/monitor/autocomplete', iviews.MonitorAutoComplete.as_view()),
     url(r'^api/projector/autocomplete', iviews.ProjectorAutoComplete.as_view()),
     url(r'^api/update/inventory/computer', iviews.ComputerUpdate.as_view()),
+    url(r'^api/staff/autocomplete', oviews.StaffAutoComplete.as_view()),
+    url(r'^api/customer/autocomplete', oviews.ProjectAutoComplete.as_view()),
+    url(r'^api/tenant/autocomplete', oviews.TenantAutoComplete.as_view()),
+    url(r'^api/update/ownership/computer', iviews.UpdateComputerOwnership.as_view()),
 
 ]
 

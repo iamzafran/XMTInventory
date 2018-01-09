@@ -53,7 +53,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     comuter = ComputerSerializer()
 
     class Meta:
-        model = Project
+        model = Customer
         field = ('id', 'projectName')
 
 

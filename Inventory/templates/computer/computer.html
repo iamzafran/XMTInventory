@@ -50,9 +50,9 @@
 
                         <tr>
                             <th scope="row">{{forloop.counter}}</th>
-                            <td><a href="inventory/computer/{{ c.id }}">{{c.pcModelSeries}}</a></td>
-                            <td><a href="inventory/computer/{{ c.id }}">{{c.pcName}}</a></td>
-                            <td><a href="inventory/computer/{{ c.id }}">{{c.pcTagNo}}</a></td>
+                            <td><a href="{% url 'computer_detail' c.id %}">{{c.pcModelSeries}}</a></td>
+                            <td><a href="{% url 'computer_detail' c.id %}">{{c.pcName}}</a></td>
+                            <td><a href="{% url 'computer_detail' c.id %}">{{c.pcTagNo}}</a></td>
                             <td>{{Remarks}}</td>
                         </tr>
                     {% endfor %}

@@ -1,5 +1,5 @@
 from django.db import models
-from Ownership.models import XMTStaff, Project, Tenant, Department
+from Ownership.models import XMTStaff, Customer, CustomerLocation, TenantLocation, Department
 
 # Create your models here.
 
@@ -32,8 +32,8 @@ class Computer(models.Model):
     projector = models.ForeignKey(Projector, on_delete=models.SET_NULL, null=True, default=None, blank=True)
     monitor = models.ForeignKey(Monitor, on_delete=models.SET_NULL, null=True, default=None, blank=True)
     xmtstaff = models.ForeignKey(XMTStaff, on_delete=models.SET_NULL, null=True, default=None, blank=True)
-    tenant = models.ForeignKey(Tenant, on_delete=models.SET_NULL, null=True, default=None, blank=True)
-    project = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+    tenantlocation = models.ForeignKey(TenantLocation, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+    customer = models.ForeignKey(CustomerLocation, on_delete=models.SET_NULL, null=True, default=None, blank=True)
 
     def __str__(self):
         return self.pcTagNo
