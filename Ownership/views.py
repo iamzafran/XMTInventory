@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from django.core.exceptions import ObjectDoesNotExist
 
 from .models import XMTStaff, Tenant, Customer, Department, TenantLocation, TenantPersonIncharge
-from Inventory.models import Computer, System, Email, Server
+from Inventory.models import Computer, System, Email, Server, Projector
 # Create your views here.
 
 
@@ -132,18 +132,31 @@ def department_detail(request, department_id):
 
 
 def department_location_detail(request, location_id):
-    template = loader.get_template('tenantlocation/tenantLocationDetail.html')
+    template = loader.get_template('tenantlocation/tenantLocationLeasing.html')
     location = TenantLocation.objects.get(pk=location_id)
     pic = TenantPersonIncharge.objects.get(location=location)
 
     try:
         computers = Computer.objects.filter(tenantlocation=location)
+
     except ObjectDoesNotExist:
         computers = None
+
+    try:
+        servers = Server.objects.filter(tenantlocation=location)
+    except ObjectDoesNotExist:
+        servers = None
+
+    try:
+        projectors = Projector.objects.filter(tenantlocation=location)
+    except ObjectDoesNotExist:
+        projectors = None
 
     context = {
         "location": location,
         "computers": computers,
+        "servers": servers,
+        "projectors": projectors,
         "pic": pic
     }
     return HttpResponse(template.render(context, request))
@@ -245,28 +258,98 @@ class UpdateStaffInventory(APIView):
         return HttpResponse("True")
 
 
-class UpdateTenantInventory(APIView):
+class UpdateTenantLocationInventory(APIView):
 
     def post(self, request):
         data = request.data
-        tenant_id = data["tenant"]
+        tenant_location_id = data["location"]
         computers = data["computers"]
-        tenant = Tenant.objects.get(id=tenant_id)
+        tenantLocation = TenantLocation.objects.get(id=tenant_location_id)
         for c in computers:
-            computer = Computer.objects.get(pcTagNo=c)
-            computer.tenant = tenant
+            tagNo = c["pcTagNo"]
+            startDate = c["startDate"]
+            endDate = c["endDate"]
+            computer = Computer.objects.get(pcTagNo=tagNo)
+            computer.tenantlocation = tenantLocation
+            computer.startDate = startDate
+            computer.endDate = endDate
             computer.save()
         return HttpResponse("true")
 
 
-class DeleteTenantInventory(APIView):
+class UpdateTenantServer(APIView):
+    def post(self, request):
+        data = request.data
+        location_id = data["location"]
+        servers = data["servers"]
+        tenantlocation = TenantLocation.objects.get(pk=location_id)
+
+        for s in servers:
+            tagNumber = s["server"]
+            startDate = s["startDate"]
+            endDate = s["endDate"]
+            update_server = Server.objects.get(tagNumber=tagNumber)
+            update_server.tenantlocation = tenantlocation
+            update_server.startDate = startDate
+            update_server.endDate = endDate
+            update_server.save()
+
+        return HttpResponse("servers updated")
+
+
+class DeleteTenantServer(APIView):
+
+    def post(self, request):
+        data = request.data
+        tag = data["server"]
+
+        delete_server = Server.objects.get(tagNumber=tag)
+        delete_server.tenantlocation = None
+        delete_server.save()
+        return HttpResponse("Deleted Server")
+
+
+class UpdateTenantProjector(APIView):
+
+    def post(self, request):
+        data = request.data
+        location_id = data["location"]
+        projectors = data["projectors"]
+        tenantlocation = TenantLocation.objects.get(pk=location_id)
+
+        for p in projectors:
+            tagNumber = p["projector"]
+            startDate = p["startDate"]
+            endDate = p["endDate"]
+            update_projector = Projector.objects.get(projectorTag=tagNumber)
+            update_projector.tenantlocation = tenantlocation
+            update_projector.startDate = startDate
+            update_projector.endDate = endDate
+            update_projector.save()
+
+        return HttpResponse("projector updated")
+
+
+class DeleteTenantProjector(APIView):
+
+    def post(self, request):
+        data = request.data
+        tag = data["projector"]
+
+        delete_projector = Projector.objects.get(projectorTag=tag)
+        delete_projector.tenantlocation = None
+        delete_projector.save()
+        return HttpResponse("Deleted projector")
+
+
+class DeleteTenantLocationInventory(APIView):
 
     def post(self, request):
         data = request.data
         computer = data["computer"]
 
         computer = Computer.objects.get(pcTagNo=computer)
-        computer.tenant = None
+        computer.tenantlocation = None
         computer.save()
         return HttpResponse("deleted")
 

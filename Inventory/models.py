@@ -1,5 +1,5 @@
 from django.db import models
-from Ownership.models import XMTStaff, Customer, CustomerLocation, TenantLocation, Department
+from Ownership.models import XMTStaff, Customer, CustomerLocation, TenantLocation, Department, Developers
 
 # Create your models here.
 
@@ -15,6 +15,9 @@ class Projector(models.Model):
     projectorYear = models.CharField(max_length=5)
     projectorTag = models.CharField(max_length=120)
     projectorSerialNumber = models.CharField(max_length=100, null=True, default=None, blank=True)
+    tenantlocation = models.ForeignKey(TenantLocation, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+    startDate = models.DateField()
+    endDate = models.DateField()
 
 
 class Computer(models.Model):
@@ -34,6 +37,8 @@ class Computer(models.Model):
     xmtstaff = models.ForeignKey(XMTStaff, on_delete=models.SET_NULL, null=True, default=None, blank=True)
     tenantlocation = models.ForeignKey(TenantLocation, on_delete=models.SET_NULL, null=True, default=None, blank=True)
     customer = models.ForeignKey(CustomerLocation, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+    startDate = models.DateField()
+    endDate = models.DateField()
 
     def __str__(self):
         return self.pcTagNo
@@ -43,6 +48,7 @@ class System(models.Model):
     systemName = models.CharField(max_length=120)
     location = models.CharField(max_length=120)
     xmtstaff = models.ForeignKey(XMTStaff, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+    developer = models.ForeignKey(Developers, on_delete=models.SET_NULL, null=True, default=None, blank=True )
 
     def __str__(self):
         return self.systemName
@@ -60,6 +66,7 @@ class Email(models.Model):
 
 
 class Server(models.Model):
+    tagNumber = models.CharField(max_length=255)
     hostname = models.CharField(max_length=120)
     serverModel = models.CharField(max_length=120)
     ipv4 = models.CharField(max_length=15)
@@ -74,6 +81,9 @@ class Server(models.Model):
     application = models.CharField(max_length=120)
     location = models.CharField(max_length=120)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+    tenantlocation = models.ForeignKey(TenantLocation, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+    startDate = models.DateField()
+    endDate = models.DateField()
 
     def __str__(self):
         return self.hostname

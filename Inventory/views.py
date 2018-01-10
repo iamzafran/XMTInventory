@@ -514,12 +514,12 @@ class ServerAutoComplete(APIView):
         data = request.data
         print(request)
         search = data["search"]
-        servers = Server.objects.filter(hostname__icontains=search, department=None)
+        servers = Server.objects.filter(tagNumber__icontains=search, department=None)
         response = []
 
         for s in servers:
             computer = {
-                'label': s.hostname
+                'label': s.tagNumber
             }
             response.append(computer)
         return JsonResponse(response, safe=False)

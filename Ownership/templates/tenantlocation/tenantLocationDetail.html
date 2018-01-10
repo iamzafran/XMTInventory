@@ -17,165 +17,26 @@
             <div class="col-3"><p class="h5">Person in Charge</p></div>
               <div class="col-9"><p class="text-muted">{{ pic.name}}</p><p class="text-muted">{{ pic.office_number }}</p><p class="text-muted">{{ pic.mobile_number }}</p></div>
           </div>
-
-          <div class="card">
-              <div class="card-header">
-                <span class="h4">Computer</span>
-                <button class="btn btn-outline-primary float-right col-1" id="edit_button">Edit</button>
-                <div class="btn-toolbar d-inline" role="toolbar" >
-                <button class="btn btn-outline-danger float-right toggle" id="cancel_button" hidden>Cancel</button>
-                <button class="btn btn-outline-success float-right toggle" style="margin-right:10px" id="update_button" hidden>Update</button>
-
+          <div class="card border border-primary" >
+              <div class="card-header border-top-0 border-primary">
+                <ul class="nav nav-tabs card-header-tabs">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#">Leasing Equipment</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">DC Portal</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">System and Apps</a>
+                  </li>
+                </ul>
               </div>
-              </div>
-              <div class="card-body" style="padding: 20px">
-                <div class="container" >
-                  <div class="form-group computer-form">
-                      {% for s in servers %}
-                        <div class="row form-row">
-                          <input type="text" class="form-control input col-8 computer-tag-no" id="computer-detail-input"   value="{{ s.hostname }}" disabled>
-                          <button class="btn btn-danger button input remove" onclick="remove(this)" disabled>Remove</button>
-                        </div>
-                      {% endfor %}
-
-
-
-                  </div>
-                  <div class="row button-row">
-                    <button class="btn btn-primary button input add col-1" onclick="add()" disabled>Add</button>
-                  </div>
-                </div>
-
+              <div class="card-body" style="padding:20px">
+                 {% block leasing %}
+                 {% endblock %}
               </div>
           </div>
 
-            <div class="card inventory" style="margin-top:50px;">
-              <div class="card-header">
-                <span class="h4">Server</span>
-                <button class="btn btn-outline-primary float-right col-1" id="edit_button">Edit</button>
-                <div class="btn-toolbar d-inline" role="toolbar" >
-                <button class="btn btn-outline-danger float-right toggle" id="cancel_button" hidden>Cancel</button>
-                <button class="btn btn-outline-success float-right toggle" style="margin-right:10px" id="update_button" hidden>Update</button>
-
-              </div>
-              </div>
-              <div class="card-body" style="padding: 20px">
-                <div class="container">
-                  <div class="form-group">
-                    <label for="computer-detail-input" class="h5"></label>
-                      {% for s in servers %}
-                        <div class="row form-row">
-                          <input type="text" class="form-control input col-8 computer-tag-no" id="computer-detail-input"   value="{{ s.hostname }}" disabled>
-                          <button class="btn btn-danger button input remove" onclick="remove(this)" disabled>Remove</button>
-                        </div>
-                      {% endfor %}
-
-
-
-                  </div>
-                  <div class="row button-row">
-                    <button class="btn btn-primary button input add col-1" onclick="add()" disabled>Add</button>
-                  </div>
-                </div>
-
-              </div>
-          </div>
-
-          <div class="card" style="margin-top:50px;">
-              <div class="card-header">
-                <span class="h4">Projector</span>
-                <button class="btn btn-outline-primary float-right col-1" id="edit_button">Edit</button>
-                <div class="btn-toolbar d-inline" role="toolbar" >
-                <button class="btn btn-outline-danger float-right toggle" id="cancel_button" hidden>Cancel</button>
-                <button class="btn btn-outline-success float-right toggle" style="margin-right:10px" id="update_button" hidden>Update</button>
-
-              </div>
-              </div>
-              <div class="card-body" style="padding: 20px">
-                <div class="container">
-                  <div class="form-group">
-                    <label for="computer-detail-input" class="h5"></label>
-                      {% for s in servers %}
-                        <div class="row form-row">
-                          <input type="text" class="form-control input col-8 computer-tag-no" id="computer-detail-input"   value="{{ s.hostname }}" disabled>
-                          <button class="btn btn-danger button input remove" onclick="remove(this)" disabled>Remove</button>
-                        </div>
-                      {% endfor %}
-
-
-
-                  </div>
-                  <div class="row button-row">
-                    <button class="btn btn-primary button input add col-1" onclick="add()" disabled>Add</button>
-                  </div>
-                </div>
-
-              </div>
-          </div>
-
-           <div class="card" style="margin-top:50px;">
-              <div class="card-header">
-                <span class="h4">Personal Printer</span>
-                <button class="btn btn-outline-primary float-right col-1" id="edit_button">Edit</button>
-                <div class="btn-toolbar d-inline" role="toolbar" >
-                <button class="btn btn-outline-danger float-right toggle" id="cancel_button" hidden>Cancel</button>
-                <button class="btn btn-outline-success float-right toggle" style="margin-right:10px" id="update_button" hidden>Update</button>
-
-              </div>
-              </div>
-              <div class="card-body" style="padding: 20px">
-                <div class="container">
-                  <div class="form-group">
-                    <label for="computer-detail-input" class="h5"></label>
-                      {% for s in servers %}
-                        <div class="row form-row">
-                          <input type="text" class="form-control input col-8 computer-tag-no" id="computer-detail-input"   value="{{ s.hostname }}" disabled>
-                          <button class="btn btn-danger button input remove" onclick="remove(this)" disabled>Remove</button>
-                        </div>
-                      {% endfor %}
-
-
-
-                  </div>
-                  <div class="row button-row">
-                    <button class="btn btn-primary button input add col-1" onclick="add()" disabled>Add</button>
-                  </div>
-                </div>
-
-              </div>
-          </div>
-
-            <div class="card" style="margin-top:50px;">
-              <div class="card-header">
-                <span class="h4">Network Printer</span>
-                <button class="btn btn-outline-primary float-right col-1" id="edit_button">Edit</button>
-                <div class="btn-toolbar d-inline" role="toolbar" >
-                <button class="btn btn-outline-danger float-right toggle" id="cancel_button" hidden>Cancel</button>
-                <button class="btn btn-outline-success float-right toggle" style="margin-right:10px" id="update_button" hidden>Update</button>
-
-              </div>
-              </div>
-              <div class="card-body" style="padding: 20px">
-                <div class="container">
-                  <div class="form-group">
-                    <label for="computer-detail-input" class="h5"></label>
-                      {% for s in servers %}
-                        <div class="row form-row">
-                          <input type="text" class="form-control input col-8 computer-tag-no" id="computer-detail-input"   value="{{ s.hostname }}" disabled>
-                          <button class="btn btn-danger button input remove" onclick="remove(this)" disabled>Remove</button>
-                        </div>
-                      {% endfor %}
-
-
-
-                  </div>
-                  <div class="row button-row">
-                    <button class="btn btn-primary button input add col-1" onclick="add()" disabled>Add</button>
-                  </div>
-                </div>
-
-              </div>
-          </div>
 
 
         </div>
@@ -183,9 +44,14 @@
 
 {% block script %}
 <script>
-         var departmentID = {{ department.id }};
+         var locationID = {{ location.id }};
+         var computersToAdd = [];
          var serversToAdd = [];
 </script>
 
-<script src="{% static 'js/tenant_location.js' %}"></script>
+<script src="{% static 'js/tenant_location_computer.js' %}"></script>
+<script src="{% static 'js/tenant_location_server.js' %}"></script>
+<script src="{% static 'js/tenant_location_projector.js' %}"></script>
+
+
 {% endblock %}
