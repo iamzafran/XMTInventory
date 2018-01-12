@@ -39,9 +39,16 @@
                     <th>Software Name</th>
 
                   </tr>
+
                 </thead>
                 <tbody>
+                   {% for s in softwares %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ s.softwareName }}</td>
 
+                        </tr>
+                    {% endfor %}
                 </tbody>
               </table>
             </div>

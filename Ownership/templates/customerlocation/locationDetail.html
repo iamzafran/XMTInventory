@@ -17,25 +17,9 @@
             <div class="col-3"><p class="h5">Person in Charge</p></div>
               <div class="col-9"><p class="text-muted">{{ pic.name}}</p><p class="text-muted">{{ pic.office_number }}</p><p class="text-muted">{{ pic.mobile_number }}</p></div>
           </div>
-          <div class="card border border-primary" >
-              <div class="card-header border-top-0 border-primary">
-                <ul class="nav nav-tabs card-header-tabs">
-                  <li class="nav-item">
-                    <a class="nav-link active" href="#">Leasing Equipment</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">DC Portal</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">System and Apps</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="card-body" style="padding:20px">
+
                  {% block leasing %}
                  {% endblock %}
-              </div>
-          </div>
 
 
 
@@ -49,9 +33,13 @@
          var serversToAdd = [];
 </script>
 
-<script src="{% static 'js/tenant_location_computer.js' %}"></script>
-<script src="{% static 'js/tenant_location_server.js' %}"></script>
-<script src="{% static 'js/tenant_location_projector.js' %}"></script>
+<script src="{% static 'js/customer_location_computer.js' %}"></script>
+<script src="{% static 'js/customer_location_server.js' %}"></script>
+<script src="{% static 'js/customer_location_projector.js' %}"></script>
+<script src="{% static 'js/customer_location_dc_rental.js' %}"></script>
+<script src="{% static 'js/customer_location_system.js' %}"></script>
+
+
 
 
 {% endblock %}

@@ -46,7 +46,7 @@
                  var json = JSON.stringify(update)
                  $.ajax({
                     type: "POST",
-                    url: "http://127.0.0.1:8000/api/update/inventory/tenantlocation",
+                    url: "http://127.0.0.1:8000/api/update/inventory/customerlocation",
                     data: json,
                     contentType: "application/json",
                     success: handleResponse
@@ -184,7 +184,7 @@
        if(tag){
          $.ajax({
                     type: "POST",
-                    url: "http://127.0.0.1:8000/api/delete/inventory/tenantlocation",
+                    url: "http://127.0.0.1:8000/api/delete/inventory/customerlocation",
                     data: json,
                     contentType: "application/json",
                     success: handleResponse

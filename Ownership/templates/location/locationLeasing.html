@@ -1,0 +1,209 @@
+{% extends 'location/locationDetail.html'%}
+
+
+ {% block leasing %}
+ <div class="card border border-primary" >
+              <div class="card-header border-top-0 border-primary">
+                <ul class="nav nav-pills card-header-pills">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'tenant_location_detail' location.id %}">Leasing Equipment</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'tenant_location_detail_dc_rental' location.id %}">DC Portal</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'tenant_location_detail_system_and_apps' location.id %}">System and Apps</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body" style="padding:20px">
+            <div class="card">
+              <div class="card-header">
+                <span class="h4">Computer</span>
+                <button class="btn btn-outline-primary float-right col-1" id="edit_button">Edit</button>
+                <div class="btn-toolbar d-inline" role="toolbar" >
+                <button class="btn btn-outline-danger float-right toggle" id="cancel_button" hidden>Cancel</button>
+                <button class="btn btn-outline-success float-right toggle" style="margin-right:10px" id="update_button" hidden>Update</button>
+
+              </div>
+              </div>
+              <div class="card-body" style="padding: 20px">
+                <div class="container" >
+                    <div class="row">
+                        <div class="col-3"><p class="h6">PC Tag Number</p></div>
+                        <div class="col-3"><p class="h6">Start Date</p></div>
+
+                        <div class="col-3"><p class="h6">End Date</p></div>
+
+                    </div>
+                  <div class="form-group computer-form">
+                     {% for c in computers %}
+                          <div class="row form-inline computer-form-group">
+                              <div class="form-group mb-2">
+                                <input type="text"  class="form-control computer-tag-input" placeholder="Computer Tag No" value="{{ c.pcTagNo }}">
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <input type="text" class="form-control datepicker start-date"  placeholder="start date" value="{{ c.startDate}}">
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <input type="text" class="form-control datepicker end-date"  placeholder="end date" value="{{ c.endDate }}">
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <button class="btn btn-danger" onclick="remove(this)"> remove </button>
+                            </div>
+                          </div>
+                      {% endfor %}
+
+
+
+                  </div>
+                  <div class="row button-row">
+                    <button class="btn btn-primary button input add col-1" onclick="add()" disabled>Add</button>
+                  </div>
+                </div>
+
+              </div>
+          </div>
+
+            <div class="card" style="margin-top:50px;">
+              <div class="card-header">
+                <span class="h4">Server</span>
+                <button class="btn btn-outline-primary float-right col-1" id="edit_server_button">Edit</button>
+                <div class="btn-toolbar d-inline" role="toolbar" >
+                <button class="btn btn-outline-danger float-right server-toggle" id="cancel_server_button" hidden>Cancel</button>
+                <button class="btn btn-outline-success float-right server-toggle" style="margin-right:10px" id="update_server_button" hidden>Update</button>
+
+              </div>
+              </div>
+              <div class="card-body" style="padding: 20px">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3"><p class="h6">Server Tag Number</p></div>
+                        <div class="col-3"><p class="h6">Start Date</p></div>
+                        <div class="col-3"><p class="h6">End Date</p></div>
+                    </div>
+                  <div class="form-group server-form">
+                    {% for s in servers %}
+                          <div class="row form-inline server-form-group">
+                              <div class="form-group mb-2">
+                                <input type="text"  class="form-control server-tag-input" placeholder="Computer Tag No" value="{{ s.tagNumber }}">
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <input type="text" class="form-control datepicker server-start-date"  placeholder="start date" value="{{ s.startDate}}">
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <input type="text" class="form-control datepicker server-end-date"  placeholder="end date" value="{{ s.endDate }}">
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <button class="btn btn-danger" onclick="removeServer(this)"> remove </button>
+                            </div>
+                          </div>
+                      {% endfor %}
+
+
+
+                  </div>
+                  <div class="row button-row">
+                    <button class="btn btn-primary button server-input add col-1" onclick="addServer()" disabled>Add</button>
+                  </div>
+                </div>
+
+              </div>
+          </div>
+
+          <div class="card" style="margin-top:50px;">
+              <div class="card-header">
+                <span class="h4">Projector</span>
+                <button class="btn btn-outline-primary float-right col-1" id="edit_projector_button">Edit</button>
+                <div class="btn-toolbar d-inline" role="toolbar" >
+                <button class="btn btn-outline-danger float-right projector-toggle" id="cancel_edit_projector_button" hidden>Cancel</button>
+                <button class="btn btn-outline-success float-right projector-toggle" style="margin-right:10px" id="update_projector_button" hidden>Update</button>
+
+              </div>
+              </div>
+              <div class="card-body" style="padding: 20px">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3"><p class="h6">Projector Tag Number</p></div>
+                        <div class="col-3"><p class="h6">Start Date</p></div>
+                        <div class="col-3"><p class="h6">End Date</p></div>
+                    </div>
+                  <div class="form-group projector-form">
+                     {% for p in projectors %}
+                          <div class="row form-inline server-form-group">
+                              <div class="form-group mb-2">
+                                <input type="text"  class="form-control projector-tag-input" placeholder="Computer Tag No" value="{{ p.projectorTag }}">
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <input type="text" class="form-control datepicker projector-start-date"  placeholder="start date" value="{{ p.startDate}}">
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <input type="text" class="form-control datepicker projector-end-date"  placeholder="end date" value="{{ p.endDate }}">
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <button class="btn btn-danger" onclick="removeProjector(this)"> remove </button>
+                            </div>
+                          </div>
+                      {% endfor %}
+                  </div>
+                  <div class="row button-row">
+                    <button class="btn btn-primary button projector-input add col-1" onclick="addProjector()" disabled>Add</button>
+                  </div>
+                </div>
+
+              </div>
+          </div>
+
+           <div class="card" style="margin-top:50px;">
+              <div class="card-header">
+                <span class="h4">Personal Printer</span>
+                <button class="btn btn-outline-primary float-right col-1" id="edit_printer_button">Edit</button>
+                <div class="btn-toolbar d-inline" role="toolbar" >
+                <button class="btn btn-outline-danger float-right personal-printer-toggle" id="cancel_edit_printer_button" hidden>Cancel</button>
+                <button class="btn btn-outline-success float-right personal-printer-toggle" style="margin-right:10px" id="update_printer_button" hidden>Update</button>
+
+              </div>
+              </div>
+              <div class="card-body" style="padding: 20px">
+                <div class="container">
+                  <div class="form-group">
+                  </div>
+                  <div class="row button-row">
+                    <button class="btn btn-primary button input add col-1" onclick="add()" disabled>Add</button>
+                  </div>
+                </div>
+
+              </div>
+          </div>
+
+            <div class="card" style="margin-top:50px;">
+              <div class="card-header">
+                <span class="h4">Network Printer</span>
+                <button class="btn btn-outline-primary float-right col-1" id="edit_network_printer_button">Edit</button>
+                <div class="btn-toolbar d-inline" role="toolbar" >
+                <button class="btn btn-outline-danger float-right network-printer-toggle" id="cancel_edit_network_printer_button" hidden>Cancel</button>
+                <button class="btn btn-outline-success float-right network-printer-toggle" style="margin-right:10px" id="update_network_printer_button" hidden>Update</button>
+
+              </div>
+              </div>
+              <div class="card-body" style="padding: 20px">
+                <div class="container">
+                  <div class="form-group">
+
+
+
+
+                  </div>
+                  <div class="row button-row">
+                    <button class="btn btn-primary button input add col-1" onclick="add()" disabled>Add</button>
+                  </div>
+                </div>
+
+              </div>
+          </div>
+           </div>
+</div>
+
+
+{% endblock %}
+

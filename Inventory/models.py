@@ -16,8 +16,9 @@ class Projector(models.Model):
     projectorTag = models.CharField(max_length=120)
     projectorSerialNumber = models.CharField(max_length=100, null=True, default=None, blank=True)
     tenantlocation = models.ForeignKey(TenantLocation, on_delete=models.SET_NULL, null=True, default=None, blank=True)
-    startDate = models.DateField()
-    endDate = models.DateField()
+    customerLocation = models.ForeignKey(CustomerLocation, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+    startDate = models.DateField(null=True, default=None, blank=True)
+    endDate = models.DateField(null=True, default=None, blank=True)
 
 
 class Computer(models.Model):
@@ -36,9 +37,9 @@ class Computer(models.Model):
     monitor = models.ForeignKey(Monitor, on_delete=models.SET_NULL, null=True, default=None, blank=True)
     xmtstaff = models.ForeignKey(XMTStaff, on_delete=models.SET_NULL, null=True, default=None, blank=True)
     tenantlocation = models.ForeignKey(TenantLocation, on_delete=models.SET_NULL, null=True, default=None, blank=True)
-    customer = models.ForeignKey(CustomerLocation, on_delete=models.SET_NULL, null=True, default=None, blank=True)
-    startDate = models.DateField()
-    endDate = models.DateField()
+    customerLocation = models.ForeignKey(CustomerLocation, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+    startDate = models.DateField(null=True, default=None, blank=True)
+    endDate = models.DateField(null=True, default=None, blank=True)
 
     def __str__(self):
         return self.pcTagNo
@@ -47,8 +48,10 @@ class Computer(models.Model):
 class System(models.Model):
     systemName = models.CharField(max_length=120)
     location = models.CharField(max_length=120)
+    tenantlocation = models.ManyToManyField(TenantLocation)
     xmtstaff = models.ForeignKey(XMTStaff, on_delete=models.SET_NULL, null=True, default=None, blank=True)
-    developer = models.ForeignKey(Developers, on_delete=models.SET_NULL, null=True, default=None, blank=True )
+    customerLocation = models.ManyToManyField(CustomerLocation)
+    developer = models.ForeignKey(Developers, on_delete=models.SET_NULL, null=True, default=None, blank=True)
 
     def __str__(self):
         return self.systemName
@@ -82,8 +85,9 @@ class Server(models.Model):
     location = models.CharField(max_length=120)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, default=None, blank=True)
     tenantlocation = models.ForeignKey(TenantLocation, on_delete=models.SET_NULL, null=True, default=None, blank=True)
-    startDate = models.DateField()
-    endDate = models.DateField()
+    customerLocation = models.ForeignKey(CustomerLocation, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+    startDate = models.DateField(null=True, default=None, blank=True)
+    endDate = models.DateField(null=True, default=None, blank=True)
 
     def __str__(self):
         return self.hostname
@@ -97,8 +101,15 @@ class DCAsset(models.Model):
 
 class Software(models.Model):
     softwareName = models.CharField(max_length=120)
+    developer = models.ForeignKey(Developers, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+    tenantlocation = models.ManyToManyField(TenantLocation)
+    customerLocation = models.ManyToManyField(CustomerLocation)
 
 
-class SoftwareOwnership(models.Model):
-    staff = models.ForeignKey(XMTStaff, on_delete=models.CASCADE, null=True, default=None, blank=True)
-    software = models.ForeignKey(Software, on_delete=models.CASCADE, null=True, default=None, blank=True)
+class DataCenter(models.Model):
+    tenantlocation = models.ForeignKey(TenantLocation, on_delete=models.CASCADE, null=True, default=None, blank=True)
+    customerLocation = models.ForeignKey(CustomerLocation, on_delete=models.SET_NULL, null=True, default=None, blank=True)
+    dataCenter = models.IntegerField()
+    numberOfRacks = models.IntegerField()
+    startDate = models.DateField()
+    endDate = models.DateField()

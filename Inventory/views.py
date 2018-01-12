@@ -182,7 +182,8 @@ class ComputerAutoComplete(APIView):
         data = request.data
         print(request)
         search = data["search"]
-        computers = Computer.objects.filter(pcTagNo__icontains=search, tenantlocation=None, xmtstaff=None, customer=None)
+        computers = Computer.objects.filter(pcTagNo__icontains=search, tenantlocation=None, xmtstaff=None,
+                                            customerLocation=None)
         response = []
 
         for c in computers:
@@ -409,6 +410,23 @@ class SystemAutoComplete(APIView):
         for s in system_query:
             row = {
                 'label': s.systemName
+            }
+            response.append(row)
+        return JsonResponse(response, safe=False)
+
+
+class SoftwareAutoComplete(APIView):
+
+    def post(self, request):
+        data = request.data
+        print(request)
+        search = data["search"]
+        softwares = Software.objects.filter(softwareName__icontains=search)
+
+        response = []
+        for s in softwares:
+            row = {
+                'label': s.softwareName
             }
             response.append(row)
         return JsonResponse(response, safe=False)

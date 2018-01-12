@@ -1,0 +1,79 @@
+{% extends 'customerlocation/locationDetail.html'%}
+
+{% block leasing %}
+ <div class="card border border-primary" >
+              <div class="card-header border-top-0 border-primary">
+                <ul class="nav nav-pills card-header-pills">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'customer_location_detail' location.id %}">Leasing Equipment</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'customer_location_detail_dc_rental' location.id %}">DC Portal</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'customer_location_detail_system_and_apps' location.id %}">System and Apps</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body" style="padding:20px">
+            <div class="card">
+              <div class="card-header">
+                <span class="h4">Data Center Rental</span>
+                <button class="btn btn-outline-primary float-right col-1" id="edit_dc_button">Edit</button>
+                <div class="btn-toolbar d-inline" role="toolbar" >
+                <button class="btn btn-outline-danger float-right dc-toggle" id="cancel_dc_button" hidden>Cancel</button>
+                <button class="btn btn-outline-success float-right dc-toggle" style="margin-right:10px" id="update_dc_button" hidden>Update</button>
+
+              </div>
+              </div>
+              <div class="card-body" style="padding: 20px">
+                <div class="container" >
+                    <div class="row">
+                        <div class="col-2"><p class="h6">DC</p></div>
+                        <div class="col-2"><p class="h6">No of Rack</p></div>
+
+                        <div class="col-2 push-md-1"><p class="h6">Start Date</p></div>
+
+                        <div class="col-2 push-md-2"><p class="h6">End Date</p></div>
+
+                    </div>
+                  <div class="form-group dc-form">
+                     {% for d in datacenter %}
+                          <div class="row form-inline dc-form-group">
+                              <div class="form-group mx-sm-3 mb-2">
+                               <select class="form-control dc-loc-input" id="exampleSelect1">
+                                  <option value="1" {% if d.dataCenter == 1 %}selected{% endif %} >DC 1</option>
+                                  <option value="2" {% if d.dataCenter == 2 %}selected{% endif %} >DC 2</option>
+                               </select>
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <input class="form-control no-of-rack-input" type="number" value="{{ d.numberOfRacks }}" id="example-number-input">
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <input type="text" class="form-control dc-input datepicker dc-start-date"  placeholder="start date" value="{{ d.startDate}}">
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <input type="text" class="form-control dc-input datepicker dc-end-date"  placeholder="end date" value="{{ d.endDate }}">
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <button class="btn btn-danger rental-id" onclick="removeDataCenter(this)" value="{{ d.id }}"> remove </button>
+                            </div>
+                          </div>
+                      {% endfor %}
+
+
+
+                  </div>
+                  <div class="row button-row">
+                    <button class="btn btn-primary button dc-input add col-1" onclick="addDataCenter()" disabled>Add</button>
+                  </div>
+                </div>
+
+              </div>
+          </div>
+
+           </div>
+</div>
+
+
+{% endblock %}

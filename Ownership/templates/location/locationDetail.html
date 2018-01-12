@@ -1,0 +1,45 @@
+{% extends 'base_ownership.html' %}
+
+{% load staticfiles %}
+
+{% block body %}
+      <div class="container">
+          <p class="h3" style="margin-bottom: 50px;">{{ location.district }}</p>
+          <div class="row align-items-start" style="margin-top:30px;">
+            <div class="col-3"><p class="h5">City</p></div>
+            <div class="col-9"><p class="text-muted">{{ location.city }}</p></div>
+          </div>
+          <div class="row align-items-start">
+            <div class="col-3"><p class="h5">State</p></div>
+            <div class="col-9"><p class="text-muted">{{ location.state }}</p></div>
+          </div>
+          <div class="row align-items-start">
+            <div class="col-3"><p class="h5">Person in Charge</p></div>
+              <div class="col-9"><p class="text-muted">{{ pic.name}}</p><p class="text-muted">{{ pic.office_number }}</p><p class="text-muted">{{ pic.mobile_number }}</p></div>
+          </div>
+
+                 {% block leasing %}
+                 {% endblock %}
+
+
+
+        </div>
+{% endblock %}
+
+{% block script %}
+<script>
+         var locationID = {{ location.id }};
+         var computersToAdd = [];
+         var serversToAdd = [];
+</script>
+
+<script src="{% static 'js/tenant_location_computer.js' %}"></script>
+<script src="{% static 'js/tenant_location_server.js' %}"></script>
+<script src="{% static 'js/tenant_location_projector.js' %}"></script>
+<script src="{% static 'js/tenant_location_dc_rental.js' %}"></script>
+<script src="{% static 'js/tenant_location_system.js' %}"></script>
+
+
+
+
+{% endblock %}

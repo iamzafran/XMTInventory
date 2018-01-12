@@ -1,0 +1,184 @@
+{% extends 'location/locationDetail.html'%}
+
+
+ {% block leasing %}
+ <div class="card border border-primary" style="margin-bottom:100px;">
+              <div class="card-header border-top-0 border-primary">
+                <ul class="nav nav-pills card-header-pills">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'tenant_location_detail' location.id %}">Leasing Equipment</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'tenant_location_detail_dc_rental' location.id %}">DC Portal</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'tenant_location_detail_system_and_apps' location.id %}">System and Apps</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body" style="padding:20px">
+                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                      Add System
+                    </button>
+                  <div class="container-fluid">
+                      <div class="row">
+
+                          {% for s in softwares %}
+                            <div class="col-6">
+                              <div class="card" >
+                                <div class="card-header">
+                                  <h5>{{ s.softwareName }}</h5>
+
+                                </div>
+                                <div class="card-block">
+                                  <div class="row">
+                                    <div class="col-2"><p class="h6">Developer Name</p></div><div class="col-10"><input class="form-control developer-name" type="text" value="{{ s.developer.developerName }}" /></div>
+                                    <div class="col-2"><p class="h6">Contact Number</p></div><div class="col-10"><input class="form-control developer-contact" type="text" value="{{ s.developer.developerContact }}" /></div>
+                                    <div class="col-2"><p class="h6">Start Date</p></div><div class="col-10"><input class="form-control datepicker start-date" type="text" value="{{ s.developer.startDate }}" /></div>
+                                    <div class="col-2"><p class="h6">End Date</p></div><div class="col-10"><input class="form-control datepicker end-date" value="{{ s.developer.endDate }}" /></div>
+                                    <div class="col-2"><p class="h6">Database</p></div><div class="col-10"><select class="form-control database-name" >
+                                        <option value="-1" {% if s.developer.db == -1 %} selected {% endif %}>None</option>
+
+                                      <option value="1" {% if s.developer.db == 1 %} selected {% endif %}>MySQL</option>
+                                      <option value="2" {% if s.developer.db == 2 %} selected {% endif %}>PostgreSQL</option>
+                                        <option value="3" {% if s.developer.db == 3 %} selected {% endif %}>Oracle</option>
+
+                                  </select></div>
+
+
+                                  </div>
+                                    <div style="margin-top: 20px;">
+                                         <button class="btn btn-primary" value="{{ s.id }}" onclick="updateSoftware(this, {{ s.developer.id }})">Update</button>
+                                         <button class="btn btn-danger" value="{{ s.id }}" onclick="removeSoftware(this, {{ s.developer.id }})">Remove</button>
+                                    </div>
+
+
+                                </div>
+                              </div>
+                            </div>
+                          {% endfor %}
+                          {% for s in systems %}
+                             <div class="col-6">
+                              <div class="card" >
+                                <div class="card-header">
+                                  <h5>{{ s.systemName }}</h5>
+                                </div>
+                                <div class="card-block">
+                                  <div class="row">
+                                    <div class="col-2"><p class="h6">Developer Name</p></div><div class="col-10"><input class="form-control developer-name" type="text" value="{{ s.developer.developerName }}" /></div>
+                                    <div class="col-2"><p class="h6">Contact Number</p></div><div class="col-10"><input class="form-control developer-contact" type="text" value="{{ s.developer.developerContact }}" /></div>
+                                    <div class="col-2"><p class="h6">Start Date</p></div><div class="col-10"><input class="form-control datepicker start-date" type="text" value="{{ s.developer.startDate }}" /></div>
+                                    <div class="col-2"><p class="h6">End Date</p></div><div class="col-10"><input class="form-control datepicker end-date" value="{{ s.developer.endDate }}" /></div>
+                                    <div class="col-2"><p class="h6">Database</p></div><div class="col-10"><select class="form-control database-name" >
+                                        <option value="-1" {% if s.developer.db == -1 %} selected {% endif %}>None</option>
+
+                                      <option value="1" {% if s.developer.db == 1 %} selected {% endif %}>MySQL</option>
+                                      <option value="2" {% if s.developer.db == 2 %} selected {% endif %}>PostgreSQL</option>
+                                        <option value="3" {% if s.developer.db == 3 %} selected {% endif %}>Oracle</option>
+
+                                  </select></div>
+
+                                  </div>
+                                    <div style="margin-top: 20px;">
+                                         <button class="btn btn-primary" value={{ s.id }} onclick="updateSystem(this, {{ s.developer.id }})">Update</button>
+                                         <button class="btn btn-danger" value={{ s.id }} onclick="removeSystem(this, {{ s.developer.id }})">Remove</button>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                          {% endfor %}
+
+
+
+
+
+                  </div>
+
+
+
+                  </div>
+
+
+
+
+                      </div>
+
+
+
+
+</div>
+
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add System</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <form class="system-form">
+                               <div class="form-group row">
+                              <div class="col-10">
+                                  <select class="form-control" id="system_or_app" onchange="check(this)">
+                                      <option value="1">System</option>
+                                      <option value="2">Apps</option>
+                                  </select>
+                              </div>
+                            </div>
+
+                        <div class="form-group row">
+
+                          <div class="col-10">
+                            <input class="form-control system-autocomplete" type="text" placeholder="System Name" id="system_name">
+                          </div>
+                        </div>
+                          <div class="form-group row">
+
+                          <div class="col-10">
+                            <input class="form-control" type="text" placeholder="Developer Name" id="developer_name">
+                          </div>
+                        </div>
+                           <div class="form-group row">
+                              <div class="col-10">
+                                <input class="form-control" type="text" placeholder="Contact Number" id="contact_number">
+                              </div>
+                            </div>
+                          <div class="form-group row">
+                              <div class="col-10">
+                                <input class="form-control datepicker" type="text" placeholder="Start Date" id="start_date">
+                              </div>
+                            </div>
+                              <div class="form-group row">
+                              <div class="col-10">
+                                <input class="form-control datepicker" type="text" placeholder="End Date" id="end_date">
+                              </div>
+                            </div>
+                          <div class="form-group row">
+                              <div class="col-10">
+                                  <select class="form-control" id="database_name">
+                                        <option value="-1">None</option>
+
+                                      <option value="1">MySQL</option>
+                                      <option value="2">PostgreSQL</option>
+                                        <option value="3">Oracle</option>
+
+                                  </select>
+                              </div>
+                            </div>
+
+                          </form>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="save_system">   Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+</div>
+
+
+{% endblock %}
+

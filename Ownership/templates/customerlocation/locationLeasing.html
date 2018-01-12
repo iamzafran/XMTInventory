@@ -1,7 +1,22 @@
-{% extends 'tenantlocation/tenantLocationDetail.html'%}
+{% extends 'customerlocation/locationDetail.html'%}
 
 
  {% block leasing %}
+ <div class="card border border-primary" >
+              <div class="card-header border-top-0 border-primary">
+                <ul class="nav nav-pills card-header-pills">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'customer_location_detail' location.id %}">Leasing Equipment</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'customer_location_detail_dc_rental' location.id %}">DC Portal</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'customer_location_detail_system_and_apps' location.id %}">System and Apps</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body" style="padding:20px">
             <div class="card">
               <div class="card-header">
                 <span class="h4">Computer</span>
@@ -186,6 +201,9 @@
 
               </div>
           </div>
+           </div>
+</div>
+
 
 {% endblock %}
 
