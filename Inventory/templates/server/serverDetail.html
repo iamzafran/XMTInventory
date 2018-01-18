@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block body %}
+
+<div class="container"  style="margin-top: 50px">
+          <p class="h3" style="margin-bottom: 50px;">{{ server.serverModel }}</p>
+
+          <div class="card">
+              <div class="card-header">
+                <span class="h4">Technical Specification</span>
+                <button class="btn btn-outline-primary float-right col-1" id="edit_button">Edit</button>
+                <div class="btn-toolbar d-inline" role="toolbar" >
+                <button class="btn btn-outline-danger float-right toggle" id="cancel_button" hidden>Cancel</button>
+                <button class="btn btn-outline-success float-right toggle" style="margin-right:10px" id="save_button" hidden>Save</button>
+
+              </div>
+              </div>
+              <div class="card-body" style="padding: 20px">
+                <div class="container">
+                  <div class="form-group">
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">Tag Number</p></div>
+                        <p class="col-6">{{ server.tagNumber }}</p>
+                    </div>
+                      <div class="row form-row">
+                      <div class="col-2"><p class="h6">Serial Number</p></div>
+                        <p class="col-6">{{ server.serialNumber }}</p>
+                    </div>
+                      <div class="row form-row">
+                      <div class="col-2"><p class="h6">Product Key</p></div>
+                        <p class="col-6">{{ server.productKey }}</p>
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">Hostname</p></div>
+                        <div class=" col-6">
+                            <input type="text" class="form-control input"  id="hostname-input" value="{{ server.hostname }}" disabled>
+                    </div>
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">Server Model</p></div>
+                        <div class=" col-6">
+                                <p class="col-6">{{ server.serverModel }}</p>
+                    </div>
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">Year of Purchase</p></div>
+                      <p class="col-6 ">{{ server.yearOfPurchase }}</p>
+                    </div>
+                      <div class="row form-row">
+                      <div class="col-2"><p class="h6">Year of Leasing</p></div>
+                          <div class="col-3">
+                              <input type="text" class="form-control input"  id="start-lease-input" value="{{ server.startLeasing }}" disabled>
+                          </div>
+                          <div class="col-3">
+                              <input type="text" class="form-control input"  id="end-lease-input" value="{{ server.endLeasing }}" disabled>
+                          </div>
+
+                    </div>
+                      <div class="row form-row">
+                      <div class="col-2"><p class="h6">Warranty Period</p></div>
+                          <div class="col-3">
+                            <select class="form-control input" id="warranty-period-input" disabled>
+                              <option value="1" {% if server.warrantyPeriod == 1 %} selected {% endif %}>1</option>
+                              <option value="2" {% if server.warrantyPeriod == 2 %} selected {% endif %}>2</option>
+                              <option value="3" {% if server.warrantyPeriod == 3 %} selected {% endif %}>3</option>
+                               <option value="4" {% if server.warrantyPeriod == 4 %} selected {% endif %}>4</option>
+                              <option value="5" {% if server.warrantyPeriod == 5 %} selected {% endif %}>5</option>
+                              <option value="6" {% if server.warrantyPeriod == 6 %} selected {% endif %}>6</option>
+                              <option value="7" {% if server.warrantyPeriod == 7 %} selected {% endif %}>7</option>
+                              <option value="8" {% if server.warrantyPeriod == 8 %} selected {% endif %}>8</option>
+                              <option value="9" {% if server.warrantyPeriod == 9 %} selected {% endif %}>9</option>
+                               <option value="10" {% if server.warrantyPeriod == 10 %} selected {% endif %}>10</option>
+                            </select>
+                          </div>
+                    </div>
+                      <div class="row form-row">
+                      <div class="col-2"><p class="h6">Extended Warranty</p></div>
+                          <div class="col-3">
+                            <select class="form-control input" id="extended-warranty-input" disabled>
+                              <option value="0" {% if server.extendedWarranty == 0 %} selected {% endif %}>0</option>
+                              <option value="1" {% if server.extendedWarranty == 1 %} selected {% endif %}>1</option>
+                              <option value="2" {% if server.extendedWarranty == 2 %} selected {% endif %}>2</option>
+                              <option value="3" {% if server.extendedWarranty == 3 %} selected {% endif %}>3</option>
+                                <option value="4" {% if server.extendedWarranty == 4 %} selected {% endif %}>4</option>
+                              <option value="5" {% if server.extendedWarranty == 5 %} selected {% endif %}>5</option>
+                            </select>
+                          </div>
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">IpV4</p></div>
+                        <div class=" col-6"><input type="text" class="form-control input"  id="ip-input" value="{{ server.ipv4 }}" disabled></div>
+                    </div>
+                      <div class="row form-row">
+                      <div class="col-2"><p class="h6">Domain</p></div>
+                        <div class=" col-6"><input type="text" class="form-control input"  id="domain-input" value="{{ server.domain }}" disabled></div>
+                    </div>
+                      <div class="row form-row">
+                      <div class="col-2"><p class="h6">Username</p></div>
+                        <div class=" col-6"><input type="text" class="form-control input"  id="username-input" value="{{ server.username }}" disabled></div>
+                    </div>
+                       <div class="row form-row">
+                      <div class="col-2"><p class="h6">Password</p></div>
+                        <div class=" col-6"><input type="text" class="form-control input"  id="password-input" value="{{ server.password }}" disabled></div>
+                    </div>
+
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">Operating System</p></div>
+                        <div class=" col-6">
+                            <input type="text" class="form-control input"  id="operating-system-input" value="{{ server.operatingSystem }}" disabled>
+                    </div>
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">Processor</p></div>
+                      <p class="col-6">{{ server.processor }}</p>
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">Hard Drive</p></div>
+                        <p class="col-6 ">{{ server.hardDrive }}</p>
+
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">Application</p></div>
+                        <div class="col-6">
+                              <input type="text" class="form-control input"  id="application-input" value="{{ server.application }}" placeholder="Projector Tag" disabled>
+
+                        </div>
+                    </div>
+                    <div class="row form-row">
+                      <div class="col-2"><p class="h6">Location</p></div>
+                        <div class="col-6">
+                              <input type="text" class="form-control input"  id="projector-input" value="{{ server.location }}" placeholder="Projector Tag" disabled>
+                        </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+          </div>
+
+        </div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+      var serverID = {{ server.id }};
+    </script>
+    <script src="{% static 'js/server_detail.js' %}"></script>
+{% endblock %}

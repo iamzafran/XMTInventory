@@ -24,8 +24,8 @@ $(document).ready(function(){
             var name = $('#system_name').val();
             var developer_name = $('#developer_name').val();
             var contact_no = $('#contact_number').val();
-            var start_date = $('#start_date').val();
-            var end_date = $('#end_date').val();
+            var start_date = formatDate($('#start_date').val());
+            var end_date = formatDate($('#end_date').val());
             var db = $('#database_name').val();
 
             var new_system = {
@@ -139,32 +139,59 @@ $('.software-autocomplete').autocomplete({
 }
 
 function addSystem(json){
+
+      var isValid = validate(".system-required");
+        console.log(isValid);
+
+        if(!isValid){
+            return;
+        }
+
      $.ajax({
                     type: "POST",
                     url: "http://127.0.0.1:8000/api/update/inventory/tenantlocation/system",
                     data: json,
                     contentType: "application/json",
-                    success: handleResponse
+                    success: handleAddSystem
         });
+
+        function handleAddSystem(data){
+        console.log(data);
+          $('#add-message').text("System succesfully added");
+                 $( "#dialog-added" ).dialog( "open" );
+
+
+    }
 }
 
 
 function addSoftware(json){
+
+
+      var isValid = validate(".system-required");
+        console.log(isValid);
+
+        if(!isValid){
+            return;
+        }
      $.ajax({
                     type: "POST",
                     url: "http://127.0.0.1:8000/api/update/inventory/tenantlocation/software",
                     data: json,
                     contentType: "application/json",
-                    success: handleResponse
+                    success: handleAddSoftware
         });
-}
 
- function handleResponse(data){
-
+        function handleAddSoftware(data){
         console.log(data);
+          $('#add-message').text("Software succesfully added");
+                 $( "#dialog-added" ).dialog( "open" );
 
 
     }
+}
+
+
 
 
 function updateSoftware(element, developer_id){
@@ -173,8 +200,8 @@ function updateSoftware(element, developer_id){
     var softwareID = $(element).val();
     var developer_name = $(root).find('.developer-name').val();
     var developer_contact = $(root).find('.developer-contact').val();
-    var start_date = $(root).find('.start-date').val();
-    var end_date = $(root).find('.end-date').val();
+    var start_date = formatDate($(root).find('.start-date').val());
+    var end_date = formatDate($(root).find('.end-date').val());
     var db = $(root).find('.database-name').val();
 
     var update = {
@@ -196,9 +223,15 @@ function updateSoftware(element, developer_id){
                     url: "http://127.0.0.1:8000/api/update/inventory/tenantlocation/software/developer",
                     data: json,
                     contentType: "application/json",
-                    success: handleResponse
+                    success: handleUpdateSoftware
                  });
 
+     function handleUpdateSoftware(data){
+
+        console.log(data);
+        $('#update-message').text("Software license updated");
+        $( "#dialog-updated" ).dialog( "open" );
+    }
 
 
 
@@ -217,8 +250,8 @@ function updateSystem(element, developer_id){
     var systemID = $(element).val();
     var developer_name = $(root).find('.developer-name').val();
     var developer_contact = $(root).find('.developer-contact').val();
-    var start_date = $(root).find('.start-date').val();
-    var end_date = $(root).find('.end-date').val();
+    var start_date = formatDate($(root).find('.start-date').val());
+    var end_date = formatDate((root).find('.end-date').val());
     var db = $(root).find('.database-name').val();
 
     var update = {
@@ -240,8 +273,16 @@ function updateSystem(element, developer_id){
                     url: "http://127.0.0.1:8000/api/update/inventory/tenantlocation/system/developer",
                     data: json,
                     contentType: "application/json",
-                    success: handleResponse
+                    success: handleUpdateSystem
                  });
+
+     function handleUpdateSystem(data){
+
+        console.log(data);
+         $('#update-message').text("System license updated");
+        $( "#dialog-updated" ).dialog( "open" );
+    }
+
 
 
 

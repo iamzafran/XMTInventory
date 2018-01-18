@@ -40,13 +40,13 @@
                      {% for c in computers %}
                           <div class="row form-inline computer-form-group">
                               <div class="form-group mb-2">
-                                <input type="text"  class="form-control computer-tag-input" placeholder="Computer Tag No" value="{{ c.pcTagNo }}">
+                                <input type="text"  class="form-control computer-tag-input computer-required" placeholder="Computer Tag No" value="{{ c.pcTagNo }}">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
-                                <input type="text" class="form-control datepicker start-date"  placeholder="start date" value="{{ c.startDate}}">
+                                <input type="text" class="form-control datepicker start-date computer-required"  placeholder="start date" value="{{ c.startDate}}">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
-                                <input type="text" class="form-control datepicker end-date"  placeholder="end date" value="{{ c.endDate }}">
+                                <input type="text" class="form-control datepicker end-date computer-required"  placeholder="end date" value="{{ c.endDate }}">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
                                 <button class="btn btn-danger" onclick="remove(this)"> remove </button>
@@ -86,13 +86,13 @@
                     {% for s in servers %}
                           <div class="row form-inline server-form-group">
                               <div class="form-group mb-2">
-                                <input type="text"  class="form-control server-tag-input" placeholder="Computer Tag No" value="{{ s.tagNumber }}">
+                                <input type="text"  class="form-control server-tag-input server-required" placeholder="Computer Tag No" value="{{ s.tagNumber }}">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
-                                <input type="text" class="form-control datepicker server-start-date"  placeholder="start date" value="{{ s.startDate}}">
+                                <input type="text" class="form-control datepicker server-start-date server-required"  placeholder="start date" value="{{ s.startDate}}">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
-                                <input type="text" class="form-control datepicker server-end-date"  placeholder="end date" value="{{ s.endDate }}">
+                                <input type="text" class="form-control datepicker server-end-date server-required"  placeholder="end date" value="{{ s.endDate }}">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
                                 <button class="btn btn-danger" onclick="removeServer(this)"> remove </button>
@@ -132,13 +132,13 @@
                      {% for p in projectors %}
                           <div class="row form-inline server-form-group">
                               <div class="form-group mb-2">
-                                <input type="text"  class="form-control projector-tag-input" placeholder="Computer Tag No" value="{{ p.projectorTag }}">
+                                <input type="text"  class="form-control projector-tag-input required" placeholder="Computer Tag No" value="{{ p.projectorTag }}">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
-                                <input type="text" class="form-control datepicker projector-start-date"  placeholder="start date" value="{{ p.startDate}}">
+                                <input type="text" class="form-control datepicker projector-start-date required"  placeholder="start date" value="{{ p.startDate}}">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
-                                <input type="text" class="form-control datepicker projector-end-date"  placeholder="end date" value="{{ p.endDate }}">
+                                <input type="text" class="form-control datepicker projector-end-date required"  placeholder="end date" value="{{ p.endDate }}">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
                                 <button class="btn btn-danger" onclick="removeProjector(this)"> remove </button>

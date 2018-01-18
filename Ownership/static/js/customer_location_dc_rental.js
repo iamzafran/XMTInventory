@@ -17,6 +17,12 @@ $(document).ready(function(){
         $('#update_dc_button').click(function(){
 
             var dcToAdd = [];
+            var isValid = validate(".rental-required");
+                console.log(isValid);
+
+                if(!isValid){
+                    return;
+                }
            $('.dc-form-group').each(function(index, value){
 
                 console.log(this);
@@ -24,8 +30,8 @@ $(document).ready(function(){
                 var dc_loc = $(this).find('.dc-loc-input').val();
                 var no_of_rack = $(this).find('.no-of-rack-input').val();
 
-                var startDate = $(this).find('.dc-start-date').val();
-                var endDate = $(this).find('.dc-end-date').val();
+                var startDate = formatDate($(this).find('.dc-start-date').val());
+                var endDate = formatDate($(this).find('.dc-end-date').val());
                 var rental_id = $(this).find('.rental-id').val();
                 console.log(dc_loc);
                 console.log(no_of_rack);
@@ -76,6 +82,8 @@ $(document).ready(function(){
                 function handleResponse(data){
 
                     console.log(data);
+                    $('#update-message').text("Data center rental successfully updated");
+                    $( "#dialog-updated" ).dialog( "open" );
                 }
 
 
@@ -97,13 +105,13 @@ $(document).ready(function(){
                     '</select>'+
                     '</div>'+
                    '<div class="form-group mx-sm-3 mb-2">'+
-                        '<input class="form-control no-of-rack-input" type="number" value="1">'+
+                        '<input class="form-control no-of-rack-input rental-required" type="number" value="1">'+
                     '</div>'+
                     '<div class="form-group mx-sm-3 mb-2">'+
-                      '<input type="text" class="form-control datepicker dc-start-date"  placeholder="start date">'+
+                      '<input type="text" class="form-control datepicker dc-start-date rental-required"  placeholder="start date">'+
                     '</div>'+
                     '<div class="form-group mx-sm-3 mb-2">'+
-                      '<input type="text" class="form-control datepicker dc-end-date"  placeholder="end date">'+
+                      '<input type="text" class="form-control datepicker dc-end-date rental-required"  placeholder="end date">'+
                     '</div>'+
                     '<div class="form-group mx-sm-3 mb-2">'+
                       '<button class="btn btn-danger rental-id" value="-1" onclick="removeDataCenter(this)"> remove </button>'+

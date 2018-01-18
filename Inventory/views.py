@@ -167,11 +167,44 @@ def computer_detail(request, computer_id):
     computer = Computer.objects.get(pk=computer_id)
     context = {
         "computer": computer,
-        "staff": computer.xmtstaff,
-        "customer": computer.customer,
-        "tenant": computer.tenantlocation,
         "projector": computer.projector,
         "monitor": computer.monitor
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def server_detail(request, server_id):
+    template = loader.get_template('server/serverDetail.html')
+    s = Server.objects.get(pk=server_id)
+    context = {
+        "server": s
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def projector_detail(request, projector_id):
+    template = loader.get_template('projector/projectorDetail.html')
+    p = Projector.objects.get(pk=projector_id)
+    context = {
+        "projector": p
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def monitor_detail(request, monitor_id):
+    template = loader.get_template('monitor/monitorDetail.html')
+    m = Monitor.objects.get(pk=monitor_id)
+    context = {
+        "monitor": m
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def dc_asset_detail(request, dc_asset_id):
+    template = loader.get_template('dcasset/dcassetDetail.html')
+    d = DCAsset.objects.get(pk=dc_asset_id)
+    context = {
+        "asset": d
     }
     return HttpResponse(template.render(context, request))
 
@@ -208,6 +241,11 @@ class ComputerList(APIView):
         pcModelSeries = computer["model_series"]
         pcName = computer["name"]
         serialNo = computer["serial_number"]
+        yearOfPurhcase = computer["year_of_purchase"]
+        startLease = computer["start_lease"]
+        endLease = computer["end_lease"]
+        warrantyPeriod = computer["warranty_period"]
+        extendedWarranty = computer["extended_warranty"]
         operatingSystem = computer["os"]
         processor = computer["processor"]
         systemType = computer["systemType"]
@@ -215,8 +253,9 @@ class ComputerList(APIView):
         hardDrive = computer["hdd"]
 
         c = Computer(pcModel=pcModel, pcTagNo=pcTagNo, pcModelSeries=pcModelSeries, pcName=pcName, serialNo=serialNo,
-                     operatingSystem=operatingSystem, processor=processor,
-                     systemType=systemType, ram=ram, hardDrive=hardDrive)
+                     yearOfPurchase=yearOfPurhcase, startLeasing=startLease, endLeasing=endLease,
+                     warrantyPeriod=warrantyPeriod, extendedWarranty=extendedWarranty, operatingSystem=operatingSystem,
+                     processor=processor, systemType=systemType, ram=ram, hardDrive=hardDrive)
 
         print("PC model = "+pcModel)
 
@@ -239,9 +278,7 @@ class ComputerList(APIView):
                 c.projector = projector
 
         c.save()
-        serializer = ComputerSerializer(c, many=False)
-        print(c.id)
-        return Response(serializer.data)
+        return HttpResponse(c.serialNo)
 
 
 class ComputerUpdate(APIView):
@@ -254,9 +291,16 @@ class ComputerUpdate(APIView):
         pcName = data["pcName"]
         new_projector = data["projector"]
         remarks = data["remarks"]
+        startLeasing = data["start_leasing"]
+        endLeasing = data["end_leasing"]
+        warrantyPeriod = data["warranty_period"]
+        extendedWarranty = data["extended_warranty"]
 
         computer = Computer.objects.get(pk=id)
-
+        print(startLeasing)
+        print(endLeasing)
+        print(warrantyPeriod)
+        print(extendedWarranty)
         if new_monitor:
             m = Monitor.objects.get(tagNo=new_monitor)
             computer.monitor = m
@@ -268,9 +312,47 @@ class ComputerUpdate(APIView):
         computer.operatingSystem = os
         computer.pcName = pcName
         computer.remarks = remarks
+        computer.startLeasing = startLeasing
+        computer.endLeasing = endLeasing
+        computer.warrantyPeriod = warrantyPeriod
+        computer.extendedWarranty = extendedWarranty
 
         computer.save()
-        return HttpResponse("Updated")
+        return HttpResponse(computer.serialNo);
+
+
+class ServerUpdate(APIView):
+
+    def post(self, request):
+        data = request.data
+        serverID = data["id"]
+        application = data["application"]
+        domain = data["domain"]
+        end_leasing = data["end_leasing"]
+        extended_warranty = data["extended_warranty"]
+        hostname = data["hostname"]
+        ipv4 = data["ipv4"]
+        os = data["os"]
+        password = data["password"]
+        start_leasing = data["start_leasing"]
+        username = data["username"]
+        warranty_period = data["warranty_period"]
+
+        s = Server.objects.get(pk=serverID)
+        s.application = application
+        s.domain = domain
+        s.endLeasing = end_leasing
+        s.startLeasing = start_leasing
+        s.warrantyPeriod = warranty_period
+        s.extendedWarranty = extended_warranty
+        s.hostname = hostname
+        s.ipv4 = ipv4
+        s.operatingSystem = os
+        s.username = username
+        s.password = password
+        s.save()
+
+        return HttpResponse(s.serialNumber)
 
 
 class UpdateComputerOwnership(APIView):
@@ -312,16 +394,20 @@ class MonitorList(APIView):
 
     def post(self, request):
 
-        monitor = request.data
-        serialNumber = monitor["serialNo"]
-        tagNumber = monitor["tagNo"]
-        monitorAge= monitor["age"]
+        data = request.data
+        serialNumber = data["serialNo"]
+        tagNumber = data["tagNo"]
+        year = data["year_of_purchase"]
+        start_leasing = data["start_leasing"]
+        end_leasing = data["end_leasing"]
+        warranty_period = data["warranty_period"]
+        extended_warranty = data["extended_warranty"]
 
-        m = Monitor(serialNo=serialNumber, tagNo=tagNumber, age=monitorAge)
+        m = Monitor(serialNo=serialNumber, tagNo=tagNumber, yearOfPurchase=year, startLeasing=start_leasing,
+                    endLeasing=end_leasing, warrantyPeriod=warranty_period, extendedWarranty=extended_warranty)
         m.save()
-        serialzer = MonitorSerializer(m, many=False)
-        print(m.id)
-        return Response(serialzer.data)
+
+        return HttpResponse(m.serialNo)
 
 
 class MonitorAutoComplete(APIView):
@@ -341,6 +427,27 @@ class MonitorAutoComplete(APIView):
         return JsonResponse(response, safe=False)
 
 
+class MonitorUpdate(APIView):
+
+    def post(self, request):
+        data = request.data
+        monitor_id = data["id"]
+        start_leasing = data["start_leasing"]
+        end_leasing = data["end_leasing"]
+        warranty_period = data["warranty_period"]
+        extended_warranty = data["extended_warranty"]
+
+        m = Monitor.objects.get(pk=monitor_id)
+        m.startLeasing = start_leasing
+        m.endLeasing = end_leasing
+        m.warrantyPeriod = warranty_period
+        m.extendedWarranty = extended_warranty
+
+        m.save()
+
+        return HttpResponse(m.serialNo)
+
+
 class ProjectorList(APIView):
 
     def get(self, request):
@@ -351,14 +458,19 @@ class ProjectorList(APIView):
     def post(self, request):
         data = request.data
         model = data["model"]
-        year = data["year"]
+        year = data["year_of_purchase"]
+        start_leasing = data["start_leasing"]
+        end_leasing = data["end_leasing"]
+        warranty_period = data["warranty_period"]
+        extended_warranty = data["extended_warranty"]
         serial_number = data["serial_number"]
         tag = data["tag"]
-        p = Projector(projectorModel=model, projectorYear=year, projectorSerialNumber=serial_number, projectorTag=tag)
+        p = Projector(projectorModel=model, projectorSerialNumber=serial_number, projectorTag=tag,
+                      yearOfPurchase=year, startLeasing=start_leasing, endLeasing=end_leasing,
+                      warrantyPeriod=warranty_period, extendedWarranty=extended_warranty)
         p.save()
-        serializer = ProjectorSerializer(p, many=False)
-        print(p.id)
-        return Response(serializer.data)
+
+        return HttpResponse(p.projectorSerialNumber)
 
 
 class ProjectorAutoComplete(APIView):
@@ -378,6 +490,26 @@ class ProjectorAutoComplete(APIView):
         return JsonResponse(response, safe=False)
 
 
+class ProjectorUpdate(APIView):
+
+    def post(self, request):
+        data = request.data
+        end_leasing = data["end_leasing"]
+        extended_warranty = data["extended_warranty"]
+        projector_id = data["id"]
+        start_leasing = data["start_leasing"]
+        warranty_period = data["warranty_period"]
+
+        p = Projector.objects.get(pk=projector_id)
+        p.endLeasing = end_leasing
+        p.extendedWarranty = extended_warranty
+        p.startLeasing = start_leasing
+        p.warrantyPeriod = warranty_period
+        p.save()
+
+        return HttpResponse(p.projectorSerialNumber)
+
+
 class SystemList(APIView):
 
     def get(self, request):
@@ -392,10 +524,7 @@ class SystemList(APIView):
 
         s = System(systemName=system_name, location=location)
         s.save()
-
-        serializer = SystemSerializer(s, many=False)
-        print(s.id)
-        return Response(serializer.data)
+        return HttpResponse(s.systemName)
 
 
 class SystemAutoComplete(APIView):
@@ -448,9 +577,7 @@ class EmailList(APIView):
         e = Email(licenses=licenses, principalName=principal_name, dateCreated=date_created)
         e.save()
 
-        serializer = EmailSerializer(e, many=False)
-
-        return Response(serializer.data)
+        return HttpResponse(e.principalName)
 
 
 class EmailListAutoComplete(APIView):
@@ -482,14 +609,38 @@ class DCAssetList(APIView):
         equipment = data["equipment"]
         description = data["description"]
         serial_number = data["serial_number"]
+        year = data["year_of_purchase"]
+        start_leasing = data["start_lease"]
+        end_leasing = data["end_lease"]
+        warranty_period = data["warranty_period"]
+        extended_warranty = data["extended_warranty"]
 
-        d = DCAsset(equipment=equipment, description=description, serialNumber=serial_number)
+        d = DCAsset(equipment=equipment, description=description, serialNumber=serial_number, yearOfPurchase=year,
+                    startLeasing=start_leasing, endLeasing=end_leasing, warrantyPeriod=warranty_period,
+                    extendedWarranty=extended_warranty)
 
         d.save()
 
-        serializer = DCAssetSerializer(d, many=False)
+        return HttpResponse(d.serialNumber)
 
-        return Response(serializer.data)
+
+class DCAssetUpdate(APIView):
+
+    def post(self, request):
+        data = request.data
+        end_leasing = data["end_leasing"]
+        extended_warranty = data["extended_warranty"]
+        dc_asset_id = data["id"]
+        start_leasing = data["start_leasing"]
+        warranty_period = data["warranty_period"]
+
+        dc = DCAsset.objects.get(pk=dc_asset_id)
+        dc.startLeasing = start_leasing
+        dc.endLeasing = end_leasing
+        dc.warrantyPeriod = warranty_period
+        dc.extendedWarranty = extended_warranty
+        dc.save()
+        return HttpResponse(dc.serialNumber)
 
 
 class ServerList(APIView):
@@ -514,16 +665,20 @@ class ServerList(APIView):
         hdd = data["hdd"]
         application = data["application"]
         location = data["location"]
+        end_lease = data["end_lease"]
+        extended_warranty = data["extended_warranty"]
+        start_lease = data["start_lease"]
+        warranty_period = data["warranty_period"]
+        year_of_purchase = data["year_of_purchase"]
 
-        s = Server(hostname=hostname, serverModel=server_model, ipv4=ip, domain=domain, username=username,
-                   password=password, operatingSystem=os, serialNumber=serial_number, productKey=product_key,
+        s = Server(hostname=hostname, serverModel=server_model, yearOfPurchase=year_of_purchase, startLeasing=start_lease,
+                   warrantyPeriod=warranty_period, endLeasing=end_lease, extendedWarranty=extended_warranty, ipv4=ip,
+                   domain=domain, username=username, password=password, operatingSystem=os, serialNumber=serial_number, productKey=product_key,
                    processor=processor, hardDrive=hdd, application=application, location=location)
 
         s.save()
 
-        serializer = ServerSerializer(s, many=False)
-
-        return Response(serializer.data)
+        return HttpResponse(s.serialNumber)
 
 
 class ServerAutoComplete(APIView):
@@ -557,6 +712,4 @@ class SoftwareList(APIView):
         s = Software(softwareName=software_name)
         s.save()
 
-        serializer = SoftwareSerializer(s, many=False)
-
-        return Response(serializer.data)
+        return HttpResponse(s.softwareName)

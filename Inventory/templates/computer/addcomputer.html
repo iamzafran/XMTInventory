@@ -18,43 +18,88 @@
         <div class="form-group row">
           <label for="pc-tag-input" class="col-2 col-form-label">PC Tag Number</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="pc-tag-input">
+            <input class="form-control required is-invalid" type="text" id="pc-tag-input">
           </div>
         </div>
         <div class="form-group row">
           <label for="pc-name-input" class="col-2 col-form-label">PC Name</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="pc-name-input">
+            <input class="form-control required" type="text" id="pc-name-input">
           </div>
         </div>
         <div class="form-group row">
           <label for="pc-model-series-input" class="col-2 col-form-label">PC Model Series</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="pc-model-series-input">
+            <input class="form-control required" type="text" id="pc-model-series-input">
           </div>
         </div>
         <div class="form-group row">
           <label for="serial-number-input" class="col-2 col-form-label">Serial Number</label>
           <div class="col-10">
-            <input class="form-control" type="text"  id="serial-number-input">
+            <input class="form-control required" type="text"  id="serial-number-input">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="year-of-purchase-input" class="col-2 col-form-label">Year of Purchase</label>
+          <div class="col-10">
+            <input class="form-control required" type="text"  id="year-of-purchase-input">
+          </div>
+        </div>
+         <div class="form-group row">
+          <label for="year-of-purchase-input" class="col-2 col-form-label">Year of Leasing</label>
+          <div class="col-3">
+            <input class="form-control required" type="text"  placeholder="start year" id="year-of-leasing-start">
+          </div>
+            <div class="col-3">
+            <input class="form-control required" type="text" placeholder="end year" id="year-of-leasing-end">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="model-input" class="col-2 col-form-label">Warranty Period</label>
+          <div class="col-3">
+            <select class="form-control required" id="warranty-period-input">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+               <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+               <option value="10">10</option>
+            </select>
+          </div>
+        </div>
+       <div class="form-group row">
+          <label for="model-input" class="col-2 col-form-label">Extended Warranty</label>
+          <div class="col-3">
+            <select class="form-control required" id="extended-warranty-period-input">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+               <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
           </div>
         </div>
         <div class="form-group row">
           <label for="operating-system-input" class="col-2 col-form-label">Operating System</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="operating-system-input">
+            <input class="form-control required" type="text" id="operating-system-input">
           </div>
         </div>
         <div class="form-group row">
           <label for="processor-input" class="col-2 col-form-label">Processor</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="processor-input">
+            <input class="form-control required" type="text" id="processor-input">
           </div>
         </div>
         <div class="form-group row">
           <label for="system-type-input" class="col-2 col-form-label">System Type</label>
           <div class="col-10">
-            <select class="form-control" id="system-type-input">
+            <select class="form-control required" id="system-type-input">
               <option value="32-bit">32-bit</option>
               <option value="64-bit">64-bit</option>
             </select>
@@ -63,7 +108,7 @@
         <div class="form-group row">
           <label for="ram-input" class="col-2 col-form-label">RAM</label>
           <div class="col-10">
-            <select class="form-control" id="ram-input">
+            <select class="form-control required" id="ram-input">
               <option value="1GB">1GB</option>
               <option value="2GB">2GB</option>
               <option value="4GB">4GB</option>
@@ -78,7 +123,7 @@
         <div class="form-group row">
           <label for="hard-drive-input" class="col-2 col-form-label">Hard Drive</label>
           <div class="col-10">
-            <select class="form-control" id="hard-drive-input">
+            <select class="form-control required" id="hard-drive-input">
               <option value="128GB">128GB</option>
               <option value="256GB">256GB</option>
               <option value="500GB">500GB</option>
@@ -92,7 +137,7 @@
         <div class="form-group row" id="monitor-input-group">
           <label for="monitor-input" class="col-2 col-form-label">Monitor</label>
           <div class="col-8">
-            <select class="form-control" id="monitor-input">
+            <select class="form-control required" id="monitor-input">
                 <option value="null">None</option>
                 {% for m in monitors %}
                 <option value="{{m.id}}">{{m.tagNo}}</option>
@@ -103,19 +148,19 @@
                 <div class="form-group row">
                   <label for="serial-number-monitor-input" class="col-2 col-form-label">Serial Number</label>
                   <div class="col-10">
-                    <input class="form-control" type="text" id="serial-number-monitor-input">
+                    <input class="form-control required-monitor" type="text" id="serial-number-monitor-input">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="monitor-tag-input" class="col-2 col-form-label">Monitor Tag</label>
                   <div class="col-10">
-                    <input class="form-control" type="text" id="monitor-tag-input">
+                    <input class="form-control required-monitor" type="text" id="monitor-tag-input">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="monitor-age-input" class="col-2 col-form-label">Age</label>
                   <div class="col-10">
-                    <input class="form-control" type="text" id="monitor-age-input">
+                    <input class="form-control required-monitor" type="text" id="monitor-age-input">
                   </div>
                 </div>
                 <div>
@@ -124,9 +169,7 @@
               </div><!--End add monitor -->
             </div>
           </div>
-          <div class="col-2">
-            <button class="btn btn-danger" id="add-new-monitor-button">Add New Monitor</button>
-          </div>
+
         </div>
         <div class="form-group row">
           <label for="projector-input" class="col-2 col-form-label">Projector</label>
@@ -137,39 +180,9 @@
                 <option value="{{p.id}}">{{p.projectorTag}}</option>
                 {% endfor %}
             </select>
-            <div class="row" style="margin-top: 10px" id="add-new-projector-form-group">
-              <div class="col-12 card" style="margin-top:10px; padding:10px"><!-- add new projector -->
-                <div class="form-group row">
-                  <label for="projector-model-input" class="col-2 col-form-label">Projector Model</label>
-                  <div class="col-10">
-                    <input class="form-control" type="text" id="projector-model-input">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="projector-year-input" class="col-2 col-form-label">Year</label>
-                  <div class="col-10">
-                    <input class="form-control" type="text" id="projector-year-input">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="serial-number-projector-input" class="col-2 col-form-label">Serial Number</label>
-                  <div class="col-10">
-                    <input class="form-control" type="text" id="serial-number-projector-input">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="projector-tag-input" class="col-2 col-form-label">Projector Tag</label>
-                  <div class="col-10">
-                    <input class="form-control" type="text" id="projector-tag-input">
-                  </div>
-                </div>
-                  <button class="btn btn-primary col-2" id="submit-projector-button">Add</button>
-              </div><!--End add projector -->
-            </div>
+
           </div>
-          <div class="col-2">
-            <button class="btn btn-danger" id="add-new-projector-button">Add New Projector</button>
-          </div>
+
         </div>
         <button class="btn btn-primary col-2" id="save-button">Save</button>
         </div>
@@ -177,5 +190,6 @@
 {% endblock %}
 
 {% block script %}
+<script src="{% static 'js/validation.js' %}"></script>
 <script src="{% static 'js/addcomputerform.js' %}"></script>
 {% endblock %}

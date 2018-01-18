@@ -2,7 +2,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.index),
+    url(r'^$', views.index, name='ownership_index'),
     url(r'^staff/(?P<staff_id>[0-9]+)$', views.staff_detail),
     url(r'^tenant/$', views.tenant_view),
     url(r'^tenant/(?P<tenant_id>[0-9]+)$', views.tenant_detail),

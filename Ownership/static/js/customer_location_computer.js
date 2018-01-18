@@ -15,13 +15,20 @@
 
 
         $('#update_button').click(function(){
+
+          var isValid = validate(".computer-required");
+                console.log(isValid);
+
+                if(!isValid){
+                    return;
+                }
            $('.computer-form-group').each(function(index, value){
 
                 console.log(this);
 
                 var pcTag = $(this).find('.computer-tag-input').val();
-                var startDate = $(this).find('.start-date').val();
-                var endDate = $(this).find('.end-date').val();
+                var startDate = formatDate($(this).find('.start-date').val());
+                var endDate = formatDate($(this).find('.end-date').val());
                 console.log(pcTag);
                 console.log(startDate);
                 console.log(endDate);
@@ -43,6 +50,8 @@
 
                 console.log(update);
 
+
+
                  var json = JSON.stringify(update)
                  $.ajax({
                     type: "POST",
@@ -53,8 +62,9 @@
                  });
 
                 function handleResponse(data){
-
                     console.log(data);
+                     $('#update-message').text("computer ownerships successfully updated");
+                    $( "#dialog-updated" ).dialog( "open" );
                 }
 
 
@@ -82,13 +92,13 @@
       var div = document.createElement('div');
       div.className = "row form-inline computer-form-group"
       var input =   '<div class="form-group mb-2">'+
-                      '<input type="text"  class="form-control computer-tag-input" placeholder="Computer Tag No">'+
+                      '<input type="text"  class="form-control computer-tag-input computer-required" placeholder="Computer Tag No">'+
                     '</div>'+
                     '<div class="form-group mx-sm-3 mb-2">'+
-                      '<input type="text" class="form-control datepicker start-date"  placeholder="start date">'+
+                      '<input type="text" class="form-control datepicker start-date computer-required"  placeholder="start date">'+
                     '</div>'+
                     '<div class="form-group mx-sm-3 mb-2">'+
-                      '<input type="text" class="form-control datepicker end-date"  placeholder="end date">'+
+                      '<input type="text" class="form-control datepicker end-date computer-required"  placeholder="end date">'+
                     '</div>'+
                     '<div class="form-group mx-sm-3 mb-2">'+
                       '<button class="btn btn-danger" onclick="remove(this)"> remove </button>'+

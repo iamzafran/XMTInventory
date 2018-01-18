@@ -8,79 +8,125 @@
         <div class="form-group row">
           <label for="hostname-input" class="col-2 col-form-label">Hostname</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="hostname-input">
+            <input class="form-control required" type="text" id="hostname-input">
           </div>
         </div>
         <div class="form-group row">
           <label for="server-model-input" class="col-2 col-form-label">Server Model</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="server-model-input">
+            <input class="form-control required" type="text" id="server-model-input">
+          </div>
+        </div>
+    <div class="form-group row">
+          <label for="year-of-purchase-input" class="col-2 col-form-label">Year of Purchase</label>
+          <div class="col-10">
+            <input class="form-control required" type="text"  id="year-of-purchase-input">
+          </div>
+        </div>
+         <div class="form-group row">
+          <label for="year-of-purchase-input" class="col-2 col-form-label">Year of Leasing</label>
+          <div class="col-3">
+            <input class="form-control required" type="text"  placeholder="start year" id="year-of-leasing-start">
+          </div>
+            <div class="col-3">
+            <input class="form-control required" type="text" placeholder="end year" id="year-of-leasing-end">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="warranty-period-input" class="col-2 col-form-label">Warranty Period</label>
+          <div class="col-3">
+            <select class="form-control" id="warranty-period-input">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+               <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+               <option value="10">10</option>
+            </select>
+          </div>
+        </div>
+       <div class="form-group row">
+          <label for="extended-warranty-period-input" class="col-2 col-form-label">Extended Warranty</label>
+          <div class="col-3">
+            <select class="form-control" id="extended-warranty-period-input">
+              <option value="0">1</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+               <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
           </div>
         </div>
         <div class="form-group row">
           <label for="ip-input" class="col-2 col-form-label">IPV4</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="ip-input">
+            <input class="form-control required" type="text" id="ip-input">
           </div>
         </div>
         <div class="form-group row">
           <label for="domain-input" class="col-2 col-form-label">Domain</label>
           <div class="col-10">
-            <input class="form-control" type="text"  id="domain-input">
+            <input class="form-control required" type="text"  id="domain-input">
           </div>
         </div>
+
         <div class="form-group row">
           <label for="username-input" class="col-2 col-form-label">Username</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="username-input">
+            <input class="form-control required" type="text" id="username-input">
           </div>
         </div>
         <div class="form-group row">
           <label for="password-input" class="col-2 col-form-label">Password</label>
           <div class="col-10">
-            <input class="form-control" type="password" id="password-input">
+            <input class="form-control required" type="password" id="password-input">
           </div>
         </div>
          <div class="form-group row">
           <label for="operating-system-input" class="col-2 col-form-label">Operating System</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="operating-system-input">
+            <input class="form-control required" type="text" id="operating-system-input">
           </div>
         </div>
         <div class="form-group row">
           <label for="serial-number-input" class="col-2 col-form-label">Serial Number</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="serial-number-input">
+            <input class="form-control required" type="text" id="serial-number-input">
           </div>
         </div>
         <div class="form-group row">
           <label for="product-key-input" class="col-2 col-form-label">Product Key</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="product-key-input">
+            <input class="form-control required" type="text" id="product-key-input">
           </div>
         </div>
         <div class="form-group row">
           <label for="processor-input" class="col-2 col-form-label">Processor</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="processor-input">
+            <input class="form-control required" type="text" id="processor-input">
           </div>
         </div>
         <div class="form-group row">
           <label for="hard-drive-input" class="col-2 col-form-label">Hard Drive</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="hard-drive-input">
+            <input class="form-control required" type="text" id="hard-drive-input">
           </div>
         </div>
          <div class="form-group row">
           <label for="application-input" class="col-2 col-form-label">Application</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="application-input">
+            <input class="form-control required" type="text" id="application-input">
           </div>
         </div>
         <div class="form-group row">
           <label for="location-input" class="col-2 col-form-label">Location</label>
           <div class="col-10">
-            <input class="form-control" type="text" id="location-input">
+            <input class="form-control required" type="text" id="location-input">
           </div>
         </div>
         <button class="btn btn-primary col-2" id="add-server-button">Save</button>
@@ -90,5 +136,6 @@
 {% endblock %}
 
 {% block script %}
+<script src="{% static 'js/validation.js' %}"></script>
 <script src="{% static 'js/addcomputerform.js' %}"></script>
 {% endblock %}

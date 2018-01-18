@@ -47,13 +47,13 @@
                                </select>
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
-                                <input class="form-control no-of-rack-input" type="number" value="{{ d.numberOfRacks }}" id="example-number-input">
+                                <input class="form-control no-of-rack-input rental-required" type="number" value="{{ d.numberOfRacks }}" id="example-number-input">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
-                                <input type="text" class="form-control dc-input datepicker dc-start-date"  placeholder="start date" value="{{ d.startDate}}">
+                                <input type="text" class="form-control dc-input datepicker dc-start-date rental-required"  placeholder="start date" value="{{ d.startDate}}">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
-                                <input type="text" class="form-control dc-input datepicker dc-end-date"  placeholder="end date" value="{{ d.endDate }}">
+                                <input type="text" class="form-control dc-input datepicker dc-end-date rental-required"  placeholder="end date" value="{{ d.endDate }}">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
                                 <button class="btn btn-danger rental-id" onclick="removeDataCenter(this)" value="{{ d.id }}"> remove </button>

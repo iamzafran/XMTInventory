@@ -15,7 +15,7 @@
               <a class="dropdown-item" href="/inventory/server">Server</a>
               <a class="dropdown-item" href="/inventory/email">Email Listings</a>
               <a class="dropdown-item" href="/inventory/dcasset">DC Asset</a>
-                                <a class="dropdown-item" href="/inventory/software">Software</a>
+                <a class="dropdown-item" href="/inventory/software">Software</a>
 
             </div>
             <a href="/inventory/monitor/add"><button class="btn btn-primary">Add New</button></a>
@@ -45,7 +45,7 @@
                     {% for m in monitors %}
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ m.serialNo }}</td>
+                            <td><a href="{% url 'monitor_detail' m.id %}">{{ m.serialNo }}</a></td>
                             <td>{{ m.tagNo }}</td>
                             <td>{{ m.age }}</td>
                         </tr>

@@ -49,17 +49,31 @@ $(document).ready(function(){
       $('#submit-monitor-button').click(function(){
             var serial_number = $('#serial-number-monitor-input').val();
             var monitor_tag = $('#monitor-tag-input').val();
-            var monitor_age = $('#monitor-age-input').val();
+            var year_of_purchase = $('#year-of-purchase-input').val();
+            var startLease = $('#year-of-leasing-start').val();
+            var endLease = $('#year-of-leasing-end').val();
+            var warrantyPeriod = $('#warranty-period-input').val();
+            var extendedWarranty= $('#extended-warranty-period-input').val();
 
             var monitor = {
                 "serialNo": serial_number,
                 "tagNo": monitor_tag,
-                "age": monitor_age
+                "year_of_purchase": year_of_purchase,
+                "start_leasing": startLease,
+                "end_leasing": endLease,
+                "warranty_period": warrantyPeriod,
+                "extended_warranty": extendedWarranty
             };
 
             var json = JSON.stringify(monitor);
 
             console.log(json);
+            var isValid = validate(".required");
+            console.log(isValid);
+
+            if(!isValid){
+                return;
+            }
 
 
             //send data to server
@@ -72,9 +86,11 @@ $(document).ready(function(){
             });
 
             function handleResponse(data){
-                     console.log(data)
-                     var monitor = data;
-                     $('#monitor-input').prepend("<option value='"+monitor.id+"'>"+monitor.tagNo+"</option>");
+                 console.log(data)
+                 $('#add-message').text(data+" successfully added");
+                 $( "#dialog-added" ).dialog( "open" );
+                 var monitor = data;
+                 $('#monitor-input').prepend("<option value='"+monitor.id+"'>"+monitor.tagNo+"</option>");
 
             }
       });
@@ -83,13 +99,21 @@ $(document).ready(function(){
       $('#submit-projector-button').click(function(){
 
             var projector_model = $('#projector-model-input').val();
-            var projector_year = $('#projector-year-input').val();
+            var projector_year = $('#year-of-purchase-input').val();
+            var startLease = $('#year-of-leasing-start').val();
+            var endLease = $('#year-of-leasing-end').val();
+            var warrantyPeriod = $('#warranty-period-input').val();
+            var extendedWarranty= $('#extended-warranty-period-input').val();
             var serial_number = $('#serial-number-projector-input').val();
             var projector_tag = $('#projector-tag-input').val();
 
             var projector = {
                 "model": projector_model,
-                "year": projector_year,
+                "year_of_purchase": projector_year,
+                "start_leasing": startLease,
+                "end_leasing": endLease,
+                "warranty_period": warrantyPeriod,
+                "extended_warranty": extendedWarranty,
                 "serial_number": serial_number,
                 "tag": projector_tag
             };
@@ -97,6 +121,12 @@ $(document).ready(function(){
             console.log(projector);
 
             var json = JSON.stringify(projector);
+            var isValid = validate(".required");
+            console.log(isValid);
+
+            if(!isValid){
+                return;
+            }
 
             $.ajax({
                 type: "POST",
@@ -108,6 +138,8 @@ $(document).ready(function(){
 
             function handleResponse(data){
                 console.log(data);
+                $('#add-message').text(data+" successfully added");
+                $( "#dialog-added" ).dialog( "open" );
                 var projector = data;
                 $('#projector-input').prepend("<option value='"+projector.id+"'>"+projector.projectorTag+"</option>");
             }
@@ -122,6 +154,11 @@ $(document).ready(function(){
         var pcname = $('#pc-name-input').val();
         var pcmodelseries = $('#pc-model-series-input').val();
         var serialnumber = $('#serial-number-input').val();
+        var yearOfPurchase = $('#year-of-purchase-input').val();
+        var startLease = $('#year-of-leasing-start').val();
+        var endLease = $('#year-of-leasing-end').val();
+        var warrantyPeriod = $('#warranty-period-input').val();
+        var extendedWarranty= $('#extended-warranty-period-input').val();
         var os = $('#operating-system-input').val();
         var processor = $('#processor-input').val();
         var systemType = $('#system-type-input').val();
@@ -144,6 +181,11 @@ $(document).ready(function(){
             "name" : pcname,
             "model_series": pcmodelseries,
             "serial_number": serialnumber,
+            "year_of_purchase": yearOfPurchase,
+            "start_lease": startLease,
+            "end_lease": endLease,
+            "warranty_period": warrantyPeriod,
+            "extended_warranty": extendedWarranty,
             "os": os,
             "processor": processor,
             "systemType": systemType,
@@ -157,6 +199,13 @@ $(document).ready(function(){
 
         var json = JSON.stringify(computer);
 
+        var isValid = validate(".required");
+        console.log(isValid);
+
+        if(!isValid){
+            return;
+        }
+
             $.ajax({
                 type: "POST",
                 url: "http://127.0.0.1:8000/api/computers/add",
@@ -167,6 +216,8 @@ $(document).ready(function(){
 
             function handleResponse(data){
                 console.log(data);
+                $('#add-message').text(data+" successfully added");
+                $( "#dialog-added" ).dialog( "open" );
 
             }
 
@@ -193,6 +244,12 @@ $(document).ready(function(){
             console.log(system);
 
             var json = JSON.stringify(system);
+            var isValid = validate(".required");
+            console.log(isValid);
+
+            if(!isValid){
+                return;
+            }
 
             $.ajax({
                 type: "POST",
@@ -204,7 +261,8 @@ $(document).ready(function(){
 
             function handleResponse(data){
                 console.log(data);
-
+                 $('#add-message').text(data+" successfully added");
+                 $( "#dialog-added" ).dialog( "open" );
             }
 
       });
@@ -225,6 +283,13 @@ $(document).ready(function(){
 
         console.log(email);
 
+        var isValid = validate(".required");
+        console.log(isValid);
+
+        if(!isValid){
+            return;
+        }
+
         var json = JSON.stringify(email);
 
             $.ajax({
@@ -237,6 +302,8 @@ $(document).ready(function(){
 
             function handleResponse(data){
                 console.log(data);
+                 $('#add-message').text(data+" successfully added");
+                 $( "#dialog-added" ).dialog( "open" );
             }
 
       });
@@ -247,16 +314,33 @@ $(document).ready(function(){
         var equipment = $('#equipment-input').val();
         var description = $('#description-input').val();
         var serial_number = $('#serial-number-input').val();
+        var yearOfPurchase = $('#year-of-purchase-input').val();
+        var startLease = $('#year-of-leasing-start').val();
+        var endLease = $('#year-of-leasing-end').val();
+        var warrantyPeriod = $('#warranty-period-input').val();
+        var extendedWarranty= $('#extended-warranty-period-input').val();
 
         var dcasset = {
             "equipment": equipment,
             "description": description,
-            "serial_number": serial_number
+            "serial_number": serial_number,
+            "year_of_purchase": yearOfPurchase,
+            "start_lease": startLease,
+            "end_lease": endLease,
+            "warranty_period": warrantyPeriod,
+            "extended_warranty": extendedWarranty
         };
 
         console.log(dcasset);
 
         var json = JSON.stringify(dcasset);
+
+         var isValid = validate(".required");
+        console.log(isValid);
+
+        if(!isValid){
+            return;
+        }
 
             $.ajax({
                 type: "POST",
@@ -268,6 +352,8 @@ $(document).ready(function(){
 
             function handleResponse(data){
                 console.log(data);
+                 $('#add-message').text(data+" successfully added");
+                 $( "#dialog-added" ).dialog( "open" );
             }
 
       });
@@ -280,6 +366,11 @@ $(document).ready(function(){
         var domain = $('#domain-input').val();
         var username = $('#username-input').val();
         var password = $('#password-input').val();
+        var yearOfPurchase = $('#year-of-purchase-input').val();
+        var startLease = $('#year-of-leasing-start').val();
+        var endLease = $('#year-of-leasing-end').val();
+        var warrantyPeriod = $('#warranty-period-input').val();
+        var extendedWarranty= $('#extended-warranty-period-input').val();
         var os = $('#operating-system-input').val();
         var serial_number = $('#serial-number-input').val();
         var product_key = $('#product-key-input').val();
@@ -292,6 +383,13 @@ $(document).ready(function(){
         server = {
             "hostname": hostname,
             "server_model": server_model,
+            "username": username,
+            "password": password,
+            "year_of_purchase": yearOfPurchase,
+            "start_lease": startLease,
+            "end_lease": endLease,
+            "warranty_period": warrantyPeriod,
+            "extended_warranty": extendedWarranty,
             "ip": ipv4,
             "domain": domain,
             "username": username,
@@ -306,6 +404,14 @@ $(document).ready(function(){
         }
 
         console.log(server);
+
+        var isValid = validate(".required");
+        console.log(isValid);
+
+        if(!isValid){
+            return;
+        }
+
         var json = JSON.stringify(server);
 
             $.ajax({
@@ -318,6 +424,8 @@ $(document).ready(function(){
 
             function handleResponse(data){
                 console.log(data);
+                   $('#add-message').text(data+" successfully added");
+                 $( "#dialog-added" ).dialog( "open" );
             }
 
       });
@@ -333,6 +441,13 @@ $(document).ready(function(){
 
         var json = JSON.stringify(software);
 
+        var isValid = validate(".required");
+        console.log(isValid);
+
+        if(!isValid){
+            return;
+        }
+
             $.ajax({
                 type: "POST",
                 url: "http://127.0.0.1:8000/api/software/add",
@@ -343,6 +458,8 @@ $(document).ready(function(){
 
             function handleResponse(data){
                 console.log(data);
+                $('#add-message').text(data+" successfully added");
+                 $( "#dialog-added" ).dialog( "open" );
             }
 
 

@@ -57,8 +57,9 @@ $(document).ready(function(){
                  });
 
                 function handleResponse(data){
-
                     console.log(data);
+                     $('#update-message').text("Projector ownership successfully updated");
+                    $( "#dialog-updated" ).dialog( "open" );
                 }
 
 

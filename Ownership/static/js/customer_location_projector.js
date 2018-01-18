@@ -17,13 +17,20 @@ $(document).ready(function(){
         $('#update_projector_button').click(function(){
             var projectorsToAdd = [];
 
+             var isValid = validate(".projector-required");
+                console.log(isValid);
+
+                if(!isValid){
+                    return;
+                }
+
            $('.projector-form-group').each(function(index, value){
 
                 console.log(this);
 
                 var projectorTag = $(this).find('.projector-tag-input').val();
-                var startDate = $(this).find('.projector-start-date').val();
-                var endDate = $(this).find('.projector-end-date').val();
+                var startDate = formatDate($(this).find('.projector-start-date').val());
+                var endDate = formatDate($(this).find('.projector-end-date').val());
                 console.log(projectorTag);
                 console.log(startDate);
                 console.log(endDate);
@@ -57,7 +64,8 @@ $(document).ready(function(){
                  });
 
                 function handleResponse(data){
-
+                    $('#update-message').text("Projector ownership successfully updated");
+                    $( "#dialog-updated" ).dialog( "open" );
                     console.log(data);
                 }
 
@@ -77,13 +85,13 @@ function addProjector(){
       var div = document.createElement('div');
       div.className = "row form-inline projector-form-group"
       var input =   '<div class="form-group mb-2">'+
-                      '<input type="text"  class="form-control projector-tag-input" placeholder="Projector Tag No">'+
+                      '<input type="text"  class="form-control projector-tag-input projector-required" placeholder="Projector Tag No">'+
                     '</div>'+
                     '<div class="form-group mx-sm-3 mb-2">'+
-                      '<input type="text" class="form-control datepicker projector-start-date"  placeholder="start date">'+
+                      '<input type="text" class="form-control datepicker projector-start-date projector-required"  placeholder="start date">'+
                     '</div>'+
                     '<div class="form-group mx-sm-3 mb-2">'+
-                      '<input type="text" class="form-control datepicker projector-end-date"  placeholder="end date">'+
+                      '<input type="text" class="form-control datepicker projector-end-date projector-required"  placeholder="end date">'+
                     '</div>'+
                     '<div class="form-group mx-sm-3 mb-2">'+
                       '<button class="btn btn-danger" onclick="removeProjector(this)"> remove </button>'+

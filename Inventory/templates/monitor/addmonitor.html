@@ -8,21 +8,60 @@
                 <div class="form-group row">
                   <label for="serial-number-monitor-input" class="col-2 col-form-label">Serial Number</label>
                   <div class="col-10">
-                    <input class="form-control" type="text" id="serial-number-monitor-input">
+                    <input class="form-control required" type="text" id="serial-number-monitor-input">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="monitor-tag-input" class="col-2 col-form-label">Monitor Tag</label>
                   <div class="col-10">
-                    <input class="form-control" type="text" id="monitor-tag-input">
+                    <input class="form-control required" type="text" id="monitor-tag-input">
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="monitor-age-input" class="col-2 col-form-label">Age</label>
-                  <div class="col-10">
-                    <input class="form-control" type="text" id="monitor-age-input">
-                  </div>
-                </div>
+          <label for="year-of-purchase-input" class="col-2 col-form-label">Year of Purchase</label>
+          <div class="col-10">
+            <input class="form-control required" type="text"  id="year-of-purchase-input">
+          </div>
+        </div>
+         <div class="form-group row">
+          <label for="year-of-purchase-input" class="col-2 col-form-label">Year of Leasing</label>
+          <div class="col-3">
+            <input class="form-control required" type="text"  placeholder="start year" id="year-of-leasing-start">
+          </div>
+            <div class="col-3">
+            <input class="form-control required" type="text" placeholder="end year" id="year-of-leasing-end">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="warranty-period-input" class="col-2 col-form-label">Warranty Period</label>
+          <div class="col-3">
+            <select class="form-control" id="warranty-period-input">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+               <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+               <option value="10">10</option>
+            </select>
+          </div>
+        </div>
+       <div class="form-group row">
+          <label for="extended-warranty-period-input" class="col-2 col-form-label">Extended Warranty</label>
+          <div class="col-3">
+            <select class="form-control" id="extended-warranty-period-input">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+               <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+        </div>
                 <div>
                 </div>
                 <button class="btn btn-primary col-2" id="submit-monitor-button">Add</button>
@@ -32,5 +71,6 @@
 {% endblock %}
 
 {% block script %}
+<script src="{% static 'js/validation.js' %}"></script>
 <script src="{% static 'js/addcomputerform.js' %}"></script>
 {% endblock %}

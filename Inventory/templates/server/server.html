@@ -49,7 +49,7 @@
                 {% for s in servers%}
                   <tr>
                     <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ s.hostname }}</td>
+                    <td><a href="{% url 'server_detail' s.id %}">{{ s.hostname }}</a></td>
                     <td>{{ s.serverModel }}</td>
                     <td>{{ s.domain }}</td>
                     <td>{{ s.application }}</td>

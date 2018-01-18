@@ -19,5 +19,9 @@ urlpatterns = [
     url(r'^software/$', views.software, name='software'),
     url(r'^software/add$', views.addsoftware, name='addsoftware'),
     url(r'^computer/(?P<computer_id>[0-9]+)$', views.computer_detail, name='computer_detail'),
+    url(r'^server/(?P<server_id>[0-9]+)$', views.server_detail, name='server_detail'),
+    url(r'^projector/(?P<projector_id>[0-9]+)$', views.projector_detail, name='projector_detail'),
+    url(r'^monitor/(?P<monitor_id>[0-9]+)$', views.monitor_detail, name='monitor_detail'),
+    url(r'^dcasset/(?P<dc_asset_id>[0-9]+)$', views.dc_asset_detail, name='dc_asset_detail'),
 
 ]

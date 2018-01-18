@@ -44,7 +44,7 @@
                     {% for p in projectors %}
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ p.projectorModel }}</td>
+                            <td><a href="{% url 'projector_detail' p.id %}">{{ p.projectorModel }}</a></td>
                             <td>{{ p.projectorTag}}</td>
                             <td>{{ p.projectorSerialNumber }}</td>
                         </tr>

@@ -47,7 +47,7 @@
                   <tr>
                     <th scope="row">{{ forloop.counter }}</th>
 
-                    <td>{{ d.equipment }}</td>
+                    <td><a href="{% url 'dc_asset_detail' d.id %}">{{ d.equipment }}</a></td>
                     <td>{{ d.description }}</td>
                       <td>{{ d.serialNumber }}</td>
 

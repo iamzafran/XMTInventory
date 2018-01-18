@@ -7,12 +7,20 @@ from Ownership.models import XMTStaff, Customer, CustomerLocation, TenantLocatio
 class Monitor(models.Model):
     serialNo = models.CharField(max_length=120)
     tagNo = models.CharField(max_length=120)
-    age = models.CharField(max_length=3)
+    yearOfPurchase = models.IntegerField()
+    startLeasing = models.IntegerField()
+    endLeasing = models.IntegerField()
+    warrantyPeriod = models.IntegerField()
+    extendedWarranty = models.IntegerField(null=True, default=None)
 
 
 class Projector(models.Model):
     projectorModel = models.CharField(max_length=120)
-    projectorYear = models.CharField(max_length=5)
+    yearOfPurchase = models.IntegerField()
+    startLeasing = models.IntegerField()
+    endLeasing = models.IntegerField()
+    warrantyPeriod = models.IntegerField()
+    extendedWarranty = models.IntegerField(null=True, default=None)
     projectorTag = models.CharField(max_length=120)
     projectorSerialNumber = models.CharField(max_length=100, null=True, default=None, blank=True)
     tenantlocation = models.ForeignKey(TenantLocation, on_delete=models.SET_NULL, null=True, default=None, blank=True)
@@ -24,6 +32,11 @@ class Projector(models.Model):
 class Computer(models.Model):
     pcModel = models.CharField(max_length=25, null=True, default=None, blank=True)
     pcTagNo = models.CharField(max_length=120)
+    yearOfPurchase = models.IntegerField()
+    startLeasing = models.IntegerField()
+    endLeasing = models.IntegerField()
+    warrantyPeriod = models.IntegerField()
+    extendedWarranty = models.IntegerField(null=True, default=None)
     pcModelSeries = models.CharField(max_length=25, null=True, default=None, blank=True)
     pcName = models.CharField(max_length=120)  #edit
     serialNo = models.CharField(max_length=120)
@@ -72,6 +85,11 @@ class Server(models.Model):
     tagNumber = models.CharField(max_length=255)
     hostname = models.CharField(max_length=120)
     serverModel = models.CharField(max_length=120)
+    yearOfPurchase = models.IntegerField()
+    startLeasing = models.IntegerField()
+    endLeasing = models.IntegerField()
+    warrantyPeriod = models.IntegerField()
+    extendedWarranty = models.IntegerField(null=True, default=None)
     ipv4 = models.CharField(max_length=15)
     domain = models.CharField(max_length=120)
     username = models.CharField(max_length=120)
@@ -97,6 +115,11 @@ class DCAsset(models.Model):
     equipment = models.CharField(max_length=120)
     description = models.CharField(max_length=120)
     serialNumber = models.CharField(max_length=120)
+    yearOfPurchase = models.IntegerField()
+    startLeasing = models.IntegerField()
+    endLeasing = models.IntegerField()
+    warrantyPeriod = models.IntegerField()
+    extendedWarranty = models.IntegerField(null=True, default=None)
 
 
 class Software(models.Model):

@@ -8,25 +8,64 @@
         <div class="form-group row">
                   <label for="projector-model-input" class="col-2 col-form-label">Projector Model</label>
                   <div class="col-10">
-                    <input class="form-control" type="text" id="projector-model-input">
+                    <input class="form-control required" type="text" id="projector-model-input">
                   </div>
                 </div>
-                <div class="form-group row">
-                  <label for="projector-year-input" class="col-2 col-form-label">Year</label>
-                  <div class="col-10">
-                    <input class="form-control" type="text" id="projector-year-input">
-                  </div>
-                </div>
+        <div class="form-group row">
+          <label for="year-of-purchase-input" class="col-2 col-form-label">Year of Purchase</label>
+          <div class="col-10">
+            <input class="form-control required" type="text"  id="year-of-purchase-input">
+          </div>
+        </div>
+         <div class="form-group row">
+          <label for="year-of-purchase-input" class="col-2 col-form-label">Year of Leasing</label>
+          <div class="col-3">
+            <input class="form-control required" type="text"  placeholder="start year" id="year-of-leasing-start">
+          </div>
+            <div class="col-3">
+            <input class="form-control required" type="text" placeholder="end year" id="year-of-leasing-end">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="warranty-period-input" class="col-2 col-form-label">Warranty Period</label>
+          <div class="col-3">
+            <select class="form-control" id="warranty-period-input">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+               <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+               <option value="10">10</option>
+            </select>
+          </div>
+        </div>
+       <div class="form-group row">
+          <label for="extended-warranty-period-input" class="col-2 col-form-label">Extended Warranty</label>
+          <div class="col-3">
+            <select class="form-control" id="extended-warranty-period-input">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+               <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+        </div>
                 <div class="form-group row">
                   <label for="serial-number-projector-input" class="col-2 col-form-label">Serial Number</label>
                   <div class="col-10">
-                    <input class="form-control" type="text" id="serial-number-projector-input">
+                    <input class="form-control required" type="text" id="serial-number-projector-input">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="projector-tag-input" class="col-2 col-form-label">Projector Tag</label>
                   <div class="col-10">
-                    <input class="form-control" type="text" id="projector-tag-input">
+                    <input class="form-control required" type="text" id="projector-tag-input">
                   </div>
                 </div>
                   <button class="btn btn-primary col-2" id="submit-projector-button">Add</button>
@@ -36,5 +75,6 @@
 {% endblock %}
 
 {% block script %}
+<script src="{% static 'js/validation.js' %}"></script>
 <script src="{% static 'js/addcomputerform.js' %}"></script>
 {% endblock %}

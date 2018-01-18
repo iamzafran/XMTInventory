@@ -22,14 +22,14 @@
                   <div class="form-group">
                     <div class="row form-row">
                       <div class="col-2"><p class="h6">PC Model</p></div>
+                        <p class="col-6"> {% if computer.pcModel == "1" %}
+                            Desktop Computer
+                        {% elif computer.pcModel == "2" %}
+                           Tab
+                        {% elif computer.pcModel == "3" %}
+                           Laptop
+                        {% endif %}</p>
 
-                        {% if computer.pcModel == 1 %}
-                            <p class="col-6 ">Desktop Computer</p>
-                        {% elif computer.pcModel == 2 %}
-                            <p class="col-6 ">Tab</p>
-                        {% elif computer.pcModel == 3 %}
-                            <p class="col-6 ">Laptop</p>
-                        {% endif %}
 
                     </div>
                     <div class="row form-row">
@@ -42,12 +42,59 @@
 
                     </div>
                     <div class="row form-row">
+                      <div class="col-2"><p class="h6">Year of Purchase</p></div>
+                      <p class="col-6 ">{{ computer.yearOfPurchase }}</p>
+
+                    </div>
+                      <div class="row form-row">
+                      <div class="col-2"><p class="h6">Year of Leasing</p></div>
+                          <div class="col-3">
+                              <input type="text" class="form-control input"  id="start-lease-input" value="{{ computer.startLeasing }}" disabled>
+                          </div>
+                          <div class="col-3">
+                              <input type="text" class="form-control input"  id="end-lease-input" value="{{ computer.endLeasing }}" disabled>
+                          </div>
+
+                    </div>
+                      <div class="row form-row">
+                      <div class="col-2"><p class="h6">Warranty Period</p></div>
+                          <div class="col-3">
+                            <select class="form-control input" id="warranty-period-input" disabled>
+                              <option value="1" {% if computer.warrantyPeriod == 1 %} selected {% endif %}>1</option>
+                              <option value="2" {% if computer.warrantyPeriod == 2 %} selected {% endif %}>2</option>
+                              <option value="3" {% if computer.warrantyPeriod == 3 %} selected {% endif %}>3</option>
+                               <option value="4" {% if computer.warrantyPeriod == 4 %} selected {% endif %}>4</option>
+                              <option value="5" {% if computer.warrantyPeriod == 5 %} selected {% endif %}>5</option>
+                              <option value="6" {% if computer.warrantyPeriod == 6 %} selected {% endif %}>6</option>
+                              <option value="7" {% if computer.warrantyPeriod == 7 %} selected {% endif %}>7</option>
+                              <option value="8" {% if computer.warrantyPeriod == 8 %} selected {% endif %}>8</option>
+                              <option value="9" {% if computer.warrantyPeriod == 9 %} selected {% endif %}>9</option>
+                               <option value="10" {% if computer.warrantyPeriod == 10 %} selected {% endif %}>10</option>
+                            </select>
+                          </div>
+                    </div>
+                      <div class="row form-row">
+                      <div class="col-2"><p class="h6">Extended Warranty</p></div>
+                          <div class="col-3">
+                            <select class="form-control input" id="extended-warranty-input" disabled>
+                              <option value="0" {% if computer.extendedWarranty == 0 %} selected {% endif %}>0</option>
+                              <option value="1" {% if computer.extendedWarranty == 1 %} selected {% endif %}>1</option>
+                              <option value="2" {% if computer.extendedWarranty == 2 %} selected {% endif %}>2</option>
+                              <option value="3" {% if computer.extendedWarranty == 3 %} selected {% endif %}>3</option>
+                                <option value="4" {% if computer.extendedWarranty == 4 %} selected {% endif %}>4</option>
+                              <option value="5" {% if computer.extendedWarranty == 5 %} selected {% endif %}>5</option>
+                            </select>
+                          </div>
+                    </div>
+                    <div class="row form-row">
                       <div class="col-2"><p class="h6">PC Name</p></div>
-                      <input type="text" class="form-control input col-6"  id="pc-name-input" value="{{ computer.pcName }}" disabled>
+                        <div class=" col-6"><input type="text" class="form-control input"  id="pc-name-input" value="{{ computer.pcName }}" disabled></div>
                     </div>
                     <div class="row form-row">
                       <div class="col-2"><p class="h6">Operating System</p></div>
-                      <input type="text" class="form-control input col-6"  id="operating-system-input" value="{{ computer.operatingSystem }}" disabled>
+                        <div class=" col-6">
+                            <input type="text" class="form-control input"  id="operating-system-input" value="{{ computer.operatingSystem }}" disabled>
+                    </div>
                     </div>
                     <div class="row form-row">
                       <div class="col-2"><p class="h6">Processor</p></div>
@@ -70,15 +117,22 @@
                     </div>
                     <div class="row form-row">
                       <div class="col-2"><p class="h6">Remarks</p></div>
-                      <textarea type="text" class="form-control input col-6"  id="remarks-input"   disabled>{{ computer.remarks }}</textarea>
+                        <div class="col-6">
+                            <textarea type="text" class="form-control input"  id="remarks-input"   disabled>{{ computer.remarks }}</textarea>
+                        </div>
                     </div>
                     <div class="row form-row">
                       <div class="col-2"><p class="h6">Projector</p></div>
-                      <input type="text" class="form-control input col-6"  id="projector-input" value="{{ projector.projectorTag }}" placeholder="Projector Tag" disabled>
+                        <div class="col-6">
+                              <input type="text" class="form-control input"  id="projector-input" value="{{ projector.projectorTag }}" placeholder="Projector Tag" disabled>
+                        </div>
                     </div>
                     <div class="row form-row">
                       <div class="col-2"><p class="h6">Monitor</p></div>
-                      <input type="text" class="form-control input col-6"  id="monitor-input" value="{{ monitor.tagNo }}" placeholder="Monitor Tag No" disabled>
+                        <div class="col-6">
+                          <input type="text" class="form-control input col-6"  id="monitor-input" value="{{ monitor.tagNo }}" placeholder="Monitor Tag No" disabled>
+
+                        </div>
                     </div>
 
                   </div>
@@ -86,55 +140,6 @@
                 </div>
 
               </div>
-          </div>
-          <div class="card" style="margin-top:50px; margin-bottom:100px;">
-            <div class="card-header"><span class="h4">Ownership</span>
-            <button class="btn btn-outline-primary float-right col-1" id="edit_ownership_button">Edit</button>
-            <div class="btn-toolbar d-inline" role="toolbar" >
-            <button class="btn btn-outline-danger float-right ownership-toggle" id="cancel_ownership_edit_button" hidden>Cancel</button>
-            <button class="btn btn-outline-success float-right ownership-toggle" style="margin-right:10px" id="update_ownership_button" hidden>Update</button>
-
-          </div></div>
-            <div class="card-body" style="padding: 20px">
-              <div class="row form-row">
-              <div class="col-2"><p class="h6">Type</p></div>
-              <div class="col-6">
-                <select class="form-control ownership-input" id="ownership-type-input" disabled>
-
-                 {% if staff %}
-                  <option value="staff" selected>Staff</option>
-                  <option value="tenant">Tenant</option>
-                  <option value="project">Project</option>
-                  {% elif tenant %}
-                    <option value="staff">Staff</option>
-                    <option value="tenant" selected>Tenant</option>
-                    <option value="project">Project</option>
-                  {% elif project %}
-                    <option value="staff">Staff</option>
-                    <option value="tenant">Tenant</option>
-                    <option value="project" selected>Project</option>
-                  {% endif %}
-                </select>
-              </div>
-            </div>
-            <div class="row form-row staff"  {% if not staff %}hidden{% endif %}>
-              <div class="col-2"><p class="h6">Staff</p></div>
-              <input type="text" class="form-control ownership-input col-6"  id="staff-input" value="{{ staff.staffName }}" disabled>
-            </div>
-            <div class="row form-row tenant" {% if not tenant %}hidden{% endif %}>
-              <div class="col-2"><p class="h6">Tenant</p></div>
-              <input type="text" class="form-control ownership-input col-6"  id="tenant-input" value="{{ tenant.tenantName }}" disabled>
-            </div>
-            <div class="row form-row project" {% if not project %}hidden{% endif %}>
-              <div class="col-2"><p class="h6">Project</p></div>
-              <input type="text" class="form-control ownership-input col-6"  id="project-input" value="{{ project.projectName }}" disabled>
-              </div>
-               <div class="row form-row" style="margin-left:10px">
-              <button class="btn btn-danger ownership-input" disabled>Revoke All Ownership</button>
-            </div>
-            </div>
-
-
           </div>
 
         </div>

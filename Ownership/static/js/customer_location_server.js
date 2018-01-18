@@ -15,13 +15,22 @@ $(document).ready(function(){
 
 
         $('#update_server_button').click(function(){
+
+         var isValid = validate(".server-required");
+                console.log(isValid);
+
+                if(!isValid){
+                    return;
+                }
+
+                var serversToAdd = [];
            $('.server-form-group').each(function(index, value){
 
                 console.log(this);
 
                 var serverTag = $(this).find('.server-tag-input').val();
-                var startDate = $(this).find('.server-start-date').val();
-                var endDate = $(this).find('.server-end-date').val();
+                var startDate = formatDate($(this).find('.server-start-date').val());
+                var endDate = formatDate($(this).find('.server-end-date').val());
                 console.log(serverTag);
                 console.log(startDate);
                 console.log(endDate);
@@ -34,7 +43,13 @@ $(document).ready(function(){
 
                 serversToAdd.push(serverItem);
 
-                var update = {
+
+
+
+
+           });
+
+           var update = {
                     "servers": serversToAdd,
                     "location": locationID
                 };
@@ -53,14 +68,11 @@ $(document).ready(function(){
                  });
 
                 function handleResponse(data){
-
+                     $('#update-message').text("server ownerships successfully updated");
+                    $( "#dialog-updated" ).dialog( "open" );
                     console.log(data);
                 }
 
-
-
-
-           });
 
 
       });
@@ -76,13 +88,13 @@ function addServer(){
       var div = document.createElement('div');
       div.className = "row form-inline server-form-group"
       var input =   '<div class="form-group mb-2">'+
-                      '<input type="text"  class="form-control server-tag-input" placeholder="Server Tag No">'+
+                      '<input type="text"  class="form-control server-tag-input server-required" placeholder="Server Tag No">'+
                     '</div>'+
                     '<div class="form-group mx-sm-3 mb-2">'+
-                      '<input type="text" class="form-control datepicker server-start-date"  placeholder="start date">'+
+                      '<input type="text" class="form-control datepicker server-start-date server-required"  placeholder="start date">'+
                     '</div>'+
                     '<div class="form-group mx-sm-3 mb-2">'+
-                      '<input type="text" class="form-control datepicker server-end-date"  placeholder="end date">'+
+                      '<input type="text" class="form-control datepicker server-end-date server-required"  placeholder="end date">'+
                     '</div>'+
                     '<div class="form-group mx-sm-3 mb-2">'+
                       '<button class="btn btn-danger" onclick="removeServer(this)"> remove </button>'+

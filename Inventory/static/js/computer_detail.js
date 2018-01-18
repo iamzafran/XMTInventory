@@ -82,10 +82,19 @@
             var remarks = $('#remarks-input').val();
             var projector = $('#projector-input').val();
             var monitor = $('#monitor-input').val();
+            var startLeasing = $('#start-lease-input').val();
+            var endLeasing = $('#end-lease-input').val();
+            var warrantyPeriod = $('#warranty-period-input').val();
+            var extendedWarranty = $('#extended-warranty-input').val();
+
 
             var update = {
                 "id": computerID,
                 "pcName": pcName,
+                "start_leasing": startLeasing,
+                "end_leasing": endLeasing,
+                "warranty_period": warrantyPeriod,
+                "extended_warranty": extendedWarranty,
                 "os": os,
                 "remarks": remarks,
                 "projector": projector,
@@ -105,7 +114,9 @@
             });
 
             function handleResponse(data){
-                console.log(data);
+                $('#update-message').text(data+" successfully updated");
+                $( "#dialog-updated" ).dialog( "open" );
+
             }
 
 
