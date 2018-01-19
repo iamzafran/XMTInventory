@@ -28,6 +28,9 @@ Other dependencies:
 4. The admin panel is used to delete inventories, create new customer, staff, tenants, location and person in charge.
 5. The same email and password is used to log in into the system.
 
+# Database Structure
+1. View the database structure by opening the db.sqlite3 file using this software http://sqlitebrowser.org/
+
 # Backing up database
 
 1. Simply copy the db.sqlite3 file and save it without changing the filename i.e The filename always needs to be "db.sqlite3"
