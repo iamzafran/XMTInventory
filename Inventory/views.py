@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.template import loader
+from django.contrib.auth import authenticate, login, logout
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Computer, Monitor, Projector, System, Email, DCAsset, Server, Software
@@ -11,6 +13,31 @@ from XMTInventory.serializers import ComputerSerializer, MonitorSerializer, Proj
 # Create your views here.
 
 
+def login_user(request):
+    email_login = request.POST['email']
+    password = request.POST['password']
+    print(email_login)
+    print(password)
+    user = authenticate(email=email_login, password=password)
+    if user is not None:
+        if user.is_active:
+            print("ok")
+            login(request, user)
+            return HttpResponseRedirect("/")
+
+        else:
+            return HttpResponseRedirect("/login/")
+
+    else:
+        return HttpResponseRedirect("/login/")
+
+
+def logout_user(request):
+    logout(request)
+    return HttpResponseRedirect("/login/")
+
+
+@login_required(login_url='/login/')
 def index(request):
     template = loader.get_template('computer/computer.html')
     computers = Computer.objects.all()
@@ -20,6 +47,7 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def projector(request):
     template = loader.get_template('projector/projector.html')
     projectors = Projector.objects.all()
@@ -29,6 +57,7 @@ def projector(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def monitor(request):
     template = loader.get_template('monitor/monitor.html')
     monitors = Monitor.objects.all()
@@ -38,6 +67,7 @@ def monitor(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def system(request):
     template = loader.get_template('system/system.html')
     systems = System.objects.all()
@@ -47,6 +77,7 @@ def system(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def email(request):
     template = loader.get_template('email/email.html')
     emails = Email.objects.all()
@@ -56,6 +87,7 @@ def email(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def addNewComputer(request):
     template = loader.get_template('computer/addcomputer.html')
     monitors = Monitor.objects.raw('SELECT * FROM Inventory_monitor')
@@ -70,6 +102,7 @@ def addNewComputer(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def addNewProjector(request):
     template = loader.get_template('projector/addprojector.html')
 
@@ -79,6 +112,7 @@ def addNewProjector(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def addNewMonitor(request):
     template = loader.get_template('monitor/addmonitor.html')
 
@@ -88,6 +122,7 @@ def addNewMonitor(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def addNewSystem(request):
     template = loader.get_template('system/addsystem.html')
 
@@ -97,6 +132,7 @@ def addNewSystem(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def addNewEmail(request):
     template = loader.get_template('email/addemail.html')
 
@@ -106,6 +142,7 @@ def addNewEmail(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def dcasset(request):
     template = loader.get_template('dcasset/dcasset.html')
     dcassets = DCAsset.objects.all()
@@ -116,6 +153,7 @@ def dcasset(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def addNewDCasset(request):
     template = loader.get_template('dcasset/addDCasset.html')
 
@@ -125,6 +163,7 @@ def addNewDCasset(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def server(request):
     template = loader.get_template('server/server.html')
     servers = Server.objects.all()
@@ -135,6 +174,7 @@ def server(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def addServer(request):
     template = loader.get_template('server/addserver.html')
 
@@ -144,6 +184,7 @@ def addServer(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def software(request):
     template = loader.get_template('software/software.html')
     softwares = Software.objects.all()
@@ -154,6 +195,7 @@ def software(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def addsoftware(request):
     template = loader.get_template('software/addsoftware.html')
 
@@ -162,6 +204,7 @@ def addsoftware(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def computer_detail(request, computer_id):
     template = loader.get_template('computer/computerDetail.html')
     computer = Computer.objects.get(pk=computer_id)
@@ -173,6 +216,7 @@ def computer_detail(request, computer_id):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def server_detail(request, server_id):
     template = loader.get_template('server/serverDetail.html')
     s = Server.objects.get(pk=server_id)
@@ -182,6 +226,7 @@ def server_detail(request, server_id):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def projector_detail(request, projector_id):
     template = loader.get_template('projector/projectorDetail.html')
     p = Projector.objects.get(pk=projector_id)
@@ -191,6 +236,7 @@ def projector_detail(request, projector_id):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def monitor_detail(request, monitor_id):
     template = loader.get_template('monitor/monitorDetail.html')
     m = Monitor.objects.get(pk=monitor_id)
@@ -200,6 +246,7 @@ def monitor_detail(request, monitor_id):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def dc_asset_detail(request, dc_asset_id):
     template = loader.get_template('dcasset/dcassetDetail.html')
     d = DCAsset.objects.get(pk=dc_asset_id)

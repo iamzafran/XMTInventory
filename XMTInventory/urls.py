@@ -18,6 +18,9 @@ from django.conf.urls import include, url
 from rest_framework.urlpatterns import format_suffix_patterns
 from Inventory import views as iviews
 from Ownership import views as oviews
+from django.contrib.auth import views as auth_views
+
+
 urlpatterns = [
     url(r'^$', iviews.index, name='index'),
     url(r'^inventory/', include('Inventory.urls')),
@@ -80,6 +83,9 @@ urlpatterns = [
     url(r'^api/tenant/autocomplete', oviews.TenantAutoComplete.as_view()),
     url(r'^api/software/autocomplete', iviews.SoftwareAutoComplete.as_view()),
     url(r'^api/update/ownership/computer', iviews.UpdateComputerOwnership.as_view()),
+    url(r'^login/$', auth_views.login, name='login'),
+    url(r'^logout/$', iviews.logout_user, name='logout'),
+    url(r'^login/user$', iviews.login_user, name='login_user'),
 
 ]
 

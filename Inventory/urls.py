@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^monitor/(?P<monitor_id>[0-9]+)$', views.monitor_detail, name='monitor_detail'),
     url(r'^dcasset/(?P<dc_asset_id>[0-9]+)$', views.dc_asset_detail, name='dc_asset_detail'),
 
+
 ]

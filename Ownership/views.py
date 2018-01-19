@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from django.template import loader
 from rest_framework.views import APIView
+from django.contrib.auth.decorators import login_required
 from rest_framework.response import Response
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -12,6 +13,7 @@ from Inventory.models import Computer, System, Email, Server, Projector, DataCen
 # Create your views here.
 
 
+@login_required(login_url='/login/')
 def index(request):
     template = loader.get_template('staff/staff.html')
     staffs = XMTStaff.objects.all()
@@ -22,6 +24,7 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def tenant_view(request):
     template = loader.get_template('tenant/tenant.html')
     tenants = Tenant.objects.all()
@@ -31,6 +34,7 @@ def tenant_view(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def project_view(request):
     template = loader.get_template('customer/customer.html')
     customers = Customer.objects.all()
@@ -40,6 +44,7 @@ def project_view(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def department_view(request):
     template = loader.get_template('department/department.html')
     departments = Department.objects.all()
@@ -49,6 +54,7 @@ def department_view(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def staff_detail(request, staff_id):
     template = loader.get_template('staff/staffDetail.html')
     staff = XMTStaff.objects.get(pk=staff_id)
@@ -79,6 +85,7 @@ def staff_detail(request, staff_id):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def tenant_detail(request, tenant_id):
     template = loader.get_template('tenant/tenantDetail.html')
     tenant = Tenant.objects.get(pk=tenant_id)
@@ -100,6 +107,7 @@ def tenant_detail(request, tenant_id):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def customer_detail(request, project_id):
     template = loader.get_template('customer/customerDetail.html')
     customer = Customer.objects.get(pk=project_id)
@@ -116,6 +124,7 @@ def customer_detail(request, project_id):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def department_detail(request, department_id):
     template = loader.get_template('department/departmentDetail.html')
     department = Department.objects.get(pk=department_id)
@@ -132,6 +141,7 @@ def department_detail(request, department_id):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def tenant_location_detail(request, location_id):
     template = loader.get_template('location/locationLeasing.html')
     location = TenantLocation.objects.get(pk=location_id)
@@ -163,6 +173,7 @@ def tenant_location_detail(request, location_id):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def customer_location_detail(request, location_id):
     template = loader.get_template('customerlocation/locationLeasing.html')
     location = CustomerLocation.objects.get(pk=location_id)
@@ -196,6 +207,7 @@ def customer_location_detail(request, location_id):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def tenant_location_rental(request, location_id):
     template = loader.get_template('location/locationDCRental.html')
     location = TenantLocation.objects.get(pk=location_id)
@@ -211,6 +223,7 @@ def tenant_location_rental(request, location_id):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def customer_location_rental(request, location_id):
     template = loader.get_template('customerlocation/locationDCRental.html')
     location = CustomerLocation.objects.get(pk=location_id)
@@ -226,6 +239,7 @@ def customer_location_rental(request, location_id):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def tenant_system_and_apps(request, location_id):
     template = loader.get_template('location/locationSystemAndApps.html')
     location = TenantLocation.objects.get(pk=location_id)
@@ -244,6 +258,7 @@ def tenant_system_and_apps(request, location_id):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/login/')
 def customer_system_and_apps(request, location_id):
     template = loader.get_template('customerlocation/locationSystemAndApps.html')
     location = CustomerLocation.objects.get(pk=location_id)
