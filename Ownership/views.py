@@ -145,7 +145,6 @@ def department_detail(request, department_id):
 def tenant_location_detail(request, location_id):
     template = loader.get_template('location/locationLeasing.html')
     location = TenantLocation.objects.get(pk=location_id)
-    pic = TenantPersonIncharge.objects.get(location=location)
 
     try:
         computers = Computer.objects.filter(tenantlocation=location)
@@ -163,6 +162,11 @@ def tenant_location_detail(request, location_id):
     except ObjectDoesNotExist:
         projectors = None
 
+    try:
+        pic = TenantPersonIncharge.objects.get(location=location)
+    except ObjectDoesNotExist:
+        pic = None
+
     context = {
         "location": location,
         "computers": computers,
@@ -177,7 +181,6 @@ def tenant_location_detail(request, location_id):
 def customer_location_detail(request, location_id):
     template = loader.get_template('customerlocation/locationLeasing.html')
     location = CustomerLocation.objects.get(pk=location_id)
-    pic = CustomerPersonInCharge.objects.get(location=location)
 
     try:
         computers = Computer.objects.filter(customerLocation=location)
@@ -195,6 +198,11 @@ def customer_location_detail(request, location_id):
     except ObjectDoesNotExist:
         projectors = None
 
+    try:
+        pic = CustomerPersonInCharge.objects.get(location=location)
+    except ObjectDoesNotExist:
+        pic = None
+
     print(computers)
 
     context = {
@@ -211,8 +219,11 @@ def customer_location_detail(request, location_id):
 def tenant_location_rental(request, location_id):
     template = loader.get_template('location/locationDCRental.html')
     location = TenantLocation.objects.get(pk=location_id)
-    pic = TenantPersonIncharge.objects.get(location=location)
     datacenter = DataCenter.objects.filter(tenantlocation=location)
+    try:
+        pic = TenantPersonIncharge.objects.get(location=location)
+    except ObjectDoesNotExist:
+        pic = None
 
     context = {
         "location": location,
@@ -227,9 +238,12 @@ def tenant_location_rental(request, location_id):
 def customer_location_rental(request, location_id):
     template = loader.get_template('customerlocation/locationDCRental.html')
     location = CustomerLocation.objects.get(pk=location_id)
-    pic = CustomerPersonInCharge.objects.get(location=location)
     datacenter = DataCenter.objects.filter(customerLocation=location)
 
+    try:
+        pic = CustomerPersonInCharge.objects.get(location=location)
+    except ObjectDoesNotExist:
+        pic = None
     context = {
         "location": location,
         "datacenter": datacenter,
@@ -243,11 +257,15 @@ def customer_location_rental(request, location_id):
 def tenant_system_and_apps(request, location_id):
     template = loader.get_template('location/locationSystemAndApps.html')
     location = TenantLocation.objects.get(pk=location_id)
-    pic = TenantPersonIncharge.objects.get(location=location)
     systems = System.objects.filter(tenantlocation=location)
     softwares = Software.objects.filter(tenantlocation=location)
     print(softwares)
     print(systems)
+
+    try:
+        pic = TenantPersonIncharge.objects.get(location=location)
+    except ObjectDoesNotExist:
+        pic = None
     context = {
         "location": location,
         "systems": systems,
@@ -262,11 +280,16 @@ def tenant_system_and_apps(request, location_id):
 def customer_system_and_apps(request, location_id):
     template = loader.get_template('customerlocation/locationSystemAndApps.html')
     location = CustomerLocation.objects.get(pk=location_id)
-    pic = CustomerPersonInCharge.objects.get(location=location)
     systems = System.objects.filter(customerLocation=location)
     softwares = Software.objects.filter(customerLocation=location)
     print(softwares)
     print(systems)
+
+    try:
+        pic = CustomerPersonInCharge.objects.get(location=location)
+    except ObjectDoesNotExist:
+        pic = None
+
     context = {
         "location": location,
         "systems": systems,

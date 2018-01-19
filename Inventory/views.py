@@ -26,9 +26,12 @@ def login_user(request):
             return HttpResponseRedirect("/")
 
         else:
-            return HttpResponseRedirect("/login/")
+            print("not active")
 
+            return HttpResponseRedirect("/login/")
     else:
+        print("not user")
+
         return HttpResponseRedirect("/login/")
 
 
