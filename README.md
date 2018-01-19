@@ -9,6 +9,7 @@ Other dependencies:
 1. Jquery
 2. JqueryUI
 3. django-rest-framework
+4. Bootstrap 4
 
 # Installation
 
